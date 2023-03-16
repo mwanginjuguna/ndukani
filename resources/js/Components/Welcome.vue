@@ -1,22 +1,35 @@
 <script setup>
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
+import {defineProps} from "vue";
+
+defineProps({
+    topCategories: Object,
+    bestSellers: Object,
+})
 </script>
 
 <template>
     <div>
-        <div class="p-6 lg:p-8 bg-white border-b border-gray-200">
-            <ApplicationLogo class="block h-12 w-auto" />
-
-            <h1 class="mt-8 text-2xl font-medium text-gray-900">
-                Welcome to your Jetstream application!
+        <div class="p-6 lg:p-8 bg-indigo-200 border-b border-gray-200">
+            <h1 class="mt-8 text-2xl font-medium text-slate-900">
+                Top Categories This Week
             </h1>
+            <section class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                <div class="mx-auto shadow-sm p-2 px-4 bg-white rounded-md">
+                    <div class="flex flex-row mx-auto">
+                        <div class="h-48 w-48 text-center bg-rose-700 rounded-md">Image</div>
+                        <p class="w-fit h-fit p-2 rounded-full py-2.5 -ml-6 mt-3 bg-indigo-800 text-green-300">-20%</p>
+                    </div>
+                    <div class="pr-4 mt2.5">
+                        <h3 class="font-bold text-xl font-serif text-indigo-900 underline underline-offset-4">Nangos 103R</h3>
+                        <div class="mt-2">
+                            <p class="text-sm text-justify leading-tight"><span class="font-semibold">Description: </span>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis,</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-            <p class="mt-6 text-gray-500 leading-relaxed">
-                Laravel Jetstream provides a beautiful, robust starting point for your next Laravel application. Laravel is designed
-                to help you build your application using a development environment that is simple, powerful, and enjoyable. We believe
-                you should love expressing your creativity through programming, so we have spent time carefully crafting the Laravel
-                ecosystem to be a breath of fresh air. We hope you love it.
-            </p>
+
         </div>
 
         <div class="bg-gray-200 bg-opacity-25 grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 p-6 lg:p-8">
