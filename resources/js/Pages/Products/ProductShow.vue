@@ -1,13 +1,13 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
-import Welcome from '@/Components/Welcome.vue';
+import Product from "../../Components/Product.vue";
 </script>
 
 <template>
     <AppLayout title="Dashboard">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-700 uppercase leading-tight">
-                Ndukani Products
+                Mulika X-r
             </h2>
         </template>
 
@@ -60,7 +60,7 @@ import Welcome from '@/Components/Welcome.vue';
 
                 </div>
                 <div class="col-span-1 md:col-span-4 bg-gray-50 shadow-xl sm:rounded-lg">
-                    <Welcome />
+                    <Product />
                 </div>
             </div>
         </div>
