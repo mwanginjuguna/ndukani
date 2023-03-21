@@ -4,6 +4,7 @@ import {defineProps} from "vue";
 import PrimaryButton from "./PrimaryButton.vue";
 import {Link} from "@inertiajs/vue3";
 import ProductCard from "./ProductCard.vue";
+import SliderSlick from "./SliderSlick.vue";
 
 defineProps({
     topCategories: Object,
@@ -25,13 +26,10 @@ defineProps({
                      :src="`https://www.mobilephonemuseum.com/assets/static/e57d5c2a34aef9308ac96a89187daa3b/9d75f/fd09a85d-5dfd-436d-be83-4667ecd73e05.png`">
 
                 <!--product preview-->
-                <div class="mx-auto py-4 pl-4 shadow-md bg-gray-100 rounded-md">
-                    <div class="flex flex-row w-fit">
-                        <img class="w-3/4 px-4 rounded-md" :src="`https://www.mobilephonemuseum.com/assets/static/377e56fa5c723ad0f77b6c2a68300cc5/9d75f/5f32b76a-dcf5-40de-87cc-ec0bf865fb3d.png`">
-                        <p class="w-fit h-fit p-2 rounded-full py-3.5 -ml-8 mt-2 bg-slate-700 text-lime-300">-20%</p>
-                    </div>
-                    <div class="pr-4 mt-2.5">
-                        <h3 class="font-bold text-xl font-serif text-indigo-900 underline underline-offset-4">Nokia - 2600 Classic</h3>
+                <ProductCard title="Nokia - 2600 Classic" percent-off="20" price="99.99" image-url="https://www.mobilephonemuseum.com/assets/static/377e56fa5c723ad0f77b6c2a68300cc5/9d75f/5f32b76a-dcf5-40de-87cc-ec0bf865fb3d.png">
+
+                    <template v-slot:description>
+
                         <div class="mt-2 flex flex-col gap-y-3">
                             <p class="text-sm text-justify leading-tight"><span class="font-semibold">Size: </span> 12cm x 25cm x 2.5cm (w x l x h).
                             </p>
@@ -44,18 +42,19 @@ defineProps({
                             <p class="text-sm text-justify leading-tight"><span class="font-semibold">Lifespan: </span> Eternal
                             </p>
                         </div>
-                    </div>
-                    <div class="mt-2 flex flex-col gap-2">
-                        <p class="text-orange-600 text-xs line-through align-super">was $168.99</p>
-                        <p class="pr-6 text-green-600 text-right text-sm font-semibold">Now <span class="underline text-lg">$99.99</span></p>
-                    </div>
-                    <PrimaryButton class="mt-3" @click.prevent="addToCart">Add to Cart</PrimaryButton>
-                </div>
+
+                    </template>
+                </ProductCard>
 
                 <!--Nangos 103R-->
-                <ProductCard image-url="" percent-off="10" title="Details about Nangos 103R" features="" price="9.99" details="<li>A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm</li>
+                <ProductCard image-url="" percent-off="10" title="Details about Nangos 103R" features="" price="9.99" details="">
+                    <template v-slot:description>
+                        <div class="text-sm text-justify leading-tight" ><span class="font-semibold">Features: </span>
+                            <li>A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm</li>
                             <li>One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. He lay on his armour-like back, and if he lifted</li>
-                            <li>The quick, brown fox jumps over a lazy dog. DJs flock by when MTV ax quiz prog. Junk MTV quiz graced by fox whelps. Bawds jog, flick quartz, vex nymphs.</li>">
+                            <li>The quick, brown fox jumps over a lazy dog. DJs flock by when MTV ax quiz prog. Junk MTV quiz graced by fox whelps. Bawds jog, flick quartz, vex nymphs.</li>
+                        </div>
+                    </template>
 
                 </ProductCard>
 
@@ -116,6 +115,9 @@ defineProps({
 
                 </ProductCard>
 
+            </div>
+            <div>
+                <SliderSlick></SliderSlick>
             </div>
         </div>
     </div>
