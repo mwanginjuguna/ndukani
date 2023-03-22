@@ -116,8 +116,8 @@ defineProps({
                 </ProductCard>
 
             </div>
-            <div>
-                <SliderSlick></SliderSlick>
+            <div class="md:col-span-2 mt-8 p-4">
+                <SliderSlick class="pt-8 border-t border-gray-300"></SliderSlick>
             </div>
         </div>
     </div>
