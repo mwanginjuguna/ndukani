@@ -2,6 +2,7 @@
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import {defineProps} from "vue";
 import PrimaryButton from "./PrimaryButton.vue";
+import ProductCard from "./ProductCard.vue";
 import {Link} from "@inertiajs/vue3";
 
 defineProps({
@@ -41,26 +42,15 @@ defineProps({
                 </div>
 
                 <!--product 2-->
-                <div class="mx-auto py-4 pl-4 shadow-md bg-gray-100 rounded-md">
-                    <div class="flex flex-row place-content-center">
-                        <div class="h-48 w-48 text-center bg-purple-900 rounded-md">Image</div>
-                        <p class="w-fit h-fit p-2 rounded-full py-3.5 -ml-8 mt-2 bg-slate-700 text-lime-300">-36%</p>
-                    </div>
-                    <div class="pr-4 mt-2.5">
-                        <h3 class="font-bold text-xl font-serif text-indigo-900 underline underline-offset-4">Waya Pro Max</h3>
-                        <div class="mt-2">
-                            <p class="text-sm text-justify leading-tight"><span class="font-semibold">Features: </span>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-                                <Link class="text-indigo-600 underline hover:text-indigo-500 text-xs">More Details</Link>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="mt-2 flex flex-row gap-2">
-                        <p>Price:</p>
-                        <p class="text-orange-600 text-xs line-through align-super">was $1500.00</p>
-                        <p class="text-green-600 text-sm font-semibold">Now <span class="underline text-lg">$1199.99</span></p>
-                    </div>
-                    <PrimaryButton class="mt-3" @click.prevent="addToCart">Add to Cart</PrimaryButton>
+                <div>
+
+                    <!--product Ericsson-->
+                    <ProductCard image-url="https://www.mobilephonemuseum.com/assets/static/48c4ec08bff03f1ad095a5b96277fb52/49c31/97f76917-c2b0-438b-9fd0-9f03bcb79e34.png" percent-off="20" title="Ericsson JB988" price="99.99">
+
+                    </ProductCard>
+
                 </div>
+
 
                 <!--product 3-->
                 <div class="mx-auto py-4 pl-4 shadow-md bg-gray-100 rounded-md">
@@ -211,6 +201,34 @@ defineProps({
                     <PrimaryButton class="mt-3" @click.prevent="addToCart">Add to Cart</PrimaryButton>
                 </div>
 
+            </div>
+
+            <div class="md:col-span-2">
+                <div class="md:flex md:flex-row gap-x-px py-10 px-6 bg-slate-100 rounded shadow-md">
+                    <div class="">
+                        <img alt="phone-image" class="max-w-sm min-h-[20rem] bg-slate-100 rounded-lg max-h-[36rem] object-cover" :src="`https://maplestore.in/wp-content/uploads/2022/09/iphone-14-pro-finish-select-202209-6-7inch-deeppurple_AV1_GEO_EMEA.jpeg`">
+                    </div>
+                    <div class="md:my-auto">
+                        <h3 class="font-bold text-xl font-serif text-indigo-900 underline underline-offset-4">Nangos 103R</h3>
+                        <div class="mt-2">
+                            <p class="text-sm text-justify leading-tight"><span class="font-semibold">Features: </span>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
+                                <Link class="text-indigo-700 hover:text-indigo-800 text-xs font-semibold flex items-center ">
+                                    More Details
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="w-5 h-5 fill-indigo-500">
+                                        <path fill-rule="evenodd" d="M5 10a.75.75 0 01.75-.75h6.638L10.23 7.29a.75.75 0 111.04-1.08l3.5 3.25a.75.75 0 010 1.08l-3.5 3.25a.75.75 0 11-1.04-1.08l2.158-1.96H5.75A.75.75 0 015 10z" clip-rule="evenodd" />
+                                    </svg>
+                                </Link>
+                            </p>
+                        </div>
+
+                        <div class="mt-2 flex flex-row gap-2">
+                            <p>Price:</p>
+                            <p class="text-orange-600 text-xs line-through align-super">was $168.99</p>
+                            <p class="text-green-600 text-sm font-semibold">Now <span class="underline text-lg">$99.99</span></p>
+                        </div>
+                        <PrimaryButton class="mt-3" @click.prevent="addToCart">Add to Cart</PrimaryButton>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

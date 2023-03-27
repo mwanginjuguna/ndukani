@@ -37,6 +37,10 @@ Route::middleware([
         return Inertia::render('Products/ProductShow');
     })->name('product-show');
 
+    Route::get('/samsung', function () {
+        return Inertia::render('Products/Samsung');
+    })->name('samsung-show');
+
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');

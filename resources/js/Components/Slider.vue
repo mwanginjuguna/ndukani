@@ -26,7 +26,7 @@
 
     >
         <swiper-slide v-for="product in productList" class="pb-14 text-slate-900">
-            <ProductCard :image-url="product.imageUrl" :title="product.phone" :price="product.price">
+            <ProductCard :image-url="product.imageUrl" :class="`w-64 h-48`" :title="product.phone" :price="product.price">
 
             </ProductCard>
         </swiper-slide>
