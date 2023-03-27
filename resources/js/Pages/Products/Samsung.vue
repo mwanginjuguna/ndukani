@@ -1,4 +1,4 @@
-<template>
+<template xmlns="http://www.w3.org/1999/html">
     <AppLayout title="Dashboard">
 
         <div class="py-12">
@@ -10,7 +10,7 @@
                     <div class="pb-6 grid grid-cols-1 md:grid-cols-2 gap-4 bg-white rounded shadow-sm">
 
                         <!--product images-->
-                        <div class="px-6 py-4">
+                        <div id="product-images" class="px-6 py-4">
                             <!--all images-->
                             <!--consider a slider-->
                             <!--for image in images-->
@@ -33,7 +33,7 @@
                         </div>
 
                         <!--product details-->
-                        <div class="px-6 py-4 text-sm text-slate-800 flex flex-col gap-y-3">
+                        <div id="product-details" class="px-6 py-4 text-sm text-slate-800 flex flex-col gap-y-3">
 
                             <div class="flex justify-between">
                                 <a
@@ -156,7 +156,7 @@
 
                             <div class="mb-4 text-sm">
                                 <p class="mb-2 uppercase font-light">Display</p>
-                                <ul class="mb-2 list-disc list-inside text-xs">
+                                <ul class="mb-2 list-disc list-inside">
                                     <li>Type: PLS LCD, 90Hz</li>
                                     <li>Size: 6.6 inches, 104.9 cm2 (~83.0% screen-to-body ratio)</li>
                                     <li>Resolution: 1080 x 2408 pixels, 20:9 ratio (~400 ppi density)</li>
@@ -166,7 +166,7 @@
 
                             <div class="mb-4 text-sm">
                                 <p class="mb-2 uppercase font-light">PLATFORM</p>
-                                <ul class="mb-2 list-disc list-inside text-xs">
+                                <ul class="mb-2 list-disc list-inside">
                                     <li>OS: Android 12, One UI 4.1</li>
                                     <li>Chipset: Qualcomm SM6225 Snapdragon 680 4G (6 nm)</li>
                                     <li>CPU: Octa-core (4x2.4 GHz Kryo 265 Gold & 4x1.9 GHz Kryo 265 Silver)</li>
@@ -176,7 +176,7 @@
 
                             <div class="mb-4 text-sm">
                                 <p class="mb-2 uppercase font-light">MEMORY</p>
-                                <ul class="mb-2 list-disc list-inside text-xs">
+                                <ul class="mb-2 list-disc list-inside">
                                     <li>
                                         Card slot: microSDXC (dedicated slot)
                                     </li>
@@ -191,7 +191,7 @@
 
                             <div class="mb-4 text-sm">
                                 <p class="mb-2 uppercase font-light">MAIN CAMERA</p>
-                                <ul class="mb-2 list-disc list-inside text-xs">
+                                <ul class="mb-2 list-disc list-inside">
                                     <li>
                                         Quad
                                         <ul class="mb-2 list-disc list-inside ml-3">
@@ -216,10 +216,10 @@
                                         </ul>
                                     </li>
                                     <li>
-                                        Internal: 64GB
+                                        Features    LED flash, panorama, HDR
                                     </li>
                                     <li>
-                                        RAM: 4GB
+                                        Video    4K@30fps, 1080p@30fps
                                     </li>
                                 </ul>
                             </div>
@@ -229,14 +229,14 @@
                     </section>
 
                     <!--product-->
-                    <section class="pb-6 bg-white rounded flex flex-col">
+                    <section id="specifications" class="pb-6 bg-white rounded flex flex-col">
                         <h2 class="my-2 mx-4 font-medium text-xl text-slate-700">Specifications</h2>
 
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-y-8 border-t border-slate-200 pt-8 mx-6">
 
-                            <div class="col-span-1 mx-4 pt-4 px-2.5 text-sm md:text-base border border-slate-200">
-                                <p class="mb-2 uppercase font-light">Display</p>
-                                <ul class="mb-2 pt-2 list-disc list-inside border-t border-slate-200">
+                            <div class="col-span-1 mx-4 pt-4 px-2.5 text-sm md:text-base rounded border border-slate-200">
+                                <p class="mb-2 font-medium uppercase font-light">Display</p>
+                                <ul class="mb-2 pt-2 font-light list-disc list-inside border-t border-slate-200">
                                     <li>Display: 6.6" PLS LCD</li>
                                     <li>Memory: 64GB + 4GB RAM</li>
                                     <li>Rear Camera: 50MP + 5MP + 2MP + 2MP</li>
@@ -247,18 +247,18 @@
                                 </ul>
                             </div>
 
-                            <div class="col-span-1 mx-4 pt-4 px-2.5 text-sm md:text-base border border-slate-200">
-                                <p class="mb-2 uppercase font-light">What's in the Box?</p>
-                                <ul class="mb-2 pt-2 list-disc list-inside border-t border-slate-200">
+                            <div class="col-span-1 mx-4 pt-4 px-2.5 text-sm md:text-base rounded border border-slate-200">
+                                <p class="mb-2 font-medium uppercase font-light">What's in the Box?</p>
+                                <ul class="mb-2 pt-2 font-light list-disc list-inside border-t border-slate-200">
                                     <li>Samsung Galaxy A23 Handset</li>
                                     <li>Charger</li>
                                     <li>User Manual</li>
                                 </ul>
                             </div>
 
-                            <div class="col-span-1 mx-4 pt-4 px-2.5 text-sm md:text-base border border-slate-200">
-                                <p class="mb-2 uppercase font-light">Specifications</p>
-                                <ul class="mb-2 pt-2 border-t border-slate-200">
+                            <div class="col-span-1 mx-4 pt-4 px-2.5 text-sm md:text-base rounded border border-slate-200">
+                                <p class="mb-2 font-medium uppercase font-light">Specifications</p>
+                                <ul class="mb-2 pt-2 font-light border-t border-slate-200">
                                     <li><span class="font-semibold">SKU</span>: SA948MP1EB7I0NAFAMZ</li>
                                     <li><span class="font-semibold">Model</span>: Galaxy A23</li>
                                     <li><span class="font-semibold">Size (L x W x H cm)</span>: -</li>
@@ -274,13 +274,22 @@
 
                     <!--product-->
                     <section class="pb-6 px-4 bg-white rounded flex flex-col">
-                        <h2 class="my-2 font-semibold text-xl text-slate-900">Similar Products</h2>
+                        <h2 class="my-2 font-semibold text-xl text-slate-900">Customer who viewed this also viewed</h2>
 
-                        <div>
+                        <div class="mt-3">
                             <Slider>
-                                <div>
-                                    <img alt="product-image" :src="`https://ke.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/84/503736/1.jpg?1607`">
-                                </div>
+
+                            </Slider>
+                        </div>
+                    </section>
+
+                    <!--products you may like-->
+                    <section class="pb-6 px-4 bg-white rounded flex flex-col">
+                        <h2 class="my-2 font-semibold text-xl text-slate-900">You May Also Like These</h2>
+
+                        <div class="mt-3">
+                            <Slider>
+
                             </Slider>
                         </div>
                     </section>
@@ -288,7 +297,244 @@
 
                 <!--right sidebar-->
                 <div class="col-span-1 md:col-span-1">
-                    Right Sidebar
+                    <section id="delivery" class=" mb-6 bg-white rounded divide-y text-black">
+                        <div class="p-2">
+                            <h3 class="font-medium">Jumia Delivery and Returns</h3>
+                        </div>
+
+                        <div class="pt-3 p-2">
+                            <p class="italic text-xs uppercase font-serif">Jumia<span class="text-orange-500 font-sans text-base font-semibold font-serif">Express</span></p>
+                            <p class="block text-xs">Express delivery in main cities. <a href="#delivery" class="text-sky-700"> Details</a></p>
+                        </div>
+
+                        <div class="mx-2 grid gap-y-3">
+
+                            <p class="mt-2 text-slate-700 font-semibold">Choose your location</p>
+
+                            <div>
+                                <select class="w-3/4 text-sm rounded border-gray-400">
+                                    <option>Eldoret</option>
+                                    <option>Nairobi</option>
+                                    <option>Mombasa</option>
+                                </select>
+                            </div>
+
+                            <div class="">
+                                <select class="w-full text-sm rounded border-gray-400">
+                                    <option>CBD - Barngetuny Plaza</option>
+                                    <option>CBD - UON/Globe/Koja/River Road</option>
+                                    <option>Mtwapa - Ferry</option>
+                                </select>
+                            </div>
+
+                            <div class="mt-2 mx-2 grid grid-cols-5 gap-x-4 text-xs">
+                                <div class="col-span-1">
+                                    <svg fill="#000000" width="24px" height="24px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M 0 6 L 0 8 L 19 8 L 19 23 L 12.84375 23 C 12.398438 21.28125 10.851563 20 9 20 C 7.148438 20 5.601563 21.28125 5.15625 23 L 4 23 L 4 18 L 2 18 L 2 25 L 5.15625 25 C 5.601563 26.71875 7.148438 28 9 28 C 10.851563 28 12.398438 26.71875 12.84375 25 L 21.15625 25 C 21.601563 26.71875 23.148438 28 25 28 C 26.851563 28 28.398438 26.71875 28.84375 25 L 32 25 L 32 16.84375 L 31.9375 16.6875 L 29.9375 10.6875 L 29.71875 10 L 21 10 L 21 6 Z M 1 10 L 1 12 L 10 12 L 10 10 Z M 21 12 L 28.28125 12 L 30 17.125 L 30 23 L 28.84375 23 C 28.398438 21.28125 26.851563 20 25 20 C 23.148438 20 21.601563 21.28125 21.15625 23 L 21 23 Z M 2 14 L 2 16 L 8 16 L 8 14 Z M 9 22 C 10.117188 22 11 22.882813 11 24 C 11 25.117188 10.117188 26 9 26 C 7.882813 26 7 25.117188 7 24 C 7 22.882813 7.882813 22 9 22 Z M 25 22 C 26.117188 22 27 22.882813 27 24 C 27 25.117188 26.117188 26 25 26 C 23.882813 26 23 25.117188 23 24 C 23 22.882813 23.882813 22 25 22 Z"></path></g></svg>
+                                </div>
+
+                                <div class="col-span-3">
+                                    <p class="font-semibold text-slate-600">Door Delivery</p>
+                                </div>
+
+                                <div class="col-span-1">
+                                    <a href="#delivery" class="inline-flex text-sky-600 hover:text-sky-700">Details</a>
+                                </div>
+                                <div class="col-span-4 col-start-2">
+                                    <p>Delivery <strong>KSh 101</strong></p>
+                                    <p>Delivery by <strong>28 March</strong> when you order within next <strong>7hrs 59mins</strong></p>
+                                </div>
+                            </div>
+
+                            <div class="mt-2 mx-2 grid grid-cols-5 gap-x-4 text-xs">
+                                <div class="col-span-1">
+                                    <svg width="24px" height="24px" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" fill="#000000">
+                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><title>Ecommerce copia 3</title><polygon points="80 48.04 80 92.04 74 92.04 74 73.29 62.26 73.29 62.26 54.29 38.26 54.29 38.26 73.29 26 73.29 26 92.04 20 92.04 20 48.04 80 48.04" fill="#e1f6fa"></polygon><polygon points="66.5 74.19 66.5 84.19 62 80.02 57.5 84.19 57.5 74.19 66.5 74.19" fill="#9ae3f0"></polygon><polygon points="54.76 55.19 54.76 65.19 50.26 61.02 45.76 65.19 45.76 55.19 54.76 55.19" fill="#9ae3f0"></polygon><polygon points="42.5 74.19 42.5 84.19 38 80.02 33.5 84.19 33.5 74.19 42.5 74.19" fill="#9ae3f0"></polygon><rect x="20" y="47.04" width="60" height="2" fill="#495771"></rect><path d="M91,93H79V35H21V93H9V35H5V25.37l0.62-.25L50,7l0.38,0.15L95,25.37V35H91V93ZM81,91h8V33h4V26.71L50,9.12,7,26.71V33h4V91h8V33H81V91Z" fill="#495771"></path><rect x="20" y="40.04" width="60" height="2" fill="#495771"></rect><path d="M74,93H26a1,1,0,0,1-1-1V73.29a1,1,0,0,1,1-1H74a1,1,0,0,1,1,1V92A1,1,0,0,1,74,93ZM27,91H73V74.29H27V91Z" fill="#495771"></path><rect x="49" y="73.29" width="2" height="19.5" fill="#495771"></rect><path d="M63.26,73.79h-2V55.29h-22v18.5h-2V54.29a1,1,0,0,1,1-1h24a1,1,0,0,1,1,1v19.5Z" fill="#495771"></path><rect width="100" height="100" fill="none"></rect></g></svg>
+                                </div>
+
+                                <div class="col-span-3">
+                                    <p class="font-semibold text-slate-600">Pickup Station</p>
+                                </div>
+
+                                <div class="col-span-1">
+                                    <a href="#delivery" class="inline-flex text-sky-600 hover:text-sky-700">Details</a>
+                                </div>
+                                <div class="col-span-4 col-start-2">
+                                    <p>Delivery <strong>KSh 52</strong></p>
+                                    <p>Available for pick up from <strong>28 March</strong> when you order within the next <strong>7hrs 59mins</strong></p>
+                                </div>
+                            </div>
+
+                            <div class="mt-2 mx-2 grid grid-cols-5 gap-x-4 text-xs">
+                                <div class="col-span-1">
+                                    <svg width="24px" height="24px" viewBox="0 0 1024 1024" fill="#000000" class="icon" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M488.006 999.898C218.982 999.898 0.106 781.022 0.106 512c0-269.022 218.876-487.898 487.9-487.898 156.624 0 304.81 76.03 396.386 203.364a8.016 8.016 0 0 1-1.828 11.17c-3.61 2.562-8.592 1.766-11.17-1.828C782.818 113.63 639.49 40.1 488.006 40.1 227.792 40.098 16.104 251.788 16.104 512c0 260.21 211.69 471.902 471.902 471.902 260.21 0 471.902-211.692 471.902-471.902a7.992 7.992 0 0 1 7.998-7.998 7.994 7.994 0 0 1 7.998 7.998c0 269.022-218.876 487.898-487.898 487.898z" fill=""></path><path d="M1015.896 567.988a7.976 7.976 0 0 1-5.656-2.344l-47.99-47.99a7.996 7.996 0 1 1 11.31-11.31l47.99 47.992a7.994 7.994 0 0 1 0 11.308 7.96 7.96 0 0 1-5.654 2.344z" fill=""></path><path d="M919.916 567.988a7.994 7.994 0 0 1-5.656-13.652l47.99-47.992a7.996 7.996 0 1 1 11.31 11.31l-47.99 47.99a7.96 7.96 0 0 1-5.654 2.344zM727.956 735.954H280.048c-4.422 0-8-3.578-8-7.998V376.028a7.994 7.994 0 0 1 8-7.998h447.906c4.422 0 8 3.578 8 7.998v351.928a7.994 7.994 0 0 1-7.998 7.998z m-439.91-15.996h431.91V384.026H288.046v335.932z" fill=""></path><path d="M727.956 384.026H280.048a8.002 8.002 0 0 1-7.39-4.936 8.018 8.018 0 0 1 1.734-8.716l63.988-63.986a7.992 7.992 0 0 1 5.656-2.344h319.934c2.124 0 4.154 0.844 5.654 2.344l63.988 63.986a8.02 8.02 0 0 1 1.734 8.716 8.002 8.002 0 0 1-7.39 4.936z m-428.598-15.996h409.29l-47.99-47.99H347.346l-47.988 47.99z" fill=""></path><path d="M456.012 384.026a8.008 8.008 0 0 1-7.156-11.576l31.994-63.988c2-3.936 6.78-5.546 10.732-3.578a8.006 8.006 0 0 1 3.578 10.732l-31.994 63.986a8.014 8.014 0 0 1-7.154 4.424zM551.992 384.026a8.016 8.016 0 0 1-7.154-4.42l-31.994-63.986a8.006 8.006 0 0 1 3.578-10.732 7.992 7.992 0 0 1 10.732 3.578l31.992 63.988a8.006 8.006 0 0 1-3.578 10.732 7.992 7.992 0 0 1-3.576 0.84z" fill=""></path><path d="M456.012 448.014a7.994 7.994 0 0 1-7.998-8v-63.988c0-4.42 3.578-7.998 7.998-7.998s7.998 3.578 7.998 7.998v63.988c0 4.422-3.578 8-7.998 8z" fill=""></path><path d="M551.992 448.014h-95.98c-4.42 0-7.998-3.578-7.998-8s3.578-7.998 7.998-7.998h95.98c4.42 0 7.998 3.578 7.998 7.998s-3.578 8-7.998 8z" fill=""></path><path d="M551.992 448.014a7.994 7.994 0 0 1-7.998-8v-63.988a7.994 7.994 0 0 1 7.998-7.998 7.994 7.994 0 0 1 7.998 7.998v63.988c0 4.422-3.578 8-7.998 8zM456.012 456.012a7.994 7.994 0 0 1-7.998-7.998v-8c0-4.42 3.578-7.998 7.998-7.998s7.998 3.578 7.998 7.998v8a7.994 7.994 0 0 1-7.998 7.998zM488.006 456.012c-4.422 0-8-3.578-8-7.998v-8a7.994 7.994 0 0 1 8-7.998 7.994 7.994 0 0 1 7.998 7.998v8a7.994 7.994 0 0 1-7.998 7.998zM519.998 456.012a7.994 7.994 0 0 1-7.998-7.998v-8a7.994 7.994 0 0 1 7.998-7.998c4.422 0 8 3.578 8 7.998v8a7.994 7.994 0 0 1-8 7.998z" fill=""></path><path d="M551.992 456.012a7.994 7.994 0 0 1-7.998-7.998v-8a7.994 7.994 0 0 1 7.998-7.998 7.994 7.994 0 0 1 7.998 7.998v8a7.994 7.994 0 0 1-7.998 7.998zM695.962 703.96h-31.994a7.994 7.994 0 0 1-7.998-8v-31.992c0-4.422 3.578-8 7.998-8h31.994a7.994 7.994 0 0 1 7.998 8v31.992c0 4.422-3.578 8-7.998 8z m-23.996-15.998h15.996v-15.996h-15.996v15.996zM631.974 703.96h-31.992a7.994 7.994 0 0 1-7.998-8v-31.992c0-4.422 3.576-8 7.998-8h31.992c4.422 0 8 3.578 8 8v31.992c0 4.422-3.578 8-8 8z m-23.994-15.998h15.996v-15.996h-15.996v15.996zM472.008 671.966H312.04a7.994 7.994 0 0 1-7.998-7.998c0-4.422 3.578-8 7.998-8h159.968a7.994 7.994 0 0 1 7.998 8 7.994 7.994 0 0 1-7.998 7.998zM392.026 703.96h-79.984a7.994 7.994 0 0 1-7.998-8 7.994 7.994 0 0 1 7.998-7.998h79.984a7.994 7.994 0 0 1 7.998 7.998c0 4.422-3.578 8-7.998 8z" fill=""></path></g></svg>
+                                </div>
+
+                                <div class="col-span-3">
+                                    <p class="font-semibold text-slate-600" id="policy">Return Policy</p>
+                                </div>
+
+                                <div class="col-span-1">
+                                    <a href="#delivery" class="inline-flex text-sky-600 hover:text-sky-700">Details</a>
+                                </div>
+                                <div class="col-span-4 col-start-2">
+                                    <p>Easy Return, Quick Refund.<a href="#policy" class="text-sky-600">See more</a></p>
+                                </div>
+                            </div>
+
+                            <div class="mt-2 mx-2 grid grid-cols-5 gap-x-4 text-xs">
+                                <div class="col-span-1">
+                                    <svg fill="#000000" width="24px" height="24px" viewBox="0 0 100 100" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg">
+                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M50,20c3.79,0,6.79,4.11,10.11,5.53s8.52.63,11,3.31,1.89,7.58,3.31,11.05S80,46.21,80,50s-4.11,6.79-5.53,10.11-.63,8.52-3.31,11c-2.53,2.52-7.58,1.89-11,3.31S53.79,80,50,80s-6.79-4.11-10.11-5.53-8.52-.63-11-3.31c-2.52-2.53-1.89-7.58-3.31-11S20,53.79,20,50s4.11-6.79,5.53-10.11.63-8.52,3.31-11S36.42,27,39.89,25.53,46.21,20,50,20Zm0,9.47A20.53,20.53,0,1,0,70.53,50,20.59,20.59,0,0,0,50,29.47Zm9.52,11.44,2,1.9a1.55,1.55,0,0,1,0,1.89L48.78,58.84a2.55,2.55,0,0,1-2,.88,2.76,2.76,0,0,1-2-.88L37.9,52a1.26,1.26,0,0,1,0-1.89l2-1.9a1.37,1.37,0,0,1,2,0l4.87,5L57.52,40.91A1.37,1.37,0,0,1,59.52,40.91Z"></path></g></svg>
+                                </div>
+
+                                <div class="col-span-3">
+                                    <p class="font-semibold text-slate-600">Warranty</p>
+                                </div>
+
+                                <div class="col-span-1">
+                                    <a href="#delivery" class="inline-flex text-sky-600 hover:text-sky-700">Details</a>
+                                </div>
+                                <div class="col-span-4 col-start-2">
+                                    <p class="pb-3">2 Years</p>
+                                </div>
+                            </div>
+
+
+
+
+
+                        </div>
+                    </section>
+
+                    <!--seller info-->
+                    <section id="seller" class="mb-6 px-2 bg-white rounded divide-y text-black">
+                        <div>
+                            <h3 class="uppercase text-slate-700 font-medium">Seller Information</h3>
+                            <svg fill="#475569" width="24px" height="24px" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M419.3 264.8l-61.8 61.8L542.9 512 357.5 697.4l61.8 61.8L666.5 512z"></path></g></svg>
+                        </div>
+
+                        <div class="pb-4 grid grid-cols-2 gap-3">
+                            <p class="mt-2 col-span-2 text-sm font-semibold">Avenue Phones</p>
+                            <div>
+                                <p class="text-xs"><span class="font-semibold">86% </span>Seller Score</p>
+                                <p class="text-xs"><span class="font-semibold">644 </span>Followers</p>
+                            </div>
+                            <button class="p-2 px-2.5 my-auto rounded-lg shadow-lg bg-amber-400 text-white font-semibold">Follow</button>
+                        </div>
+
+                        <div class="pb-4 text-xs">
+
+                            <div class="mt-3 flex flex-row gap-2">
+                                <p class="text-sm font-semibold">Seller Performance</p>
+                                <svg fill="#475569" width="20px" height="20px" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg">
+                                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M960 0c530.193 0 960 429.807 960 960s-429.807 960-960 960S0 1490.193 0 960 429.807 0 960 0Zm0 101.053c-474.384 0-858.947 384.563-858.947 858.947S485.616 1818.947 960 1818.947 1818.947 1434.384 1818.947 960 1434.384 101.053 960 101.053Zm-42.074 626.795c-85.075 39.632-157.432 107.975-229.844 207.898-10.327 14.249-10.744 22.907-.135 30.565 7.458 5.384 11.792 3.662 22.656-7.928 1.453-1.562 1.453-1.562 2.94-3.174 9.391-10.17 16.956-18.8 33.115-37.565 53.392-62.005 79.472-87.526 120.003-110.867 35.075-20.198 65.9 9.485 60.03 47.471-1.647 10.664-4.483 18.534-11.791 35.432-2.907 6.722-4.133 9.646-5.496 13.23-13.173 34.63-24.269 63.518-47.519 123.85l-1.112 2.886c-7.03 18.242-7.03 18.242-14.053 36.48-30.45 79.138-48.927 127.666-67.991 178.988l-1.118 3.008a10180.575 10180.575 0 0 0-10.189 27.469c-21.844 59.238-34.337 97.729-43.838 138.668-1.484 6.37-1.484 6.37-2.988 12.845-5.353 23.158-8.218 38.081-9.82 53.42-2.77 26.522-.543 48.24 7.792 66.493 9.432 20.655 29.697 35.43 52.819 38.786 38.518 5.592 75.683 5.194 107.515-2.048 17.914-4.073 35.638-9.405 53.03-15.942 50.352-18.932 98.861-48.472 145.846-87.52 41.11-34.26 80.008-76 120.788-127.872 3.555-4.492 3.555-4.492 7.098-8.976 12.318-15.707 18.352-25.908 20.605-36.683 2.45-11.698-7.439-23.554-15.343-19.587-3.907 1.96-7.993 6.018-14.22 13.872-4.454 5.715-6.875 8.77-9.298 11.514-9.671 10.95-19.883 22.157-30.947 33.998-18.241 19.513-36.775 38.608-63.656 65.789-13.69 13.844-30.908 25.947-49.42 35.046-29.63 14.559-56.358-3.792-53.148-36.635 2.118-21.681 7.37-44.096 15.224-65.767 17.156-47.367 31.183-85.659 62.216-170.048 13.459-36.6 19.27-52.41 26.528-72.201 21.518-58.652 38.696-105.868 55.04-151.425 20.19-56.275 31.596-98.224 36.877-141.543 3.987-32.673-5.103-63.922-25.834-85.405-22.986-23.816-55.68-34.787-96.399-34.305-45.053.535-97.607 15.256-145.963 37.783Zm308.381-388.422c-80.963-31.5-178.114 22.616-194.382 108.33-11.795 62.124 11.412 115.76 58.78 138.225 93.898 44.531 206.587-26.823 206.592-130.826.005-57.855-24.705-97.718-70.99-115.729Z" fill-rule="evenodd"></path> </g></svg>
+                            </div>
+
+                            <div class="mt-1.5 flex flex-row gap-2">
+                                <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <rect width="24" height="24" transform="matrix(4.37114e-08 -1 -1 -4.37114e-08 24 24)" fill="white"></rect> <path fill-rule="evenodd" clip-rule="evenodd" d="M2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12ZM10.5066 6.65264C11.0199 5.26682 12.98 5.26683 13.4933 6.65264L14.1209 8.34727C14.2662 8.73956 14.6403 8.99995 15.0586 8.99995L16.5269 8.99995C17.9614 8.99995 18.6798 10.7343 17.6655 11.7487L16.1306 13.2835C15.8942 13.52 15.7915 13.8589 15.8571 14.1868L16.2262 16.0319C16.4943 17.3727 15.0333 18.3872 13.8707 17.6675L12.5263 16.8352C12.2038 16.6356 11.7961 16.6356 11.4736 16.8352L10.1292 17.6675C8.96662 18.3872 7.5056 17.3727 7.77375 16.0319L8.14279 14.1868C8.20836 13.8589 8.10574 13.52 7.86931 13.2835L6.29284 11.7071C5.29385 10.7081 6.00138 8.99995 7.41416 8.99995L8.94126 8.99995C9.35959 8.99995 9.73371 8.73956 9.87901 8.34727L10.5066 6.65264Z" fill="#84cc16"></path> </g></svg>
+
+                                <p>Order Fulfillment Rate: <span class="font-semibold">Excellent</span> </p>
+                            </div>
+
+                            <div class="mt-1 flex flex-row gap-2">
+                                <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <rect width="24" height="24" transform="matrix(4.37114e-08 -1 -1 -4.37114e-08 24 24)" fill="white"></rect> <path fill-rule="evenodd" clip-rule="evenodd" d="M2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12ZM10.5066 6.65264C11.0199 5.26682 12.98 5.26683 13.4933 6.65264L14.1209 8.34727C14.2662 8.73956 14.6403 8.99995 15.0586 8.99995L16.5269 8.99995C17.9614 8.99995 18.6798 10.7343 17.6655 11.7487L16.1306 13.2835C15.8942 13.52 15.7915 13.8589 15.8571 14.1868L16.2262 16.0319C16.4943 17.3727 15.0333 18.3872 13.8707 17.6675L12.5263 16.8352C12.2038 16.6356 11.7961 16.6356 11.4736 16.8352L10.1292 17.6675C8.96662 18.3872 7.5056 17.3727 7.77375 16.0319L8.14279 14.1868C8.20836 13.8589 8.10574 13.52 7.86931 13.2835L6.29284 11.7071C5.29385 10.7081 6.00138 8.99995 7.41416 8.99995L8.94126 8.99995C9.35959 8.99995 9.73371 8.73956 9.87901 8.34727L10.5066 6.65264Z" fill="#84cc16"></path> </g></svg>
+
+                                <p>Quality Score: <span class="font-semibold">Good</span> </p>
+                            </div>
+
+                            <div class="mt-1 flex flex-row gap-2">
+                                <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <rect width="24" height="24" transform="matrix(4.37114e-08 -1 -1 -4.37114e-08 24 24)" fill="white"></rect> <path fill-rule="evenodd" clip-rule="evenodd" d="M2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12ZM10.5066 6.65264C11.0199 5.26682 12.98 5.26683 13.4933 6.65264L14.1209 8.34727C14.2662 8.73956 14.6403 8.99995 15.0586 8.99995L16.5269 8.99995C17.9614 8.99995 18.6798 10.7343 17.6655 11.7487L16.1306 13.2835C15.8942 13.52 15.7915 13.8589 15.8571 14.1868L16.2262 16.0319C16.4943 17.3727 15.0333 18.3872 13.8707 17.6675L12.5263 16.8352C12.2038 16.6356 11.7961 16.6356 11.4736 16.8352L10.1292 17.6675C8.96662 18.3872 7.5056 17.3727 7.77375 16.0319L8.14279 14.1868C8.20836 13.8589 8.10574 13.52 7.86931 13.2835L6.29284 11.7071C5.29385 10.7081 6.00138 8.99995 7.41416 8.99995L8.94126 8.99995C9.35959 8.99995 9.73371 8.73956 9.87901 8.34727L10.5066 6.65264Z" fill="#84cc16"></path> </g></svg>
+
+                                <p>Customer Rating: <span class="font-semibold">Good</span> </p>
+                            </div>
+
+                        </div>
+                    </section>
+
+                    <!--product menu-->
+                    <section id="product-menu " class="grid bg-white rounded divide-y">
+
+                        <NavLink :href="`#product-details`" :class="`flex gap-x-4 active:bg-gray-100 px-2 py-2`">
+                            <svg width="24px" height="24px" viewBox="0 0 512 512" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000">
+                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>item-details</title> <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="icon" fill="#000000" transform="translate(42.666667, 85.333333)"> <path d="M426.666667,1.42108547e-14 L426.666667,341.333333 L3.55271368e-14,341.333333 L3.55271368e-14,1.42108547e-14 L426.666667,1.42108547e-14 Z M384,42.6666667 L42.6666667,42.6666667 L42.6666667,298.666667 L384,298.666667 L384,42.6666667 Z M341.333333,213.333333 L341.333333,245.333333 L234.666667,245.333333 L234.666667,213.333333 L341.333333,213.333333 Z M341.333333,149.333333 L341.333333,181.333333 L234.666667,181.333333 L234.666667,149.333333 L341.333333,149.333333 Z M192,85.3333333 L192,170.666667 L85.3333333,170.666667 L85.3333333,85.3333333 L192,85.3333333 Z M341.333333,85.3333333 L341.333333,117.333333 L234.666667,117.333333 L234.666667,85.3333333 L341.333333,85.3333333 Z" id="Combined-Shape"> </path> </g> </g> </g></svg>
+                            <p>Product details</p>
+                        </NavLink>
+
+                        <NavLink :href="`#specifications`" :class="`flex gap-x-4 pt-3 active:bg-gray-100 px-2 py-2`">
+                            <svg width="20px" height="20px" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="http://www.w3.org/2000/svg" fill="#000000">
+                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M320 89.6h640v76.8H320V89.6z m0 768h640v76.8H320v-76.8z m-256-768h128v76.8H64V89.6z m256 384h640v76.8H320V473.6z m-256 0h128v76.8H64V473.6z m0 384h128v76.8H64v-76.8z" fill="#000000"></path></g></svg>
+                            <p>Specifications</p>
+                        </NavLink>
+
+                        <NavLink :href="`#feedback`" :class="`flex gap-x-4 pt-3 active:bg-gray-100 px-2 py-2`">
+                            <svg width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#000000">
+                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path fill="none" d="M0 0h24v24H0z"></path> <path d="M6.455 19L2 22.5V4a1 1 0 0 1 1-1h18a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H6.455zM4 18.385L5.763 17H20V5H4v13.385zM11 13h2v2h-2v-2zm0-6h2v5h-2V7z"></path> </g> </g></svg>
+                            <p>Customer Feedback</p>
+                        </NavLink>
+
+                    </section>
+
+                    <div class="mt-4 pb-6 grid grid-cols-1 md:grid-cols-2 gap-1 bg-white rounded shadow-sm">
+
+                        <!--product images-->
+                        <div class="py-1">
+                            <!--all images-->
+                            <!--consider a slider-->
+                            <!--for image in images-->
+                            <img class="rounded object-cover" alt="image" :src="`https://ke.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/84/503736/2.jpg?1607`">
+
+                        </div>
+
+                        <!--product details-->
+                        <div class="px-1 py-4 text-sm text-slate-800 flex flex-col gap-y-1.5">
+
+                            <h2 class="h-4 overflow-hidden font-light text-xs text-slate-700 leading-tight">
+                                Samsung Galaxy A23, 6.6″, 64GB + 4GB RAM (Dual SIM), 5000mAh, Black
+                            </h2>
+
+
+                            <div>
+                                <div class="py-2">
+                                    <p class="text-base text-black font-sans font-bold">KSh 28,399</p>
+                                    <div class="mt-1.5 flex flex-wrap gap-x-2">
+                                        <p class="pr-2 font-light text-xs text-slate-400 line-through">KSh 31,999</p>
+                                        <p class="-mt-px p-1 text-xs text-[#f68b1e] bg-[#fef3e9]">-11%</p>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+
+                        </div>
+
+                        <!-- button -->
+                        <div id="cart-button"
+                             class="col-span-2 mx-2 px-4 py-3 flex gap-x-4 shadow-lg drop-shadow-lg rounded-sm bg-amber-500 hover:underline hover:underline-offset-2 uppercase"
+                             @click="addToCart(33)"
+                        >
+                            <svg fill="#ffffff" width="24px" height="24px" viewBox="0 0 24 24" data-name="Layer 1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><title></title><path d="M12.2,9h1.6V6.8H16V5.2H13.8V3H12.2V5.2H10V6.8h2.2ZM20,5v5.5L7.45,12.72,5,3H1.25a1,1,0,0,0,0,2H3.47L6.7,18H20V16H8.26l-.33-1.33L22,12.18V5ZM7,19a1.5,1.5,0,1,0,1.5,1.5A1.5,1.5,0,0,0,7,19Zm12,0a1.5,1.5,0,1,0,1.5,1.5A1.5,1.5,0,0,0,19,19Z"></path></g></svg>
+                            <p class="font-bold text-base text-white pl-3">Add to cart</p>
+                        </div>
+
+                    </div>
+
+                    <section class="mt-6 py-4 bg-white rounded-lg shadow-md mx-auto">
+                        <p class="text-xs text-center">
+                            Questions about this product?
+                        </p>
+                        <p class="flex place-content-center mt-2">
+                            <svg width="34px" height="34px" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" fill="#000000" stroke="#000000">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path fill="#f59e0b" d="M273.536 736H800a64 64 0 0 0 64-64V256a64 64 0 0 0-64-64H224a64 64 0 0 0-64 64v570.88L273.536 736zM296 800 147.968 918.4A32 32 0 0 1 96 893.44V256a128 128 0 0 1 128-128h576a128 128 0 0 1 128 128v416a128 128 0 0 1-128 128H296z"></path><path fill="#f59e0b" d="M512 499.2a51.2 51.2 0 1 1 0-102.4 51.2 51.2 0 0 1 0 102.4zm192 0a51.2 51.2 0 1 1 0-102.4 51.2 51.2 0 0 1 0 102.4zm-384 0a51.2 51.2 0 1 1 0-102.4 51.2 51.2 0 0 1 0 102.4z"></path></g></svg>
+                            <span class="inline pl-2 uppercase text-amber-500 text-lg font-semibold">Chat</span>
+                        </p>
+                    </section>
                 </div>
 
             </div>
@@ -301,5 +547,6 @@
 <script setup>
 import AppLayout from "../../Layouts/AppLayout.vue";
 import Slider from "../../Components/Slider.vue";
+import Navlink from "../../Components/NavLink.vue"
 
 </script>
