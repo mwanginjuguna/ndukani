@@ -6,11 +6,7 @@
         :navigation="true"
         :pagination-clickable="true"
         :centered-slides="true"
-        :autoplay="{
-            delay: 8000,
-            pause_on_mouse_enter:true
-        }"
-        :autoplay-pause-on-mouse-enter="true"
+
         :pagination="{
       hideOnClick: false,
 
@@ -20,9 +16,6 @@
         slidesPerView: 2,
       },
     }"
-        @progress="onProgress"
-        @slidechange="onSlideChange"
-
     >
         <swiper-slide v-for="product in productList" class="pb-14 text-slate-900 max-w-fit">
             <SliderProductCard :image-url="product.imageUrl" :title="product.phone" :price="product.price">

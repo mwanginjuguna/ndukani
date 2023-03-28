@@ -34,7 +34,7 @@
                             <!--all images-->
                             <!--consider a slider-->
                             <!--for image in images-->
-                            <img class="rounded object-cover" alt="image" :src="`https://ke.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/84/503736/2.jpg?1607`">
+                            <img class="rounded object-cover" alt="image" :src="featuredUrl">
 
                             <hr class="mb-3 px-6 text-slate-100">
 
@@ -110,8 +110,8 @@
 
                                 <!-- button -->
                                 <div id="cart-button"
-                                    class="my-5 px-8 py-3 grid grid-cols-2 flex justify-between shadow-lg drop-shadow-lg rounded-sm bg-amber-500 hover:underline hover:underline-offset-2 uppercase"
-                                    @click="addToCart(33)"
+                                     class="my-5 px-8 py-3 grid grid-cols-2 flex justify-between shadow-lg drop-shadow-lg rounded-sm bg-amber-500 hover:underline hover:underline-offset-2 uppercase"
+                                     @click="addToCart(33)"
                                 >
                                     <svg fill="#ffffff" width="24px" height="24px" viewBox="0 0 24 24" data-name="Layer 1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><title></title><path d="M12.2,9h1.6V6.8H16V5.2H13.8V3H12.2V5.2H10V6.8h2.2ZM20,5v5.5L7.45,12.72,5,3H1.25a1,1,0,0,0,0,2H3.47L6.7,18H20V16H8.26l-.33-1.33L22,12.18V5ZM7,19a1.5,1.5,0,1,0,1.5,1.5A1.5,1.5,0,0,0,7,19Zm12,0a1.5,1.5,0,1,0,1.5,1.5A1.5,1.5,0,0,0,19,19Z"></path></g></svg>
                                     <p class="font-bold text-base text-white">Add to cart</p>
@@ -149,27 +149,19 @@
                     <section class="pb-6 px-4 bg-white rounded flex flex-col">
                         <h2 class="my-2 font-semibold text-xl text-slate-900">Product Description</h2>
 
-                        <div class="pt-4 text-sm border-t border-slate-200">
-                            <p>Take in more, all at once. The Samsung Galaxy A23's 6.6-inch V-Cut Display gives you room to see and do more. With FHD+ technology and a 90Hz refresh rate, the content you see every day will look smoother and sharper. An advanced octa-core processor with<strong> 4GB of RAM</strong> ensures that Galaxy A23 runs seamlessly and without a glitch no matter what you’re doing, whether that’s using multiple apps at the same time, streaming a video or gaming online. Enjoy <strong>64GB of internal storage</strong> and add up to 1TB more with MicroSD card. Snap memorable moments in clear detail with Galaxy A23’s unique Quad Camera system including 50MP main, 5MP ultrawide, 2MP macro, 2MP depth and 8MP front selfie camera. Order for this&nbsp;Samsung Galaxy A23 Smartphone online from Jumia Kenya&nbsp;and have it delivered to your doorstep.</p>
+                        <div v-if="$slots.description" class="pt-4 text-sm border-t border-slate-200">
+                            <p>
+                                <slot name="description" />
+                            </p>
                         </div>
-
-                        <div class="mt-2.5 mx-auto">
-                            <a href="https://postimg.cc/K4yR8DjT" target="_blank">
-                                <img alt="image" :src="`https://ke.jumia.is/cms/external/pet/SA948MP1EB7I0NAFAMZ/b6fea5e658ea1f9d38aebbb3d285a8d7.jpg`">
-                            </a>
+                        <div v-for="coverImage in coverImages">
+                            <div class="mt-2.5 mx-auto">
+                                <a href="https://postimg.cc/K4yR8DjT" target="_blank">
+                                    <img :alt="coverImage.name" :src="coverImage.url">
+                                </a>
+                            </div>
                         </div>
-
-                        <div class="mt-2.5 mx-auto">
-                            <a href="https://postimg.cc/Mv6HyZyK" target="_blank">
-                                <img alt="image" :src="`https://ke.jumia.is/cms/external/pet/SA948MP1EB7I0NAFAMZ/7c7b7b43fa1c32c0c7ca8bf340f4ddc7.jpg`">
-                            </a>
-                        </div>
-
-                        <div class="mt-2.5 mx-auto">
-                            <a href="https://postimg.cc/gngJ49Dy" target="_blank">
-                                <img alt="image" :src="`https://ke.jumia.is/cms/external/pet/SA948MP1EB7I0NAFAMZ/d9d863e8adfb36bab4c8fb3cf951685e.jpg`">
-                            </a>
-                        </div>
+                        
 
                         <div>
                             <h3 class="mt-2 mb-4 font-medium text-slate-700 text-lg">Technical Specifications</h3>
@@ -725,7 +717,7 @@
                         </p>
                         <p class="flex place-content-center mt-2">
                             <svg width="24px" height="24px" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" fill="#000000" stroke="#000000">
-                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path fill="#f59e0b" d="M273.536 736H800a64 64 0 0 0 64-64V256a64 64 0 0 0-64-64H224a64 64 0 0 0-64 64v570.88L273.536 736zM296 800 147.968 918.4A32 32 0 0 1 96 893.44V256a128 128 0 0 1 128-128h576a128 128 0 0 1 128 128v416a128 128 0 0 1-128 128H296z"></path><path fill="#f59e0b" d="M512 499.2a51.2 51.2 0 1 1 0-102.4 51.2 51.2 0 0 1 0 102.4zm192 0a51.2 51.2 0 1 1 0-102.4 51.2 51.2 0 0 1 0 102.4zm-384 0a51.2 51.2 0 1 1 0-102.4 51.2 51.2 0 0 1 0 102.4z"></path></g></svg>
+                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path fill="#f59e0b" d="M273.536 736H800a64 64 0 0 0 64-64V256a64 64 0 0 0-64-64H224a64 64 0 0 0-64 64v570.88L273.536 736zM296 800 147.968 918.4A32 32 0 0 1 96 893.44V256a128 128 0 0 1 128-128h576a128 128 0 0 1 128 128v416a128 128 0 0 1-128 128H296z"></path><path fill="#f59e0b" d="M512 499.2a51.2 51.2 0 1 1 0-102.4 51.2 51.2 0 0 1 0 102.4zm192 0a51.2 51.2 0 1 1 0-102.4 51.2 51.2 0 0 1 0 102.4zm-384 0a51.2 51.2 0 1 1 0-102.4 51.2 51.2 0 0 1 0 102.4z"></path></g></svg>
                             <span class="inline pl-2 uppercase text-amber-500 font-semibold">Chat</span>
                         </p>
                     </section>
@@ -743,5 +735,28 @@ import AppLayout from "../../Layouts/AppLayout.vue";
 import Slider from "../../Components/Slider.vue";
 import Navlink from "../../Components/NavLink.vue"
 import {Link} from "@inertiajs/vue3";
+import {defineProps} from "vue";
+
+const props = defineProps({
+    smartPhone: Object,
+    phoneReviews: Object,
+    images: Object,
+    featuredUrl: String,
+    coverImages: Object // blog or From Seller images preferably landscape
+})
+const smartPhone = {
+    "title": 'Apple IPhone 14 PRO Max – 6.7″ – 6GB RAM 128GB ROM 48MP CAMERA – Esim - Deep Purple',
+    "officialStore": true,
+    "brand" : "Samsung",
+    "verifiedRatings": 25,
+    "averageStars": 4.98,
+    "price": "Ksh 185,000",
+    "initialPrice": "Ksh 205,000",
+    "percentOff": "18",
+    "warranty": "2 Years",
+    "description": "Take in more, all at once. The Samsung Galaxy A23's 6.6-inch V-Cut Display gives you room to see and do more. With FHD+ technology and a 90Hz refresh rate, the content you see every day will look smoother and sharper. An advanced octa-core processor with<strong> 4GB of RAM</strong> ensures that Galaxy A23 runs seamlessly and without a glitch no matter what you’re doing, whether that’s using multiple apps at the same time, streaming a video or gaming online. Enjoy <strong>64GB of internal storage</strong> and add up to 1TB more with MicroSD card. Snap memorable moments in clear detail with Galaxy A23’s unique Quad Camera system including 50MP main, 5MP ultrawide, 2MP macro, 2MP depth and 8MP front selfie camera. Order for this&nbsp;Samsung Galaxy A23 Smartphone online from Jumia Kenya&nbsp;and have it delivered to your doorstep.",
+
+}
+
 
 </script>
