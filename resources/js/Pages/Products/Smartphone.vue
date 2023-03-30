@@ -55,7 +55,7 @@
                         <!--product details-->
                         <div id="product-details" class="px-6 py-4 text-sm text-slate-800 flex flex-col gap-y-3">
 
-                            <div class="flex justify-between">
+                            <div v-if="officialStore" class="flex justify-between">
                                 <a
                                     href="#"
                                     class="mb-1 py-1 px-1.5 bg-sky-800 rounded-sm leading-tight text-slate-50 text-xs">
@@ -68,13 +68,13 @@
                             </div>
 
                             <h2 class="font-medium text-lg text-slate-700 leading-tight">
-                                Samsung Galaxy A23, 6.6″, 64GB + 4GB RAM (Dual SIM), 5000mAh, Black
+                                {{ smartPhone.title }}
                             </h2>
 
                             <p class="text-sm font-light">
                                 <span class="font-medium">Brand:</span>
-                                <a href="#" class="px-1 inline-flex text-sky-700 hover:text-sky-600 hover:underline">Samsung</a> |
-                                <a href="#" class="pl-1 inline-flex text-sky-700 hover:text-sky-600 hover:underline">Similar products from Samsung</a>
+                                <a href="#" class="px-1 inline-flex text-sky-700 hover:text-sky-600 hover:underline">{{ smartPhone.brand }}</a> |
+                                <a href="#" class="pl-1 inline-flex text-sky-700 hover:text-sky-600 hover:underline">Similar products from {{ smartPhone.brand }}</a>
                             </p>
 
                             <!-- rating score -->
@@ -92,7 +92,7 @@
 
                             <div>
 
-                                <a class="text-sky-600 hover:text-sky-500 hover:underline">(24 verified ratings)</a>
+                                <a class="text-sky-600 hover:text-sky-500 hover:underline">({{ smartPhone.verifiedRatings }} verified ratings)</a>
 
                                 <hr class="px-6 text-slate-100">
 
@@ -161,7 +161,6 @@
                                 </a>
                             </div>
                         </div>
-                        
 
                         <div>
                             <h3 class="mt-2 mb-4 font-medium text-slate-700 text-lg">Technical Specifications</h3>
@@ -735,18 +734,21 @@ import AppLayout from "../../Layouts/AppLayout.vue";
 import Slider from "../../Components/Slider.vue";
 import Navlink from "../../Components/NavLink.vue"
 import {Link} from "@inertiajs/vue3";
-import {defineProps} from "vue";
+import {defineProps, ref} from "vue";
 
 const props = defineProps({
     smartPhone: Object,
     phoneReviews: Object,
     images: Object,
     featuredUrl: String,
-    coverImages: Object // blog or From Seller images preferably landscape
+    coverImages: Object, // blog or From Seller images preferably landscape
+    officialStore: true
 })
+
+const officialStore = ref(true);
 const smartPhone = {
     "title": 'Apple IPhone 14 PRO Max – 6.7″ – 6GB RAM 128GB ROM 48MP CAMERA – Esim - Deep Purple',
-    "officialStore": true,
+    "officialStore": props.officialStore ?? true,
     "brand" : "Samsung",
     "verifiedRatings": 25,
     "averageStars": 4.98,
