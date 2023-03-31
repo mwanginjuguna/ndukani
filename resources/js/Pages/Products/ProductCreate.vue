@@ -121,7 +121,7 @@ const product = ref({
 })
 
 defineProps({
-    
+
 })
 
 // Define the options for the select fields
