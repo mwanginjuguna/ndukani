@@ -117,4 +117,84 @@ class ProductController extends Controller
             'keyFeatures' => $keyFeatures
         ]);
     }
+
+    /*
+     * Store a new product
+     * @param App\Http\Requests\ProductRequest
+     * return JSON data
+     */
+    public function productsBySeller($seller_id): \Illuminate\Http\JsonResponse
+    {
+        $products = Product::query()->where('seller_id', '=', $seller_id)->get()
+        $brands = Brand::all();
+        $categories = Category::all();
+        $tags = Tag::all();
+        $seller = Seller::findOrFail($seller_id);
+        $users = User::query()->where('id', '=', $seller->user_id)->first();
+        return response()->json([
+            "products" => $products,
+            "brands" => $brands,
+            "categories" => $categories,
+            "tags" => $tags,
+            "seller" => $seller
+        ]);
+    }
+
+    /*
+     * products by brand
+     *  */
+    public function productsByBrand($brand_id): \Illuminate\Http\JsonResponse
+    {
+        $products = Product::query()->where('brand_id', '=', $brand_id)->get();
+        $brand = Brand::findOrFail($brand_id);
+        $categories = Category::all();
+        $tags = Tag::all();
+        $sellers = Seller::query()->where('brand_id', '=', $brand_id)->get();
+        return response()->json([
+            "products" => $products,
+            "brand" => $brand,
+            "categories" => $categories,
+            "tags" => $tags,
+            "sellers" => $sellers
+        ]);
+    }
+
+    /*
+     * products by category
+     *  */
+    public function productsByCategory($category_id): \Illuminate\Http\JsonResponse
+    {
+        $products = Product::query()->where('category_id', '=', $category_id)->latest()->get();
+        $brand = Brand::all();
+        $category = Category::findOrFail($category_id);
+        $tags = Tag::all();
+        $sellers = Seller::query()->where('category_id', '=', $category_id)->latest()->get();
+
+        return response()->json([
+            "products" => $products,
+            "brand" => $brand,
+            "categories" => $category,
+            "tags" => $tags,
+            "sellers" => $sellers
+        ]);
+    }
+
+    /*
+     * products by tag
+     *  */
+    public function productsByTag($tag_id): \Illuminate\Http\JsonResponse
+    {
+        $products = Product::query()->where('brand_id', '=', $tag_id)->get();
+        $brand = Brand::all();
+        $categories = Category::all();
+        $tag = Tag::findOrFail($tag_id);
+        $sellers = Seller::query()->where('tag_id', '=', $tag_id)->get();
+        return response()->json([
+            "products" => $products,
+            "brand" => $brand,
+            "categories" => $categories,
+            "tag" => $tag,
+            "sellers" => $sellers
+        ]);
+    }
 }

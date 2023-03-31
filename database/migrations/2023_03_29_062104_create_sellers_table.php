@@ -14,10 +14,14 @@ return new class extends Migration
         Schema::create('sellers', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('category_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->foreignId('tag_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->foreignId('brand_id')->nullable()->constrained()->cascadeOnDelete();
             $table->boolean('is_manufacturer')->default(false);
             $table->string('country');
             $table->float('score')->nullable();
             $table->timestamps();
+            $table->softDeletes('deleted_at');
         });
     }
 
