@@ -14,13 +14,19 @@ use App\Models\Seller;
 use App\Models\Specification;
 use App\Models\Tag;
 use App\Models\User;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class ProductController extends Controller
 {
-    // all products
-    public function index(Request $request)
+    /**
+     * get all products
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function index(Request $request): JsonResponse
     {
         $products = Product::all();
         $brands = Brand::all();
@@ -38,12 +44,12 @@ class ProductController extends Controller
             ]);
     }
 
-    /*
+    /**
      * Create a new product
-     * @param App\Http\Requests\ProductRequest
-     * return JSON data
+     * @param Request $request
+     * @return Response
      */
-    public function create(Request $request)
+    public function create(Request $request): Response
     {
         $brands = Brand::all();
         $categories = Category::all();
@@ -58,12 +64,12 @@ class ProductController extends Controller
         ]);
     }
 
-    /*
+    /**
      * Store a new product
-     * @param App\Http\Requests\ProductRequest
-     * return JSON data
+     * @param ProductRequest $request
+     * @return JsonResponse
      */
-    public function store(ProductRequest $request)
+    public function store(ProductRequest $request): JsonResponse
     {
         $validatedData = $request->validated();
 
@@ -77,7 +83,28 @@ class ProductController extends Controller
         ]);
     }
 
-    public function show($id)
+    /**
+     * Show/view a product resource
+     * @param Product $product
+     * @return JsonResponse
+     */
+    public function show(Product $product): JsonResponse
+    {
+        // Load the product and its relationships
+        $product->load('category', 'tag', 'brand', 'seller', 'ratings');
+
+        // Return a JSON response with the product and its relationships
+        return response()->json([
+            'product' => $product
+        ]);
+    }
+
+    /**
+     * Show/view a product resource
+     * @param int $id
+     * @return JsonResponse
+    */
+    public function showIt(int $id): JsonResponse
     {
         $product = Product::findOrFail($id);
         $category = Category::query()
@@ -118,34 +145,43 @@ class ProductController extends Controller
         ]);
     }
 
-    /*
+    /**
      * Store a new product
-     * @param App\Http\Requests\ProductRequest
+     * @param integer $seller_id
      * return JSON data
      */
-    public function productsBySeller($seller_id): \Illuminate\Http\JsonResponse
+    public function productsBySeller(int $seller_id): JsonResponse
     {
-        $products = Product::query()->where('seller_id', '=', $seller_id)->get()
+        $products = Product::query()
+            ->where('seller_id', '=', $seller_id)
+            ->latest()
+            ->get();
         $brands = Brand::all();
         $categories = Category::all();
         $tags = Tag::all();
         $seller = Seller::findOrFail($seller_id);
-        $users = User::query()->where('id', '=', $seller->user_id)->first();
+        $user = User::query()->where('id', '=', $seller->user_id)->first();
         return response()->json([
             "products" => $products,
             "brands" => $brands,
             "categories" => $categories,
             "tags" => $tags,
-            "seller" => $seller
+            "seller" => $seller,
+            "user" => $user
         ]);
     }
 
-    /*
+    /**
      * products by brand
+     * @param int $brand_id
+     * @return JsonResponse
      *  */
-    public function productsByBrand($brand_id): \Illuminate\Http\JsonResponse
+    public function productsByBrand(int $brand_id): JsonResponse
     {
-        $products = Product::query()->where('brand_id', '=', $brand_id)->get();
+        $products = Product::query()
+            ->where('brand_id', '=', $brand_id)
+            ->latest()
+            ->get();
         $brand = Brand::findOrFail($brand_id);
         $categories = Category::all();
         $tags = Tag::all();
@@ -159,42 +195,186 @@ class ProductController extends Controller
         ]);
     }
 
-    /*
+    /**
      * products by category
-     *  */
-    public function productsByCategory($category_id): \Illuminate\Http\JsonResponse
+     * @param int $category_id
+     * @return JsonResponse
+     */
+    public function productsByCategory(int $category_id): JsonResponse
     {
         $products = Product::query()->where('category_id', '=', $category_id)->latest()->get();
-        $brand = Brand::all();
+        $brands = Brand::all();
         $category = Category::findOrFail($category_id);
         $tags = Tag::all();
         $sellers = Seller::query()->where('category_id', '=', $category_id)->latest()->get();
 
         return response()->json([
             "products" => $products,
-            "brand" => $brand,
+            "brands" => $brands,
             "categories" => $category,
             "tags" => $tags,
             "sellers" => $sellers
         ]);
     }
 
-    /*
+    /**
      * products by tag
-     *  */
-    public function productsByTag($tag_id): \Illuminate\Http\JsonResponse
+     * @param int $tag_id
+     * @return JsonResponse
+     */
+    public function productsByTag($tag_id): JsonResponse
     {
-        $products = Product::query()->where('brand_id', '=', $tag_id)->get();
-        $brand = Brand::all();
+        $products = Product::query()
+            ->where('brand_id', '=', $tag_id)
+            ->latest()
+            ->get();
+        $brands = Brand::all();
         $categories = Category::all();
         $tag = Tag::findOrFail($tag_id);
         $sellers = Seller::query()->where('tag_id', '=', $tag_id)->get();
         return response()->json([
             "products" => $products,
-            "brand" => $brand,
+            "brands" => $brands,
             "categories" => $categories,
             "tag" => $tag,
             "sellers" => $sellers
         ]);
+    }
+
+    /**
+     * Price Filters - show products in a given price range
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function sortByPrice(Request $request): JsonResponse
+    {
+        $payload = $request->json();
+        $priceFrom = $payload['lowestPrice'];
+        $priceTo = $payload['highestPrice'];
+
+        $products = Product::query()
+            ->where('price', '>=', $priceFrom)
+            ->where('price', '<=', $priceTo)
+            ->latest()
+            ->get();
+
+        $brands = Brand::all();
+        $categories = Category::all();
+        $tags = Tag::all();
+        $sellers = Seller::all();
+
+        return response()->json([
+            "products" => $products,
+            "brands" => $brands,
+            "categories" => $categories,
+            "tags" => $tags,
+            "sellers" => $sellers
+        ]);
+    }
+
+    /**
+     * return only products that are in stock
+     * @param Request $request
+     * @return JsonResponse
+    */
+    public function inStockOnly(Request $request): JsonResponse
+    {
+        $products = Product::query()
+            ->where('in_stock')
+            ->latest()
+            ->get();
+        $brands = Brand::all();
+        $categories = Category::all();
+        $tags = Tag::all();
+        $sellers = Seller::all();
+        $users = User::all();
+
+        return response()->json([
+            "products" => $products,
+            "brands" => $brands,
+            "categories" => $categories,
+            "tags" => $tags,
+            "sellers" => $sellers,
+            "users" => $users
+        ]);
+    }
+
+    /**
+     * Search for products based on given keywords.
+     *
+     * @param Request $request The HTTP request object
+     * @return JsonResponse The response with the search results
+     */
+    public function search(Request $request): JsonResponse
+    {
+        // Retrieve the search query parameter from the request
+        $query = $request->input('q');
+
+        // Get the products that match the search query
+        $products = Product::where('name', 'LIKE', "%{$query}%")
+            ->orWhere('description', 'LIKE', "%{$query}%")
+            ->get();
+
+        // Return the search results as JSON
+        return response()->json(['results' => $products]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function sort(Request $request): JsonResponse
+    {
+        $sortType = $request->input('sort_type');
+        $sortField = $request->input('sort_field');
+
+        $query = Product::query();
+
+        // apply search query if present
+        if ($request->filled('search')) {
+            $search = $request->input('search');
+            $query->where('name', 'like', "%$search%");
+        }
+
+        // apply sort
+        $query->orderBy($sortField, $sortType);
+
+        // get results
+        $products = $query->get();
+
+        // return as JSON
+        return response()->json([
+            'products' => $products
+        ]);
+    }
+
+    /**
+     * Get related products for the given product.
+     *
+     * @param int $productId
+     * @return JsonResponse
+     */
+    protected function relatedProducts(int $productId): JsonResponse
+    {
+        // Retrieve the product instance
+        $product = Product::findOrFail($productId);
+
+        // Retrieve the tag ids of the product
+        $tagIds = $product->tags->pluck('id')->toArray();
+
+        // Retrieve the related products based on shared tags
+        $relatedProducts = Product::where('id', '!=', $productId)
+            ->where(function ($query) use ($tagIds) {
+                $query->whereIn('tags.id', $tagIds)
+                    ->orWhereHas('tags', function ($query) use ($tagIds) {
+                        $query->whereIn('tags.id', $tagIds);
+                    });
+            })
+            ->take(10)
+            ->get();
+
+        return response()->json($relatedProducts);
     }
 }

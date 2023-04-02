@@ -4,31 +4,120 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Product extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'category_id', 'tag_id', 'brand_id', 'seller_id', 'rating_id', 'price', 'currency',  'description', 'quantity', 'in_stock'];
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'name',
+        'category_id',
+        'tag_id',
+        'brand_id',
+        'seller_id',
+        'price',
+        'currency',
+        'description',
+        'quantity',
+        'in_stock',
+    ];
 
-    public function category()
+    /**
+     * Get the category that the product belongs to.
+     *
+     * @return BelongsTo
+     */
+    public function category(): BelongsTo
     {
-        $this->belongsTo(Category::class);
+        return $this->belongsTo(Category::class);
     }
-    public function tag()
+
+    /**
+     * Get the tag that the product belongs to.
+     *
+     * @return BelongsTo
+     */
+    public function tag(): BelongsTo
     {
-        $this->belongsTo(Tag::class);
+        return $this->belongsTo(Tag::class);
     }
-    public function brand()
+
+    /**
+     * Get the brand that the product belongs to.
+     *
+     * @return BelongsTo
+     */
+    public function brand(): BelongsTo
     {
-        $this->belongsTo(Brand::class);
+        return $this->belongsTo(Brand::class);
     }
-    public function seller()
+
+    /**
+     * Get the seller that the product belongs to.
+     *
+     * @return BelongsTo
+     */
+    public function seller(): BelongsTo
     {
-        $this->belongsTo(Seller::class);
+        return $this->belongsTo(Seller::class);
     }
-    public function ratings()
+
+    /**
+     * Get the ratings for the product.
+     *
+     * @return HasMany
+     */
+    public function ratings(): HasMany
     {
-        $this->hasMany(Rating::class);
+        return $this->hasMany(Rating::class);
+    }
+
+    /**
+     * Get the reviews for the product.
+     *
+     * @return HasMany
+     */
+    public function reviews(): HasMany
+    {
+        return $this->hasMany(Review::class);
+    }
+
+    /**
+     * Get the image that the product has.
+     *
+     * @return HasOne
+     */
+    public function image(): HasOne
+    {
+        return $this->hasOne(Image::class);
+    }
+
+    /**
+     * Get the related products for the product.
+     *
+     * @return BelongsToMany
+     */
+    public function relatedProducts(): BelongsToMany
+    {
+        return $this->belongsToMany(Product::class, 'product_product', 'product_id', 'related_product_id');
+    }
+
+    /**
+     * Get the discounts that are applicable to the product.
+     *
+     * @return BelongsToMany
+     */
+    public function discounts(): BelongsToMany
+    {
+        return $this->belongsToMany(Discount::class);
     }
 }

@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->foreignId('category_id')->nullable()->constrained()->nullOnDelete();
+            $table->foreignId('product_type_id')->nullable()->constrained()->nullOnDelete();
             $table->foreignId('tag_id')->nullable()->constrained()->nullOnDelete();
             $table->foreignId('brand_id')->nullable()->constrained()->nullOnDelete();
             $table->foreignId('seller_id')->nullable()->constrained()->nullOnDelete();
-            $table->foreignId('rating_id')->nullable()->constrained()->nullOnDelete();
             $table->double('price', total: 8, places: 2)->nullable();
             $table->string('currency')->nullable();
             $table->foreignId('discount_id')->nullable()->constrained()->nullOnDelete();
