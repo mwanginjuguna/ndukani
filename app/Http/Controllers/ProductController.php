@@ -28,20 +28,52 @@ class ProductController extends Controller
      */
     public function index(Request $request): JsonResponse
     {
-        $products = Product::all();
-        $brands = Brand::all();
-        $categories = Category::all();
-        $tags = Tag::all();
-        $sellers = Seller::all();
-        $users = User::all();
-        return response()->json([
-            "products" => $products,
-            "brands" => $brands,
-            "categories" => $categories,
-            "tags" => $tags,
-            "sellers" => $sellers,
-            "users" => $users
-            ]);
+        $query = Product::query();
+
+        // filter by brand
+        if ($request->has('brand')) {
+            $query->where('brand', $request->brand);
+        }
+
+        // filter by category
+        if ($request->has('category')) {
+            $query->where('category', $request->category);
+        }
+
+        // filter by price range
+        if ($request->has('min_price')) {
+            $query->where('price', '>=', $request->min_price);
+        }
+
+        if ($request->has('max_price')) {
+            $query->where('price', '<=', $request->max_price);
+        }
+
+        // filter by rating
+        if ($request->has('rating')) {
+            $query->where('rating', $request->rating);
+        }
+
+        // apply sorting if required
+        if ($request->has('sort_by')) {
+            $sortBy = $request->sort_by;
+
+            if ($sortBy === 'price_high_to_low') {
+                $query->orderByDesc('price');
+            } elseif ($sortBy === 'price_low_to_high') {
+                $query->orderBy('price');
+            } elseif ($sortBy === 'name_a_to_z') {
+                $query->orderBy('name');
+            } elseif ($sortBy === 'name_z_to_a') {
+                $query->orderByDesc('name');
+            } elseif ($sortBy === 'rating') {
+                $query->orderByDesc('rating');
+            }
+        }
+
+        $products = $query->paginate(10);
+
+        return response()->json($products);
     }
 
     /**

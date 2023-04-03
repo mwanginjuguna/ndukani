@@ -32,3 +32,25 @@ Route::prefix('products')->group(function () {
     Route::get('/search', [ProductController::class, 'search'])->name('products.search');
     Route::get('/sort', [ProductController::class, 'sort'])->name('products.sort');
 });
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::resource('products.reviews', 'ReviewController')->only(['store', 'update', 'destroy']);
+});
+
+// Example with names for the routes
+Route::middleware('auth:sanctum')->group(function () {
+    Route::resource('products.reviews', 'ReviewController')->only(['store', 'update', 'destroy'])
+        ->names([
+            'store' => 'reviews.store',
+            'update' => 'reviews.update',
+            'destroy' => 'reviews.destroy',
+        ]);
+});
+
+// orders API
+Route::group(['middleware' => ['auth:sanctum'], 'prefix' => 'orders'], function () {
+    Route::get('/', [OrdersController::class, 'index'])->name('orders.index');
+    Route::post('/', [OrdersController::class, 'store'])->name('orders.store');
+    Route::get('/{order}', [OrdersController::class, 'show'])->name('orders.show');
+    Route::put('/{order}', [OrdersController::class, 'update'])->name('orders.update');
+});
