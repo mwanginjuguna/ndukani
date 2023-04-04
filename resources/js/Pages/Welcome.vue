@@ -9,6 +9,42 @@ import MenuDropdown from "../Components/MenuDropdown.vue";
 
 const showMenu = ref(false);
 
+const {currentIndex, changeCurrentIndex} = ref(0);
+
+function classShow(id) {
+    const showEl = false;
+    if (id=== currentIndex){
+        return 'block';
+    }
+}
+
+const loadPrev = () => {
+    return false;
+    // currentIndex !== length(imageUrls) ? ch :
+};
+const loadNext = ref(false);
+
+
+
+const imageUrls = [
+    {
+        "id": 1,
+        "url" : "https://ke.jumia.is/cms/2023/W13/HP/Sliders/Revised/KE_Easter_Cross_Generic_0323_S_rvsd.jpg"
+    },
+    {
+        "id": 2,
+        "url": "https://ke.jumia.is/cms/2023/SuperBrandDays/Nivea/V0/Generics/Revised/KE_Nivea_SBD_0323_S_rvsd.jpg"
+    },
+    {
+        "id": 3,
+        "url": "https://ke.jumia.is/cms/2023/W13/HP/Sliders/Revised/KE_Easter_Drinks_0323_S_rvsd.jpg"
+    },
+    {
+        "id": 4,
+        "url" : "https://ke.jumia.is/cms/2023/W13/HP/Sliders/KE_Easter_Sneakers_0323_S_a.jpg"
+    }
+]
+
 defineProps({
     canLogin: Boolean,
     canRegister: Boolean,
@@ -132,7 +168,7 @@ function toggleMenu() {
             <div class="mt-3">
                 <div class="grid grid-cols-1 md:grid-cols-5">
 
-                    <div id="menu-col" class="col-span-1 mr-3 py-1.5 text-xs font-light bg-white rounded-md shadow-md flex flex-col gap-y-2">
+                    <div id="menu-col" class="col-span-1 mr-3 py-1.5 max-h-[385px] text-xs font-light bg-white rounded-md shadow-md flex flex-col gap-y-2">
 
                         <a href="#menu-col" class="px-2 flex flex-wrap gap-x-2">
                             <svg fill="#000000" width="21px" height="21px" viewBox="0 0 24 24" id="apple-fruit" data-name="Flat Line" xmlns="http://www.w3.org/2000/svg" class="icon flat-line">
@@ -209,7 +245,13 @@ function toggleMenu() {
                     </div>
 
                     <div id="slider" class="col-span-1 md:col-span-3">
-                        <img alt="img-slide" class="rounded-xl" :src="`https://ke.jumia.is/cms/2023/W13/HP/Sliders/Revised/KE_Easter_Drinks_0323_S_rvsd.jpg`">
+                        <!--all image cards-->
+
+                        <div v-for="slide in imageUrls" class="">
+                            <img alt="img-slide" class="hidden rounded-xl" :class="classShow(slide.id)" :src="slide.url" :key="slide.id">
+                        </div>
+
+
                     </div>
 
                     <div class="ml-3 col-span-1">
