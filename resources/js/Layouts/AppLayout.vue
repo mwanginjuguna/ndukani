@@ -36,7 +36,7 @@ const logout = () => {
         <div class="grid grid-cols-5">
 
             <!-- Sidebar -->
-            <aside class="hidden md:block md:col-span-1 max-h-screen overflow-y-scroll bg-slate-800 dark:bg-slate-100 text-gray-100 active:text-white dark:text-slate-800">
+            <aside class="hidden md:block md:col-span-1 max-h-screen overflow-y-scroll bg-amber-400 dark:bg-slate-100 text-slate-900 active:text-white dark:text-slate-800">
 
                 <Sidebar />
 
@@ -49,7 +49,8 @@ const logout = () => {
 
                 <div class="relative min-h-screen bg-gray-100">
 
-                    <nav class="sticky top-0 right-0 bg-white border-b border-gray-100">
+                    <!--Navbar-->
+                    <nav class="sticky top-0 right-0 z-[9999] bg-white border-b border-gray-100">
                         <!-- Primary Navigation Menu -->
                         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                             <div class="flex justify-between h-16">
@@ -76,16 +77,19 @@ const logout = () => {
                                         </div>
 
                                     </div>
-                                    <!--menu-->
+                                    <!--mega menu-->
                                     <div class="mx-6 mt-1 sm:mb-0">
                                         <MenuDropdown>
+                                            <!--trigger-->
                                             <template v-slot:trigger>
                                                 <button class="flex flex-wrap max-w-fit gap-2 text-gray-500 border border-gray-100 hover:shadow-md rounded-xl py-2.5 px-2 hover:underline hover:underline-offset-4">
                                                     <p class="pt-1">Mega Menu</p>
-                                                    <svg fill="#64748b" version="1.1" id="Layer_1" class="pt-1.5" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve" stroke="#d1d5db"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path d="M49.288,59.647c0.383,0.348,0.863,0.519,1.342,0.519c0.076,0,0.151-0.015,0.228-0.023c0.028,0.001,0.057,0.008,0.085,0.008 c0.545,0,1.088-0.222,1.482-0.657l15.231-16.804c0.742-0.818,0.68-2.083-0.139-2.824c-0.818-0.743-2.083-0.679-2.824,0.139 L50.656,55.49L35.169,41.453c-0.819-0.744-2.083-0.68-2.824,0.139c-0.742,0.818-0.68,2.083,0.139,2.824L49.288,59.647z"></path> <path d="M50,83.214c18.449,0,33.458-15.009,33.458-33.457c0-18.449-15.009-33.458-33.458-33.458 c-18.448,0-33.457,15.009-33.457,33.458C16.543,68.205,31.552,83.214,50,83.214z M50,20.299c16.243,0,29.458,13.215,29.458,29.458 c0,16.242-13.215,29.457-29.458,29.457c-16.242,0-29.457-13.215-29.457-29.457C20.543,33.514,33.758,20.299,50,20.299z"></path> </g> </g></svg>
+                                                    <svg fill="#64748b" version="1.1" id="Layer_1" class="pt-1.5" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve" stroke="#d1d5db">
+                                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path d="M49.288,59.647c0.383,0.348,0.863,0.519,1.342,0.519c0.076,0,0.151-0.015,0.228-0.023c0.028,0.001,0.057,0.008,0.085,0.008 c0.545,0,1.088-0.222,1.482-0.657l15.231-16.804c0.742-0.818,0.68-2.083-0.139-2.824c-0.818-0.743-2.083-0.679-2.824,0.139 L50.656,55.49L35.169,41.453c-0.819-0.744-2.083-0.68-2.824,0.139c-0.742,0.818-0.68,2.083,0.139,2.824L49.288,59.647z"></path> <path d="M50,83.214c18.449,0,33.458-15.009,33.458-33.457c0-18.449-15.009-33.458-33.458-33.458 c-18.448,0-33.457,15.009-33.457,33.458C16.543,68.205,31.552,83.214,50,83.214z M50,20.299c16.243,0,29.458,13.215,29.458,29.458 c0,16.242-13.215,29.457-29.458,29.457c-16.242,0-29.457-13.215-29.457-29.457C20.543,33.514,33.758,20.299,50,20.299z"></path> </g> </g></svg>
                                                 </button>
                                             </template>
 
+                                            <!--menu content-->
                                             <template v-slot:default>
                                                 <div class="text-left text-sm grid grid-cols-1 md:grid-cols-3 mx-auto max-w-2xl min-w-fit my-1.5 pr-4 divide-y md:divide-y-0">
 
@@ -107,7 +111,7 @@ const logout = () => {
                                                         <p class="font-semibold">Store</p>
                                                         <Link :href="route('home')" class="text-gray-600 hover:underline hover:underline-offset-2 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Products</Link>
 
-                                                        <Link :href="route('home')" class="text-gray-600 hover:underline hover:underline-offset-2 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Categories</Link>
+                                                        <Link :href="route('categories')" class="text-gray-600 hover:underline hover:underline-offset-2 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Categories</Link>
 
                                                         <Link :href="route('home')" class="text-gray-600 hover:underline hover:underline-offset-2 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">New Arrivals</Link>
 
@@ -359,7 +363,7 @@ const logout = () => {
                     </header>
 
                     <!-- Page Content -->
-                    <main>
+                    <main class="relative">
                         <slot />
                     </main>
                 </div>

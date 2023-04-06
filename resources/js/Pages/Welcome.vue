@@ -6,44 +6,9 @@ import Dropdown from "../Components/Dropdown.vue";
 import DropdownLink from "../Components/DropdownLink.vue";
 import {ref} from "vue";
 import MenuDropdown from "../Components/MenuDropdown.vue";
+import HeroLandscapeSlider from "./Products/Partials/HeroLandscapeSlider.vue";
 
 const showMenu = ref(false);
-
-const {currentIndex, changeCurrentIndex} = ref(0);
-
-function classShow(id) {
-    const showEl = false;
-    if (id=== currentIndex){
-        return 'block';
-    }
-}
-
-const loadPrev = () => {
-    return false;
-    // currentIndex !== length(imageUrls) ? ch :
-};
-const loadNext = ref(false);
-
-
-
-const imageUrls = [
-    {
-        "id": 1,
-        "url" : "https://ke.jumia.is/cms/2023/W13/HP/Sliders/Revised/KE_Easter_Cross_Generic_0323_S_rvsd.jpg"
-    },
-    {
-        "id": 2,
-        "url": "https://ke.jumia.is/cms/2023/SuperBrandDays/Nivea/V0/Generics/Revised/KE_Nivea_SBD_0323_S_rvsd.jpg"
-    },
-    {
-        "id": 3,
-        "url": "https://ke.jumia.is/cms/2023/W13/HP/Sliders/Revised/KE_Easter_Drinks_0323_S_rvsd.jpg"
-    },
-    {
-        "id": 4,
-        "url" : "https://ke.jumia.is/cms/2023/W13/HP/Sliders/KE_Easter_Sneakers_0323_S_a.jpg"
-    }
-]
 
 defineProps({
     canLogin: Boolean,
@@ -246,12 +211,7 @@ function toggleMenu() {
 
                     <div id="slider" class="col-span-1 md:col-span-3">
                         <!--all image cards-->
-
-                        <div v-for="slide in imageUrls" class="">
-                            <img alt="img-slide" class="hidden rounded-xl" :class="classShow(slide.id)" :src="slide.url" :key="slide.id">
-                        </div>
-
-
+                        <HeroLandscapeSlider />
                     </div>
 
                     <div class="ml-3 col-span-1">

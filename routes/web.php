@@ -29,6 +29,7 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
+
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
@@ -40,6 +41,10 @@ Route::middleware([
     Route::get('/products', function () {
         return Inertia::render('Dashboard');
     })->name('products');
+
+    Route::get('/categories', function () {
+        return Inertia::render('Categories/CategoryIndex');
+    })->name('categories');
 
     Route::get('/samsung', function () {
         return Inertia::render('Products/Samsung');
