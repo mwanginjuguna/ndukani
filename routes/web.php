@@ -43,8 +43,12 @@ Route::middleware([
     })->name('products');
 
     Route::get('/categories', function () {
-        return Inertia::render('Categories/CategoryIndex');
+        return Inertia::render('Categories/CategoryIndex', ['categories' => \App\Models\Category::all()]);
     })->name('categories');
+
+    Route::get('/tags', function () {
+        return Inertia::render('Products/Brands', ['tags' => \App\Models\Tag::all()]);
+    })->name('tags');
 
     Route::get('/samsung', function () {
         return Inertia::render('Products/Samsung');

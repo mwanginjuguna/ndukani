@@ -69,7 +69,7 @@ function addCategory() {
 <template>
     <AppLayout title="Dashboard">
         <template #header>
-            <h2 id="categories" class="font-semibold text-xl text-gray-700 uppercase leading-tight">
+            <h2 id="tags" class="font-semibold text-xl text-gray-700 uppercase leading-tight">
                 Dukani Categories
             </h2>
         </template>
@@ -80,6 +80,7 @@ function addCategory() {
                 <div class="hidden sticky top-0 md:top-32 right-0 md:block md:col-span-1 h-fit px-4 py-4 text-xs xl:text-sm bg-gray-50 rounded-md shadow-sm">
 
                     <button class="my-2 p-1.5 px-3 text-slate-100 rounded hover:underline hover:bg-slate-900 bg-slate-700 transition-all 300ms ease-in-out" @click="newCategory = true">Add New</button>
+                    <!-- Modal -->
                     <Modal :show="newCategory" :closeable="true">
                         <div class="max-w-lg pt-4 pb-10 mx-auto">
                             <div>
@@ -108,7 +109,7 @@ function addCategory() {
                         </div>
                     </Modal>
 
-                    <h4 class="font-semibold text-slate-500">Main Categories</h4>
+                    <h4 class="font-semibold text-slate-500">Main Brands</h4>
 
                     <div class="mt-6 flex flex-row gap-1 text-gray-600 font-semibold ">
                         <svg viewBox="0 0 24 24" fill="none" width="29px" height="29px" xmlns="http://www.w3.org/2000/svg" stroke="#828282"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <rect x="7.5" y="4.5" width="9" height="15" rx="1.5" stroke="#475569"></rect> <rect x="9.5" y="6.5" width="5" height="5" rx="0.75" stroke="#475569"></rect> <rect width="1.5" height="1" rx="0.5" transform="matrix(1 0 0 -1 9.5 14.5)" stroke="#475569"></rect> <rect width="1.5" height="1" rx="0.5" transform="matrix(1 0 0 -1 13 14.5)" stroke="#475569"></rect> </g>
@@ -154,7 +155,7 @@ function addCategory() {
 
                 <div class="col-span-1 md:col-span-4 bg-gray-50">
 
-                    <!--all categories-->
+                    <!--all brands-->
                     <div class="pb-3 bg-white rounded">
                         <div class="px-4 py-3 bg-amber-500 text-slate-900 flex justify-between">
                             <h3 class="font-semibold text-lg text-slate-900">All Categories</h3>
@@ -167,31 +168,45 @@ function addCategory() {
 
                         <div class="grid grid-cols-3 gap-1 p-1">
 
-                            <a href="#categories" class="rounded shadow-sm max-w-[260px] min-w-fit shadow-xl sm:rounded-lg">
-                                <img :src="`https://ke.jumia.is/cms/2021/W28/NewHome/Grocery/Brands/Mobile/coca-cola_260x144.png`" alt="img-sm">
+                            <a href="#tags" class="rounded shadow-sm max-w-[260px] min-w-fit shadow-xl sm:rounded-lg">
+                                <img :src="`https://ke.jumia.is/cms/2021/W28/NewHome/Grocery/Brands/Mobile/Tusker.jpg`" alt="img-sm">
+                            </a>
+
+                            <a href="#tags" class="rounded shadow-sm max-w-[260px] min-w-fit shadow-xl sm:rounded-lg">
+                                <img :src="`https://ke.jumia.is/cms/2021/W28/NewHome/Phones/Brands/Mobile/Samsung.jpg`" alt="img-sm">
                             </a>
 
 
-                            <a href="/computing"
+                            <a href="#tags" class="rounded shadow-sm max-w-[260px] min-w-fit shadow-xl sm:rounded-lg">
+                                <img :src="`https://ke.jumia.is/cms/2023/W08/brands/Sony.png`" alt="img-sm">
+                            </a>
+
+
+                            <a href="#tags" class="rounded shadow-sm max-w-[260px] min-w-fit shadow-xl sm:rounded-lg">
+                                <img :src="`https://ke.jumia.is/cms/2021/JMALL/Brands/EPSON.jpg`" alt="img-sm">
+                            </a>
+
+
+                            <a href="/tags"
                                class="rounded bg-amber-800 hover:scale-[1.009] max-w-[260px] max-h-[144px] min-w-fit  min-h-[80px] bg-no-repeat bg-center bg-cover text-white text-center flex place-content-center shadow-sm">
-                               <span class="my-auto h-fit px-1.5 font-semibold bg-opacity-50 rounded-lg">Featured</span>
+                                <span class="my-auto h-fit px-1.5 font-semibold bg-opacity-50 rounded-lg">Featured</span>
                             </a>
 
-                            <a href="/other-categories"
+                            <a href="/tags"
                                style="background-image: url('https://ke.jumia.is/cms/2021/W28/NewHome/Grocery/Brands/Mobile/coca-cola_260x144.png');"
                                class="rounded bg-slate-800 hover:scale-[1.009] max-w-[260px] max-h-[144px] min-h-[80px] min-w-fit bg-no-repeat bg-center bg-cover text-white text-center flex place-content-center shadow-sm">
-                               <span class="mt-2 h-fit px-1.5 font-semibold text-amber-500 bg-opacity-50 rounded-lg">Others</span>
+                                <span class="mt-2 h-fit px-1.5 font-semibold text-amber-500 bg-opacity-50 rounded-lg">Others</span>
                             </a>
 
                         </div>
 
                         <div class="grid grid-cols-3 md:grid-cols-4 gap-1 p-1">
 
-                            <a href="/categories"
-                               v-for="category in allCategories"
-                               :key="category.id"
+                            <a href="/tags"
+                               v-for="tag in tags"
+                               :key="tag.id"
                                class="rounded bg-slate-800 hover:scale-[1.009] max-w-[260px] max-h-[144px] min-w-fit min-h-[80px] bg-no-repeat bg-center bg-cover text-white text-center flex place-content-center shadow-sm">
-                                <span class="my-auto h-fit px-1.5 font-semibold bg-opacity-50 rounded-lg">{{ category.name }}</span>
+                                <span class="my-auto h-fit px-1.5 font-semibold bg-opacity-50 rounded-lg">{{ tag.name }}</span>
                             </a>
 
                         </div>

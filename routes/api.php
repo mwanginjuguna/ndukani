@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\WishlistController;
+use App\Http\Controllers\ReviewController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
@@ -34,19 +36,17 @@ Route::prefix('products')->group(function () {
     Route::get('/sort', [ProductController::class, 'sort'])->name('products.sort');
 });
 
-Route::middleware('auth:sanctum')->group(function () {
-    Route::resource('products.reviews', 'ReviewController')->only(['store', 'update', 'destroy']);
-});
-
 // Example with names for the routes
 Route::middleware('auth:sanctum')->group(function () {
-    Route::resource('products.reviews', 'ReviewController')->only(['store', 'update', 'destroy'])
-        ->names([
-            'store' => 'reviews.store',
-            'update' => 'reviews.update',
-            'destroy' => 'reviews.destroy',
-        ]);
+    Route::post('/product/reviews', [ReviewController::class, 'store'])->name('reviews.store');
+    Route::patch('/product/reviews', [ReviewController::class, 'update'])->name('reviews.update');
+    Route::delete('/product/reviews/{review}', [ReviewController::class, 'destroy'])->name('reviews.destroy');
 });
+
+
+Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
+Route::get('/categories/{category}', [CategoryController::class, 'show'])->name('category.show');
+Route::post('/categories', [CategoryController::class, 'store'])->name('category.store');
 
 // orders API
 Route::group(['middleware' => ['auth:sanctum'], 'prefix' => 'orders'], function () {
