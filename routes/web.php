@@ -47,8 +47,12 @@ Route::middleware([
     })->name('categories');
 
     Route::get('/tags', function () {
-        return Inertia::render('Products/Brands', ['tags' => \App\Models\Tag::all()]);
+        return Inertia::render('Products/Tags', ['tags' => \App\Models\Tag::all()]);
     })->name('tags');
+
+    Route::get('/brands', function () {
+        return Inertia::render('Products/Brands', ['brands' => \App\Models\Brand::all()]);
+    })->name('brands');
 
     Route::get('/samsung', function () {
         return Inertia::render('Products/Samsung');
