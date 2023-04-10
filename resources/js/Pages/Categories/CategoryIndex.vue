@@ -190,7 +190,7 @@ function addCategory() {
                             <a href="/categories"
                                v-for="category in allCategories"
                                :key="category.id"
-                               class="rounded bg-slate-800 hover:scale-[1.009] max-w-[260px] max-h-[144px] min-w-fit min-h-[80px] bg-no-repeat bg-center bg-cover text-white text-center flex place-content-center shadow-sm">
+                               class="rounded bg-amber-800 hover:scale-[1.009] max-w-[260px] max-h-[144px] min-w-fit min-h-[80px] bg-no-repeat bg-center bg-cover text-white text-center flex place-content-center shadow-sm">
                                 <span class="my-auto h-fit px-1.5 font-semibold bg-opacity-50 rounded-lg">{{ category.name }}</span>
                             </a>
 

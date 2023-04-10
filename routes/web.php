@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
+use App\Models\Brand;
+use App\Models\Category;
+use App\Models\Tag;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -24,6 +28,10 @@ Route::get('/', function () {
     ]);
 })->name('home');
 
+Route::get('/coming-soon', function () {
+    return Inertia::render('ComingSoon');
+})->name('coming-soon');
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -39,19 +47,19 @@ Route::middleware([
     })->name('product-show');
 
     Route::get('/products', function () {
-        return Inertia::render('Dashboard');
+        return Inertia::render('Products/ProductIndex');
     })->name('products');
 
     Route::get('/categories', function () {
-        return Inertia::render('Categories/CategoryIndex', ['categories' => \App\Models\Category::all()]);
+        return Inertia::render('Categories/CategoryIndex', ['categories' => Category::all()]);
     })->name('categories');
 
     Route::get('/tags', function () {
-        return Inertia::render('Products/Tags', ['tags' => \App\Models\Tag::all()]);
+        return Inertia::render('Products/Tags', ['tags' => Tag::all()]);
     })->name('tags');
 
     Route::get('/brands', function () {
-        return Inertia::render('Products/Brands', ['brands' => \App\Models\Brand::all()]);
+        return Inertia::render('Products/Brands', ['brands' => Brand::all(), 'categories' => Category::all()]);
     })->name('brands');
 
     Route::get('/samsung', function () {

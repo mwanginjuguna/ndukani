@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\OrderController;
@@ -43,10 +44,15 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::delete('/product/reviews/{review}', [ReviewController::class, 'destroy'])->name('reviews.destroy');
 });
 
-
+// categories api
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
 Route::get('/categories/{category}', [CategoryController::class, 'show'])->name('category.show');
 Route::post('/categories', [CategoryController::class, 'store'])->name('category.store');
+
+// brands api
+Route::get('/brands', [BrandController::class, 'index'])->name('brands.index');
+Route::get('/brands/{brand}', [BrandController::class, 'show'])->name('brand.show');
+Route::post('/brands', [BrandController::class, 'store'])->name('brand.store');
 
 // orders API
 Route::group(['middleware' => ['auth:sanctum'], 'prefix' => 'orders'], function () {

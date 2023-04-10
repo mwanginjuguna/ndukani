@@ -12,6 +12,7 @@ let { flash } = useFlash();
 
 defineProps({
     brands: Object,
+    categories: Object
 })
 const newBrand = ref(false);
 const addedBrand = ref(null)
@@ -24,7 +25,8 @@ watch([usePage().props.brands, addedBrand], () => {
 
 const brandForm = useForm({
     name: '',
-    description: ''
+    description: '',
+    category_id: ''
 });
 
 function modalClose() {
@@ -41,7 +43,8 @@ function addBrand() {
         },
         body: JSON.stringify({
             'name': brandForm.name,
-            'description': brandForm.description
+            'description': brandForm.description,
+            'category_id': brandForm.category_id
         })
     }).then(response => {
         if (!response.ok) {
@@ -97,6 +100,22 @@ function addBrand() {
                                         Description
                                     </label>
                                     <textarea rows="6" name="description" v-model="brandForm.description" class="px-1 w-full bg-white text-slate-900 border border-gray-300 rounded"></textarea>
+                                </div>
+
+                                <div class="mt-3 px-6 flex flex-col">
+                                    <label class="font-semibold">
+                                        Select Category
+                                    </label>
+                                    <select v-model="brandForm.category_id"
+                                            name="category_id"
+                                            class="px-1 w-full bg-white text-slate-900 border border-gray-300 rounded">
+                                        <option value="">Select One</option>
+                                        <option
+                                            v-for="category in categories"
+                                            :value="category.id">
+                                            {{ category.name }}
+                                        </option>
+                                    </select>
                                 </div>
 
                                 <div class="mt-3 px-6 max-w-lg flex justify-between">
