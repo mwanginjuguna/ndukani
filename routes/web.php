@@ -46,6 +46,10 @@ Route::middleware([
         return Inertia::render('Products/ProductShow');
     })->name('product-show');
 
+    Route::get('/product/new', function () {
+        return Inertia::render('Products/ProductCreate');
+    })->name('product-create');
+
     Route::get('/products', function () {
         return Inertia::render('Products/ProductIndex');
     })->name('products');

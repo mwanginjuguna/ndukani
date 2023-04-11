@@ -18,5 +18,21 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+        $products = [];
+        foreach ($products as $product) {
+            \App\Models\Product::factory()->create([
+                'name' => $product->name,
+                'category_id' => $product->category_id,
+                'tag_id' => $product->tag_id,
+                'brand_id' => $product->brand_id,
+                'seller_id' => $product->seller_id,
+                'price' => $product->price,
+                'currency' => $product->currency,
+                'description' => $product->description,
+                'quantity' => $product->quantity,
+                'in_stock' => $product->in_stock,
+            ]);
+    }
+
     }
 }
