@@ -44,6 +44,7 @@
                         <span v-if="formErrors.brand_id" class="text-red-500">{{ formErrors.brand_id[0] }}</span>
                     </div>
 
+                    <!--
                     <div class="mb-4">
                         <label for="seller_id" class="block font-bold mb-2">Seller:</label>
                         <select id="seller_id" v-model="formData.seller_id" class="w-full rounded-lg border-gray-300 px-4 py-2">
@@ -52,6 +53,7 @@
                         </select>
                         <span v-if="formErrors.seller_id" class="text-red-500">{{ formErrors.seller_id[0] }}</span>
                     </div>
+                    -->
 
                     <div class="mb-4">
                         <label for="price" class="block font-bold mb-2">Price:</label>
@@ -90,7 +92,8 @@
 
                     <div class="mb-4">
                         <label for="in_stock" class="block font-bold mb-2">In Stock:</label>
-                        <input type="checkbox" id="in_stock" name="in_stock" v-model="formData.in_stock"
+                        <input type="checkbox" id="in_stock" name="in_stock"
+                               v-model="formData.in_stock"
                                class="w-5 h-5 text-gray-600 border-gray-400 rounded" />
                     </div>
 
@@ -106,7 +109,7 @@
 
 <script setup>
 import {defineProps, ref} from 'vue'
-import {useForm} from "@inertiajs/vue3";
+import {useForm, usePage} from "@inertiajs/vue3";
 import AppLayout from "../../Layouts/AppLayout.vue";
 import {useFlash} from "../../Composables/useFlash.js";
 
@@ -181,7 +184,19 @@ const submitForm = async () => {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(product)
+        body: JSON.stringify({
+            name: formData.name,
+            category_id: formData.category_id,
+            tag_id: formData.tag_id,
+            brand_id: formData.brand_id,
+            seller_id: formData.seller_id ?? usePage().props.auth.user.id,
+            rating_id: formData.rating_id,
+            price: formData.price,
+            currency: formData.currency,
+            description: formData.description,
+            quantity: formData.quantity,
+            in_stock: formData.in_stock
+        })
     })
 
     if (response.ok) {

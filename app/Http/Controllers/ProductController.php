@@ -103,10 +103,17 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request): JsonResponse
     {
+        dd($request);
         $validatedData = $request->validated();
 
         // save product to db
         $product = Product::create($validatedData);
+
+        if (!isset($request->seller_id))
+        {
+            $product->seller_id = auth()->id();
+            $product->save();
+        }
 
         // API response
         return response()->json([

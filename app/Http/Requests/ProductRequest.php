@@ -28,7 +28,7 @@ class ProductRequest extends FormRequest
             'brand_id' => 'nullable|integer',
             'seller_id' => 'nullable|integer',
             'rating_id' => 'nullable|integer',
-            'price' => 'required|numeric',
+            'price' => 'required',
             'currency' => 'nullable|string|max:255',
             'description' => 'nullable|string',
             'quantity' => 'nullable|integer',
