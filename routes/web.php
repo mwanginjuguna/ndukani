@@ -47,7 +47,11 @@ Route::middleware([
     })->name('product-show');
 
     Route::get('/product/new', function () {
-        return Inertia::render('Products/ProductCreate');
+        return Inertia::render('Products/ProductCreate', [
+            "categories" => Category::all(),
+            "tags" => Tag::all(),
+            "brands" => Brand::all(),
+        ]);
     })->name('product-create');
 
     Route::get('/products', function () {

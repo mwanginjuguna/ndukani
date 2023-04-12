@@ -13,13 +13,14 @@
 
                     <div class="mb-4">
                         <label for="name" class="block font-bold mb-2">Name:</label>
-                        <input type="text" id="name" v-model="formData.name" class="w-full rounded-lg border-gray-300 px-4 py-2" />
+                        <input type="text" id="name" v-model="formData.name" placeholder="Enter Product Name" class="w-full rounded-lg border-gray-300 px-4 py-2" />
                         <span v-if="formErrors.name" class="text-red-500">{{ formErrors.name[0] }}</span>
                     </div>
 
                     <div class="mb-4">
                         <label for="category_id" class="block font-bold mb-2">Category:</label>
                         <select id="category_id" v-model="formData.category_id" class="w-full rounded-lg border-gray-300 px-4 py-2">
+                            <option selected :value="null">Select one</option>
                             <option v-for="category in categories" :key="category.id" :value="category.id">{{ category.name }}</option>
                         </select>
                         <span v-if="formErrors.category_id" class="text-red-500">{{ formErrors.category_id[0] }}</span>
@@ -27,27 +28,31 @@
 
                     <div class="mb-4">
                         <label for="tag_id" class="block font-bold mb-2">Tag:</label>
-                        <input type="text" id="tag_id" v-model="formData.tag_id" class="w-full rounded-lg border-gray-300 px-4 py-2" />
+                        <select id="tag_id" v-model="formData.tag_id" class="w-full rounded-lg border-gray-300 px-4 py-2">
+                            <option selected :value="null">Select one</option>
+                            <option v-for="tag in tags" :key="tag.id" :value="tag.id">{{ tag.name }}</option>
+                        </select>
                         <span v-if="formErrors.tag_id" class="text-red-500">{{ formErrors.tag_id[0] }}</span>
                     </div>
 
                     <div class="mb-4">
                         <label for="brand_id" class="block font-bold mb-2">Brand:</label>
-                        <input type="text" id="brand_id" v-model="formData.brand_id" class="w-full rounded-lg border-gray-300 px-4 py-2" />
+                        <select id="brand_id" v-model="formData.category_id" class="w-full rounded-lg border-gray-300 px-4 py-2">
+                            <option :value="null">Select one</option>
+                            <option v-for="brand in brands" :key="brand.id" :value="brand.id">{{ brand.name }}</option>
+                        </select>
                         <span v-if="formErrors.brand_id" class="text-red-500">{{ formErrors.brand_id[0] }}</span>
                     </div>
 
                     <div class="mb-4">
                         <label for="seller_id" class="block font-bold mb-2">Seller:</label>
-                        <input type="text" id="seller_id" v-model="formData.seller_id" class="w-full rounded-lg border-gray-300 px-4 py-2" />
+                        <select id="seller_id" v-model="formData.seller_id" class="w-full rounded-lg border-gray-300 px-4 py-2">
+                            <option :value="null">Select one</option>
+                            <option v-for="seller in sellers" :key="seller.id" :value="seller.id">{{ seller.name }}</option>
+                        </select>
                         <span v-if="formErrors.seller_id" class="text-red-500">{{ formErrors.seller_id[0] }}</span>
                     </div>
 
-                    <div class="mb-4">
-                        <label for="rating_id" class="block font-bold mb-2">Rating:</label>
-                        <input type="text" id="rating_id" v-model="formData.rating_id" class="w-full rounded-lg border-gray-300 px-4 py-2" />
-                        <span v-if="formErrors.rating_id" class="text-red-500">{{ formErrors.rating_id[0] }}</span>
-                    </div>
                     <div class="mb-4">
                         <label for="price" class="block font-bold mb-2">Price:</label>
                         <input type="text" id="price" name="price" v-model="formData.price"
@@ -59,6 +64,7 @@
                         <label for="currency" class="block font-bold mb-2">Currency:</label>
                         <select id="currency" name="currency" v-model="formData.currency"
                                 class="w-full rounded-lg border-gray-400 px-4 py-2">
+                            <option value="">Select one</option>
                             <option value="USD">USD</option>
                             <option value="EUR">EUR</option>
                             <option value="GBP">GBP</option>
@@ -102,6 +108,9 @@
 import {defineProps, ref} from 'vue'
 import {useForm} from "@inertiajs/vue3";
 import AppLayout from "../../Layouts/AppLayout.vue";
+import {useFlash} from "../../Composables/useFlash.js";
+
+let { flash } = useFlash();
 
 const formData = useForm({
     name: '',
@@ -134,7 +143,10 @@ const product = ref({
 })
 
 defineProps({
-
+    categories: Object,
+    tags: Object,
+    brands: Object,
+    sellers: Object
 })
 
 // Define the options for the select fields
@@ -169,13 +181,16 @@ const submitForm = async () => {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(product.value)
+        body: JSON.stringify(product)
     })
 
     if (response.ok) {
         // Do something on success, e.g. show a success message
+        await flash('Success', "Product added successfully.", "success");
+
     } else {
         // Handle the error case, e.g. show an error message
+        await flash("Failed", "Something went wrong while saving the product. Try Again!", "warning");
     }
 }
 

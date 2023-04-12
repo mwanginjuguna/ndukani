@@ -4,6 +4,7 @@ use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\TagController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\ReviewController;
 use Illuminate\Http\Request;
@@ -53,6 +54,11 @@ Route::post('/categories', [CategoryController::class, 'store'])->name('category
 Route::get('/brands', [BrandController::class, 'index'])->name('brands.index');
 Route::get('/brands/{brand}', [BrandController::class, 'show'])->name('brand.show');
 Route::post('/brands', [BrandController::class, 'store'])->name('brand.store');
+
+// tags api
+Route::get('/tags', [TagController::class, 'index'])->name('tags.index');
+Route::get('/tags/{tag}', [TagController::class, 'show'])->name('tag.show');
+Route::post('/tags', [TagController::class, 'store'])->name('tag.store');
 
 // orders API
 Route::group(['middleware' => ['auth:sanctum'], 'prefix' => 'orders'], function () {

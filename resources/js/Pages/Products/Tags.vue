@@ -11,37 +11,37 @@ import {useFlash} from "../../Composables/useFlash.js";
 let { flash } = useFlash();
 
 defineProps({
-    categories: Object,
+    tags: Object,
 })
-const newCategory = ref(false);
-const addedCategory = ref(null)
+const newTag = ref(false);
+const addedTag = ref(null)
 
-const allCategories = ref(usePage().props.categories );
+const allTags = ref(usePage().props.tags );
 
-watch([usePage().props.categories, addedCategory], () => {
-    allCategories.value = Object.assign({}, usePage().props.categories, addedCategory.value);
+watch([usePage().props.tags, addedTag], () => {
+    allTags.value = Object.assign({}, usePage().props.tags, addedTag.value);
 });
 
-const categoryForm = useForm({
+const tagForm = useForm({
     name: '',
     description: ''
 });
 
 function modalClose() {
-    newCategory.value = false;
+    newTag.value = false;
 }
 
-function addCategory() {
+function addTag() {
 
     // fetch API
-    fetch(route('category.store'), {
+    fetch(route('tag.store'), {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            'name': categoryForm.name,
-            'description': categoryForm.description
+            'name': tagForm.name,
+            'description': tagForm.description
         })
     }).then(response => {
         if (!response.ok) {
@@ -54,7 +54,7 @@ function addCategory() {
                 console.log(data.data);
                 // usePage().props.flash.message = data.message;
                 flash('Success', data.message, 'success');
-                categoryForm.reset();
+                tagForm.reset();
                 modalClose();
                 // update all the categories
             }
@@ -70,7 +70,7 @@ function addCategory() {
     <AppLayout title="Dashboard">
         <template #header>
             <h2 id="tags" class="font-semibold text-xl text-gray-700 uppercase leading-tight">
-                Dukani Categories
+                Dukani Tags
             </h2>
         </template>
 
@@ -79,9 +79,9 @@ function addCategory() {
                 <!--side panel-->
                 <div class="hidden sticky top-0 md:top-32 right-0 md:block md:col-span-1 h-fit px-4 py-4 text-xs xl:text-sm bg-gray-50 rounded-md shadow-sm">
 
-                    <button class="my-2 p-1.5 px-3 text-slate-100 rounded hover:underline hover:bg-slate-900 bg-slate-700 transition-all 300ms ease-in-out" @click="newCategory = true">Add New</button>
+                    <button class="my-2 p-1.5 px-3 text-slate-100 rounded hover:underline hover:bg-slate-900 bg-slate-700 transition-all 300ms ease-in-out" @click="newTag = true">Add New</button>
                     <!-- Modal -->
-                    <Modal :show="newCategory" :closeable="true">
+                    <Modal :show="newTag" :closeable="true">
                         <div class="max-w-lg pt-4 pb-10 mx-auto">
                             <div>
 
@@ -89,21 +89,21 @@ function addCategory() {
                                     <label class="font-semibold">
                                         Name
                                     </label>
-                                    <input name="name" v-model="categoryForm.name" type="text" class="px-1 w-full bg-white text-slate-900 border border-gray-300 rounded">
+                                    <input name="name" v-model="tagForm.name" type="text" class="px-1 w-full bg-white text-slate-900 border border-gray-300 rounded">
                                 </div>
 
                                 <div class="mt-3 px-6 flex flex-col">
                                     <label class="font-semibold">
                                         Description
                                     </label>
-                                    <textarea rows="6" name="description" v-model="categoryForm.description" class="px-1 w-full bg-white text-slate-900 border border-gray-300 rounded"></textarea>
+                                    <textarea rows="6" name="description" v-model="tagForm.description" class="px-1 w-full bg-white text-slate-900 border border-gray-300 rounded"></textarea>
                                 </div>
 
                                 <div class="mt-3 px-6 max-w-lg flex justify-between">
-                                    <PrimaryButton @click="addCategory" @close="modalClose" :class="{ 'opacity-25': categoryForm.processing }" :disabled="categoryForm.processing">
-                                        Add Categories
+                                    <PrimaryButton @click="addTag" @close="modalClose" :class="{ 'opacity-25': tagForm.processing }" :disabled="tagForm.processing">
+                                        Add Tags
                                     </PrimaryButton>
-                                    <SecondaryButton @click="newCategory = false" :class="`bg-amber-600 text-white hover:bg-amber-700 hover:text-gray-100`">Cancel</SecondaryButton>
+                                    <SecondaryButton @click="newTag = false" :class="`bg-amber-600 text-white hover:bg-amber-700 hover:text-gray-100`">Cancel</SecondaryButton>
                                 </div>
                             </div>
                         </div>
@@ -203,7 +203,7 @@ function addCategory() {
                         <div class="grid grid-cols-3 md:grid-cols-4 gap-1 p-1">
 
                             <a href="/tags"
-                               v-for="tag in tags"
+                               v-for="tag in allTags"
                                :key="tag.id"
                                class="rounded bg-slate-800 hover:scale-[1.009] max-w-[260px] max-h-[144px] min-w-fit min-h-[80px] bg-no-repeat bg-center bg-cover text-white text-center flex place-content-center shadow-sm">
                                 <span class="my-auto h-fit px-1.5 font-semibold bg-opacity-50 rounded-lg">{{ tag.name }}</span>
