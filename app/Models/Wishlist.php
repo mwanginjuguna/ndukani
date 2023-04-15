@@ -2,12 +2,19 @@
 
 namespace App\Models;
 
+use Database\Factories\WishlistFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Wishlist extends Model
 {
     use HasFactory;
+
+    protected static function newFactory(): WishlistFactory
+    {
+        return WishlistFactory::new();
+    }
+
 
     /**
      * The attributes that are mass assignable.

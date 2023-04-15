@@ -2,27 +2,26 @@
 
 namespace Database\Factories;
 
-use App\Models\KeyFeature;
-use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use JetBrains\PhpStorm\ArrayShape;
 
 /**
  * @extends Factory
  */
-class KeyFeatureFactory extends Factory
+class CategoryFactory extends Factory
 {
-    protected $model = KeyFeature::class;
+    protected $model = Category::class;
     /**
      * Define the model's default state.
      *
      * @return array<string, mixed>
      */
-    public function definition(): array
+    #[ArrayShape(['name' => "string", 'description' => "string"])] public function definition(): array
     {
         return [
-            'product_id' => Product::factory(),
             'name' => $this->faker->word,
-            'details' => $this->faker->sentence,
+            'description' => $this->faker->paragraph,
         ];
     }
 }

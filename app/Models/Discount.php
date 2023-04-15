@@ -9,5 +9,5 @@ class Discount extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['code', 'percent_off', 'expires_at'];
+    protected $fillable = ['code', 'percent_off', 'expires_at']; // add more fields such as active, maybe user_id
 }

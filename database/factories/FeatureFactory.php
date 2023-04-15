@@ -2,13 +2,17 @@
 
 namespace Database\Factories;
 
+use App\Models\Feature;
+use App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Feature>
+ * @extends Factory
  */
 class FeatureFactory extends Factory
 {
+    protected $model = Feature::class;
+
     /**
      * Define the model's default state.
      *
@@ -17,7 +21,9 @@ class FeatureFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'product_id' => Product::factory(),
+            'name' => $this->faker->word,
+            'details' => $this->faker->sentence,
         ];
     }
 }

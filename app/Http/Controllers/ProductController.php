@@ -14,6 +14,7 @@ use App\Models\Seller;
 use App\Models\Specification;
 use App\Models\Tag;
 use App\Models\User;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -103,7 +104,7 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request): JsonResponse
     {
-        dd($request);
+        // dd($request);
         $validatedData = $request->validated();
 
         // save product to db
@@ -139,7 +140,7 @@ class ProductController extends Controller
     }
 
     /**
-     * Show/view a product resource
+     * Show/view a product resource - show() alternative
      * @param int $id
      * @return JsonResponse
     */

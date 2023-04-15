@@ -26,7 +26,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::prefix('products')->group(function () {
+// Example with names for the routes
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/product/reviews', [ReviewController::class, 'store'])->name('reviews.store');
+    Route::patch('/product/reviews', [ReviewController::class, 'update'])->name('reviews.update');
+    Route::delete('/product/reviews/{review}', [ReviewController::class, 'destroy'])->name('reviews.destroy');
+});
+
+// products prefix
+Route::prefix('/products')->group(function () {
     Route::get('/', [ProductController::class, 'index'])->name('products.index');
     Route::get('/{product}', [ProductController::class, 'show'])->name('products.show');
     Route::post('/', [ProductController::class, 'store'])->name('products.store');
@@ -36,14 +44,7 @@ Route::prefix('products')->group(function () {
     Route::post('/{product}/add-to-wishlist', [WishlistController::class, 'addToWishlist'])->name('products.addToWishlist');
     Route::get('/search', [ProductController::class, 'search'])->name('products.search');
     Route::get('/sort', [ProductController::class, 'sort'])->name('products.sort');
-});
-
-// Example with names for the routes
-Route::middleware('auth:sanctum')->group(function () {
-    Route::post('/product/reviews', [ReviewController::class, 'store'])->name('reviews.store');
-    Route::patch('/product/reviews', [ReviewController::class, 'update'])->name('reviews.update');
-    Route::delete('/product/reviews/{review}', [ReviewController::class, 'destroy'])->name('reviews.destroy');
-});
+})->middleware('auth:sanctum');
 
 // categories api
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');

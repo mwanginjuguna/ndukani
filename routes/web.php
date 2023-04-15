@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\WishlistController;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Tag;
@@ -53,6 +56,9 @@ Route::middleware([
             "brands" => Brand::all(),
         ]);
     })->name('product-create');
+
+    // Route::resource('products', ProductController::class);
+
 
     Route::get('/products', function () {
         return Inertia::render('Products/ProductIndex');

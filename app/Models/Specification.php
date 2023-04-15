@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Specification extends Model
 {
@@ -11,8 +12,8 @@ class Specification extends Model
 
     protected $fillable = ['product_id', 'title', 'details', 'type'];
 
-    public function product()
+    public function product(): BelongsTo
     {
-        $this->belongsTo(Product::class);
+        return $this->belongsTo(Product::class);
     }
 }

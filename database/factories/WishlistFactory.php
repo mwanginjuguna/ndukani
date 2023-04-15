@@ -2,16 +2,18 @@
 
 namespace Database\Factories;
 
-use App\Models\KeyFeature;
 use App\Models\Product;
+use App\Models\User;
+use App\Models\Wishlist;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
  * @extends Factory
  */
-class KeyFeatureFactory extends Factory
+class WishlistFactory extends Factory
 {
-    protected $model = KeyFeature::class;
+    protected $model = Wishlist::class;
+
     /**
      * Define the model's default state.
      *
@@ -21,8 +23,7 @@ class KeyFeatureFactory extends Factory
     {
         return [
             'product_id' => Product::factory(),
-            'name' => $this->faker->word,
-            'details' => $this->faker->sentence,
+            'user_id' => User::factory(),
         ];
     }
 }

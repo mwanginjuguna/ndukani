@@ -9,7 +9,7 @@
         <div class="py-8">
             <div class="max-w-5xl mx-auto sm:px-4 lg:px-12 ">
                 <form @submit.prevent="submitForm" class="bg-white rounded-lg shadow-md p-6 lg:py-12 lg:px-10">
-                    <h2 class="text-xl text-center font-bold mb-4">Create Product</h2>
+                    <h2 class="text-xl text-center font-bold mb-4">Create Product {{ this.$page.props.jetstreamToken }}</h2>
 
                     <div class="mb-4">
                         <label for="name" class="block font-bold mb-2">Name:</label>
@@ -108,12 +108,25 @@
 </template>
 
 <script setup>
-import {defineProps, ref} from 'vue'
+import {defineProps, onBeforeMount, ref} from 'vue'
 import {useForm, usePage} from "@inertiajs/vue3";
 import AppLayout from "../../Layouts/AppLayout.vue";
 import {useFlash} from "../../Composables/useFlash.js";
 
 let { flash } = useFlash();
+
+onBeforeMount(() => {
+    fetch('/sanctum/csrf-cookie').then(response => {
+        fetch('/api/user').then(response => {
+            response.json().then(data => {
+                console.log(data)
+                const token = data.api_token;
+                // Store the authentication token in the Vue application
+                this.$store.commit('SET_AUTH_TOKEN', token);
+            });
+        });
+    });
+})
 
 const formData = useForm({
     name: '',
@@ -177,12 +190,31 @@ const ratingOptions = [
     // Define options for the rating select field here
 ]
 
+// submit form web
+const submitForm = () => {
+    formData.post(route('products.store'), {
+        onError: () => { flash('Err!', 'An error occurred! Try again', 'danger') },
+        preserveScroll: false,
+        onFinish: () => { formData.reset(); },
+    });
+    const a = Object.assign(
+        document.createElement('a'),
+        {
+            href: route('product-create'),
+            style:"display: none",
+        });
+    document.body.appendChild(a);
+    a.click();
+}
+
 // Here you would use fetch to submit the data to the backend API
-const submitForm = async () => {
-    const response = await fetch('/api/products', {
+const submitFormAPI = async () => {
+    const response = await fetch(route('products.store'), {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+            'Authorization': `Bearer ${usePage().props.auth.token}`,
         },
         body: JSON.stringify({
             name: formData.name,
@@ -195,7 +227,8 @@ const submitForm = async () => {
             currency: formData.currency,
             description: formData.description,
             quantity: formData.quantity,
-            in_stock: formData.in_stock
+            in_stock: formData.in_stock,
+            user: usePage().props.user
         })
     })
 
