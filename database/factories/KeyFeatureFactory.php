@@ -19,10 +19,11 @@ class KeyFeatureFactory extends Factory
      */
     public function definition(): array
     {
+        $kfs = ['Size', 'Memory', 'Color', 'Display'];
         return [
-            'product_id' => Product::factory(),
-            'name' => $this->faker->word,
-            'details' => $this->faker->sentence,
+            'product_id' => 4, // rand(1, 10),
+            'name' => 'Memory',// $this->faker->randomElement($kfs),
+            'details' => '64GB Internal + 4GB RAM',// $this->faker->sentence,
         ];
     }
 }

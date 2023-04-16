@@ -21,10 +21,11 @@ class BrandFactory extends Factory
      */
     #[ArrayShape(['name' => "string", 'description' => "string", 'category_id' => "mixed"])] public function definition(): array
     {
+        $brands = ['Samsung', 'Afrik', 'Apple', 'Sony', 'Wakanda', 'Tesla'];
         return [
             'name' => $this->faker->company,
             'description' => $this->faker->paragraph,
-            'category_id' => Category::factory(),
+            'category_id' => rand(1, 13),
         ];
     }
 }

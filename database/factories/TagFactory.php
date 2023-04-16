@@ -20,9 +20,11 @@ class TagFactory extends Factory
      */
     public function definition(): array
     {
+        $tags = ['African', 'Fashion', 'Man Clothes', 'Woman Clothes', 'Phone', 'Smartphone', 'Computers',
+            'Tablets', 'Feature PHones', 'Accessories', 'Others'];
         return [
-            'name' => $this->faker->word,
-            'category_id' => Category::factory(),
+            'name' => $this->faker->randomElement($tags),
+            'category_id' => rand(2, 14),
         ];
     }
 }

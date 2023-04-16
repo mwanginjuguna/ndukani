@@ -22,8 +22,8 @@ class WishlistFactory extends Factory
     public function definition(): array
     {
         return [
-            'product_id' => Product::factory(),
-            'user_id' => User::factory(),
+            'product_id' => 4, // Product::factory(),
+            'user_id' => 1, // User::factory(),
         ];
     }
 }

@@ -11,12 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('specifications', function (Blueprint $table) {
+        Schema::create('product_images', function (Blueprint $table) {
             $table->id();
             $table->foreignId('product_id')->constrained()->cascadeOnDelete();
-            $table->string('title'); // eg Ram, Internal, Size
-            $table->text('details')->nullable(); // eg 10GB or 11"
-            $table->string('type')->default('Technical'); // change column name to 'title', eg, Memory, Display
+            $table->text('path');
+            $table->string('title')->nullable();
+            $table->string('alt')->nullable();
+            $table->boolean('is_main')->default(false);
+            $table->integer('order')->default(0);
             $table->timestamps();
         });
     }
@@ -26,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('specifications');
+        Schema::dropIfExists('product_images');
     }
 };

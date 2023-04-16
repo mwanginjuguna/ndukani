@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('brands', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->text('description');
-            $table->foreignId('category_id')->constrained()->cascadeOnDelete();
+            $table->text('description')->nullable();
+            $table->foreignId('category_id')->nullable()->constrained()->cascadeOnDelete();
             $table->softDeletes('deleted_at');
             $table->timestamps();
         });

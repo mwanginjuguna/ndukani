@@ -19,9 +19,10 @@ class CategoryFactory extends Factory
      */
     #[ArrayShape(['name' => "string", 'description' => "string"])] public function definition(): array
     {
+        $types =['Computing', 'Fashion', 'Bakery', 'Phones', 'Accessories', 'Health and Beauty', 'Kids', 'Gaming', 'African', 'Sportswear', 'Others'];
         return [
-            'name' => $this->faker->word,
-            'description' => $this->faker->paragraph,
+            'name' => $this->faker->randomElement($types),
+            'description' => $this->faker->sentences(3),
         ];
     }
 }

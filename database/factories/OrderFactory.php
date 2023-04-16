@@ -20,8 +20,8 @@ class OrderFactory extends Factory
     public function definition(): array
     {
         return [
-            'order_number' => $this->faker->randomNumber(),
-            'user_id' => $this->faker->numberBetween(1, 10),
+            'order_number' => $this->faker->randomNumber(7, strict: true),
+            'user_id' => 3,// $this->faker->numberBetween(2, 5),
             'subtotal' => $this->faker->randomFloat(2, 100, 1000),
             'discount' => $this->faker->randomFloat(2, 0, 50),
             'tax' => $this->faker->randomFloat(2, 0, 100),
@@ -31,7 +31,6 @@ class OrderFactory extends Factory
             'payment_id' => $this->faker->uuid,
             'notes' => $this->faker->text,
             'status' => $this->faker->randomElement(['pending', 'processing', 'shipped', 'delivered']),
-
         ];
     }
 }

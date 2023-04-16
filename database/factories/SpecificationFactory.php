@@ -19,13 +19,13 @@ class SpecificationFactory extends Factory
      */
     public function definition(): array
     {
-        $types = ['text', 'number', 'select'];
+        $types = ['Original', 'New', 'Official'];
 
         return [
-            'product_id' => Product::factory(),
-            'title' => $this->faker->sentence(),
-            'details' => $this->faker->paragraph(),
-            'type' => $this->faker->randomElement($types),
+            'product_id' => 4,// rand(1, 10),
+            'title' => 'Protection',// $this->faker->sentence(),
+            'details' => 'Corning Gorilla Glass 5',// $this->faker->paragraph(),
+            'type' => 'Display',// $this->faker->randomElement($types),
         ];
     }
 }

@@ -12,6 +12,7 @@ use App\Models\KeyFeature;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Product;
+use App\Models\ProductImage;
 use App\Models\Review;
 use App\Models\Specification;
 use App\Models\Tag;
@@ -26,20 +27,21 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory(10)->create();
-        Tag::factory()->count(10)->create();
-        Category::factory()->count(10)->create();
-        Brand::factory()->count(10)->create();
-        Product::factory(20)->create();
-        Feature::factory(20)->create();
-        KeyFeature::factory(20)->create();
-        Specification::factory(20)->create();
-        Cart::factory(4)->create();
-        Wishlist::factory(6)->create();
-        Review::factory(8)->create();
-        Discount::factory(8)->create();
-        Order::factory(6)->create();
-        OrderItem::factory(12)->create();
+        // User::factory(10)->create();
+        // Tag::factory()->count(10)->create();
+        // Category::factory()->count(10)->create();
+        // Brand::factory()->count(10)->create();
+        // Product::factory(1)->create();
+        ProductImage::factory(1)->create();
+        // Feature::factory(1)->create();
+        // KeyFeature::factory(1)->create();
+        // Specification::factory(1)->create();
+        // Cart::factory(1)->create();
+        // Wishlist::factory(1)->create();
+        // Review::factory(4)->create();
+        // Discount::factory(1)->create();
+        // Order::factory(1)->create();
+        // OrderItem::factory(1)->create();
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',

@@ -24,9 +24,9 @@ class CartFactory extends Factory
         $user = User::factory()->create();
 
         return [
-            'product_id' => $product->id,
-            'user_id' => $user->id,
-            'quantity' => $this->faker->numberBetween(1, 10),
+            'product_id' => 4, // $product->id,
+            'user_id' => 1, // $user->id,
+            'quantity' => 1, // $this->faker->numberBetween(1, 10),
         ];
     }
 }

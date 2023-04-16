@@ -21,14 +21,14 @@ class ReviewFactory extends Factory
     public function definition(): array
     {
         return [
-            'product_id' => function () {
+            'product_id' => 4 /* function () {
                 return Product::factory()->create()->id;
-            },
-            'user_id' => function () {
+            }*/,
+            'user_id' => rand(1, 5) /* function () {
                 return User::factory()->create()->id;
-            },
-            'rating' => $this->faker->numberBetween(1, 5),
-            'comment' => $this->faker->text(),
+            }*/,
+            'rating' => $this->faker->numberBetween(4, 5),
+            'comment' => $this->faker->sentences(nb: 2, asText: true),
         ];
     }
 }
