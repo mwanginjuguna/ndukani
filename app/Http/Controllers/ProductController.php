@@ -126,17 +126,29 @@ class ProductController extends Controller
     /**
      * Show/view a product resource
      * @param Product $product
-     * @return JsonResponse
+     * @return Response
      */
-    public function show(Product $product): JsonResponse
+    public function show(Product $product): Response
     {
         // Load the product and its relationships
-        $product->load('category', 'tag', 'brand', 'seller', 'ratings');
+        $product->load('category', 'tag', 'brand', 'seller', 'reviews', 'features', 'keyFeatures', 'specifications', 'images');
 
-        // Return a JSON response with the product and its relationships
-        return response()->json([
-            'product' => $product
-        ]);
+        // Create an array of the product's relationships to be passed as individual props to the Vue component
+        $props = [
+            'product' => $product,
+            'category' => $product->category,
+            'tag' => $product->tag,
+            'brand' => $product->brand,
+            'seller' => $product->seller,
+            'reviews' => $product->reviews,
+            'features' => $product->features,
+            'keyFeatures' => $product->keyFeatures,
+            'specifications' => $product->specifications,
+            'images' => $product->images,
+        ];
+
+        // Return a JSON response with the product and its relationships as individual props
+        return Inertia::render('Products/ProductShow', $props);
     }
 
     /**

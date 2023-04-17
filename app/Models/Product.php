@@ -94,11 +94,26 @@ class Product extends Model
     /**
      * Get the image that the product has.
      *
-     * @return HasOne
+     * @return HasMany
      */
-    public function image(): HasOne
+    public function images(): HasMany
     {
-        return $this->hasOne(Image::class);
+        return $this->hasMany(ProductImage::class);
+    }
+
+    public function features(): HasMany
+    {
+        return $this->hasMany(Feature::class);
+    }
+
+    public function keyFeatures(): HasMany
+    {
+        return $this->hasMany(KeyFeature::class);
+    }
+
+    public function specifications(): HasMany
+    {
+        return $this->hasMany(Specification::class);
     }
 
     /**

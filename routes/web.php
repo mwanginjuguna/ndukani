@@ -47,7 +47,9 @@ Route::middleware([
 
     Route::get('/product', function () {
         return Inertia::render('Products/ProductShow');
-    })->name('product-show');
+    })->name('product');
+
+    Route::get('/product/{product}', [ProductController::class, 'show'])->name('product-show');
 
     Route::get('/product/new', function () {
         return Inertia::render('Products/ProductCreate', [
