@@ -21,10 +21,10 @@ class ReviewFactory extends Factory
     public function definition(): array
     {
         return [
-            'product_id' => 4 /* function () {
+            'product_id' => 8 /* function () {
                 return Product::factory()->create()->id;
             }*/,
-            'user_id' => rand(1, 5) /* function () {
+            'user_id' => rand(2, 4) /* function () {
                 return User::factory()->create()->id;
             }*/,
             'rating' => $this->faker->numberBetween(4, 5),

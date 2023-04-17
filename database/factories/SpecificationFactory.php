@@ -22,10 +22,10 @@ class SpecificationFactory extends Factory
         $types = ['Original', 'New', 'Official'];
 
         return [
-            'product_id' => 4,// rand(1, 10),
-            'title' => 'Protection',// $this->faker->sentence(),
-            'details' => 'Corning Gorilla Glass 5',// $this->faker->paragraph(),
-            'type' => 'Display',// $this->faker->randomElement($types),
+            'product_id' => 8,// rand(1, 10),
+            'details' => 'Compared to those dazzling complications watches, simple black and white dial watches are more suitable for showing your elegance.',// $this->faker->sentence(),
+            'title' => 'Simple black and white plate',// $this->faker->paragraph(),
+            'type' => 'Most of the choice',// $this->faker->randomElement($types),
         ];
     }
 }

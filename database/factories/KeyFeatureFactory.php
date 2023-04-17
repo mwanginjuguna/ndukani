@@ -21,9 +21,9 @@ class KeyFeatureFactory extends Factory
     {
         $kfs = ['Size', 'Memory', 'Color', 'Display'];
         return [
-            'product_id' => 4, // rand(1, 10),
-            'name' => 'Memory',// $this->faker->randomElement($kfs),
-            'details' => '64GB Internal + 4GB RAM',// $this->faker->sentence,
+            'product_id' => 8, // rand(1, 10),
+            'name' => 'Guaranteed brand new.',// $this->faker->randomElement($kfs),
+            // $this->faker->sentence,
         ];
     }
 }

@@ -32,13 +32,13 @@ class DatabaseSeeder extends Seeder
         // Category::factory()->count(10)->create();
         // Brand::factory()->count(10)->create();
         // Product::factory(1)->create();
-        ProductImage::factory(1)->create();
+        // ProductImage::factory(1)->create();
         // Feature::factory(1)->create();
         // KeyFeature::factory(1)->create();
         // Specification::factory(1)->create();
         // Cart::factory(1)->create();
         // Wishlist::factory(1)->create();
-        // Review::factory(4)->create();
+        // Review::factory(3)->create();
         // Discount::factory(1)->create();
         // Order::factory(1)->create();
         // OrderItem::factory(1)->create();

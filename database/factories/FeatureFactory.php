@@ -20,11 +20,11 @@ class FeatureFactory extends Factory
      */
     public function definition(): array
     {
-        $features = ['Model', 'SKU', 'Weight'];
+        $features = ['Model', 'SKU', 'Weight', 'Shop Type'];
         return [
-            'product_id' => 4, // rand(1, 10),
-            'name' => 'Weight (kg)',// $this->faker->word,
-            'details' => '0.195',// $this->faker->sentence,
+            'product_id' => 8, // rand(1, 10),
+            'name' => 'Shop Type',// $this->faker->word,
+            'details' => 'Men Fashion',// $this->faker->sentence,
         ];
     }
 }
