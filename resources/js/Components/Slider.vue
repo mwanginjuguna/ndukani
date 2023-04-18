@@ -30,7 +30,7 @@ import { register } from 'swiper/element/bundle';
 
 register();
 import {Swiper} from "swiper";
-import ProductCard from "./ProductCard.vue";
+
 import SliderProductCard from "./SliderProductCard.vue";
 const spaceBetween = 50;
 const onProgress = (e) => {

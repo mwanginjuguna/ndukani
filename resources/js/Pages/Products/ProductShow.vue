@@ -31,7 +31,6 @@
 
                         <!--product images-->
                         <div id="product-images" class="px-6 py-4">
-                            <!--all images-->
                             <!--consider a slider-->
                             <!--for image in images
                             <div class="flex flex-col">
@@ -50,21 +49,25 @@
                                     </div>
                                 </div>
                             </div>-->
+                            <!--all images-->
                             <div class="flex flex-col">
                                 <img
                                     id="main_image"
+                                    v-for="image in images"
+                                    :key="image.id"
+                                    v-show="activeImage === image.id"
                                     class="rounded object-cover"
                                     alt="image"
-                                    :src="activeImagePath"
+                                    :src="image.path"
                                 />
 
                                 <div class="py-3 flex flex-row gap-x-1 overflow-auto">
-                                    <small-image
+                                    <SmallImage
                                         v-for="image in images"
                                         :key="image.id"
                                         :image="image"
                                         :isActive="activeImage === image.id"
-                                        @select="activeImage = image.id"
+                                        @select="onSelectImage(image)"
                                     />
                                 </div>
                             </div>
@@ -102,13 +105,20 @@
                             </div>
 
                             <h2 class="font-medium text-lg text-slate-700 leading-tight">
-                                Samsung Galaxy A23, 6.6″, 64GB + 4GB RAM (Dual SIM), 5000mAh, Black
+                                {{ product.name }}
                             </h2>
 
                             <p class="text-sm font-light">
                                 <span class="font-medium">Brand:</span>
-                                <a href="#" class="px-1 inline-flex text-sky-700 hover:text-sky-600 hover:underline">Samsung</a> |
-                                <a href="#" class="pl-1 inline-flex text-sky-700 hover:text-sky-600 hover:underline">Similar products from Samsung</a>
+
+                                <Link :href="`/brands/`+brand.id" class="px-1 inline-flex text-sky-700 hover:text-sky-600 hover:underline">
+                                    {{ brand.name }}
+                                </Link>
+                                |
+
+                                <Link :href="`/brands/`+brand.id" class="pl-1 inline-flex text-sky-700 hover:text-sky-600 hover:underline">
+                                    Similar products from Samsung
+                                </Link>
                             </p>
 
                             <!-- rating score -->
@@ -126,14 +136,16 @@
 
                             <div>
 
-                                <a class="text-sky-600 hover:text-sky-500 hover:underline">(24 verified ratings)</a>
+                                <a class="text-sky-600 hover:text-sky-500 hover:underline">({{ reviews.length}} verified reviews)</a>
 
                                 <hr class="px-6 text-slate-100">
 
                                 <div class="my-2 py-2">
-                                    <p class="text-2xl text-black font-sans font-extrabold">KSh 28,399</p>
+                                    <p class="text-2xl text-black font-sans font-extrabold">{{ product.currency }}
+                                        {{ product.price }}</p>
                                     <div class="mt-1.5 flex flex-wrap gap-x-2">
-                                        <p class="pr-2 font-light text-slate-400 line-through">KSh 31,999</p>
+                                        <p class="pr-2 font-light text-slate-400 line-through">{{ product.currency }}
+                                            {{ Number((1.3 * product.price).toFixed(2)) }}</p>
                                         <p class="-mt-px p-1 text-sm text-[#f68b1e] bg-[#fef3e9]">-11%</p>
                                     </div>
                                 </div>
@@ -144,8 +156,8 @@
 
                                 <!-- button -->
                                 <div id="cart-button"
-                                     class="my-5 px-8 py-3 grid grid-cols-2 flex justify-between shadow-lg drop-shadow-lg rounded-sm bg-amber-500 hover:underline hover:underline-offset-2 uppercase"
-                                     @click="addToCart(33)"
+                                     class="my-5 px-8 py-3 grid grid-cols-2 flex justify-between shadow-lg drop-shadow-lg rounded-sm bg-amber-500 hover:underline hover:underline-offset-2 uppercase hover:cursor-pointer"
+                                     @click="addToCart(product.id)"
                                 >
                                     <svg fill="#ffffff" width="24px" height="24px" viewBox="0 0 24 24" data-name="Layer 1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><title></title><path d="M12.2,9h1.6V6.8H16V5.2H13.8V3H12.2V5.2H10V6.8h2.2ZM20,5v5.5L7.45,12.72,5,3H1.25a1,1,0,0,0,0,2H3.47L6.7,18H20V16H8.26l-.33-1.33L22,12.18V5ZM7,19a1.5,1.5,0,1,0,1.5,1.5A1.5,1.5,0,0,0,7,19Zm12,0a1.5,1.5,0,1,0,1.5,1.5A1.5,1.5,0,0,0,19,19Z"></path></g></svg>
                                     <p class="font-bold text-base text-white">Add to cart</p>
@@ -184,7 +196,7 @@
                         <h2 class="my-2 font-semibold text-xl text-slate-900">Product Description</h2>
 
                         <div class="pt-4 text-sm border-t border-slate-200">
-                            <p>Take in more, all at once. The Samsung Galaxy A23's 6.6-inch V-Cut Display gives you room to see and do more. With FHD+ technology and a 90Hz refresh rate, the content you see every day will look smoother and sharper. An advanced octa-core processor with<strong> 4GB of RAM</strong> ensures that Galaxy A23 runs seamlessly and without a glitch no matter what you’re doing, whether that’s using multiple apps at the same time, streaming a video or gaming online. Enjoy <strong>64GB of internal storage</strong> and add up to 1TB more with MicroSD card. Snap memorable moments in clear detail with Galaxy A23’s unique Quad Camera system including 50MP main, 5MP ultrawide, 2MP macro, 2MP depth and 8MP front selfie camera. Order for this&nbsp;Samsung Galaxy A23 Smartphone online from Jumia Kenya&nbsp;and have it delivered to your doorstep.</p>
+                            <p>{{ product.description }}</p>
                         </div>
 
                         <div class="mt-2.5 mx-auto">
@@ -207,77 +219,15 @@
 
                         <div>
                             <h3 class="mt-2 mb-4 font-medium text-slate-700 text-lg">Technical Specifications</h3>
+                            <div v-for="sp in specTypes" class="mb-4 text-sm">
+                                <p class="mb-2 uppercase font-light" >{{sp}}</p>
 
-                            <div class="mb-4 text-sm">
-                                <p class="mb-2 uppercase font-light">Display</p>
-                                <ul class="mb-2 list-disc list-inside">
-                                    <li>Type: PLS LCD, 90Hz</li>
-                                    <li>Size: 6.6 inches, 104.9 cm2 (~83.0% screen-to-body ratio)</li>
-                                    <li>Resolution: 1080 x 2408 pixels, 20:9 ratio (~400 ppi density)</li>
-                                    <li>Protection: Corning Gorilla Glass 5</li>
-                                </ul>
+                                <div v-for="specs in specifications" :key="specs.type">
+                                    <ul v-if="sp === specs.type" class="mb-2 list-disc list-inside">
+                                        <li>{{ specs.title }}: {{ specs.details }}</li>
+                                    </ul>
+                                </div>
                             </div>
-
-                            <div class="mb-4 text-sm">
-                                <p class="mb-2 uppercase font-light">PLATFORM</p>
-                                <ul class="mb-2 list-disc list-inside">
-                                    <li>OS: Android 12, One UI 4.1</li>
-                                    <li>Chipset: Qualcomm SM6225 Snapdragon 680 4G (6 nm)</li>
-                                    <li>CPU: Octa-core (4x2.4 GHz Kryo 265 Gold & 4x1.9 GHz Kryo 265 Silver)</li>
-                                    <li>GPU: Adreno 610</li>
-                                </ul>
-                            </div>
-
-                            <div class="mb-4 text-sm">
-                                <p class="mb-2 uppercase font-light">MEMORY</p>
-                                <ul class="mb-2 list-disc list-inside">
-                                    <li>
-                                        Card slot: microSDXC (dedicated slot)
-                                    </li>
-                                    <li>
-                                        Internal: 64GB
-                                    </li>
-                                    <li>
-                                        RAM: 4GB
-                                    </li>
-                                </ul>
-                            </div>
-
-                            <div class="mb-4 text-sm">
-                                <p class="mb-2 uppercase font-light">MAIN CAMERA</p>
-                                <ul class="mb-2 list-disc list-inside">
-                                    <li>
-                                        Quad
-                                        <ul class="mb-2 list-disc list-inside ml-3">
-                                            <li>
-                                                50 MP, f/1.8, (wide), PDAF, OIS
-                                            </li>
-                                            <li>
-                                                5 MP, f/2.2, 123˚ (ultrawide), 1/5", 1.12µm
-                                            </li>
-                                            <li>
-                                                2 MP, f/2.4, (macro)
-                                            </li>
-                                            <li>
-                                                2 MP, f/2.4, (depth)
-                                            </li>
-                                            <li>
-                                                Features    LED flash, panorama, HDR
-                                            </li>
-                                            <li>
-                                                Video    4K@30fps, 1080p@30fps
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        Features    LED flash, panorama, HDR
-                                    </li>
-                                    <li>
-                                        Video    4K@30fps, 1080p@30fps
-                                    </li>
-                                </ul>
-                            </div>
-
                         </div>
 
                     </section>
@@ -289,36 +239,27 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-y-8 border-t border-slate-200 pt-8 mx-6">
 
                             <div class="col-span-1 mx-4 pt-4 px-2.5 text-sm md:text-base rounded border border-slate-200">
-                                <p class="mb-2 font-medium uppercase font-light">Display</p>
-                                <ul class="mb-2 pt-2 font-light list-disc list-inside border-t border-slate-200">
-                                    <li>Display: 6.6" PLS LCD</li>
-                                    <li>Memory: 64GB + 4GB RAM</li>
-                                    <li>Rear Camera: 50MP + 5MP + 2MP + 2MP</li>
-                                    <li>Front Camera: 8MP</li>
-                                    <li>OS: Android</li>
-                                    <li>Processor:  Octa-core processor</li>
-                                    <li>Battery: 5,000mAh</li>
+                                <p class="mb-2 font-medium uppercase font-light">Key Features</p>
+                                <ul v-for="ft in keyFeatures" :key="ft.id" class="mb-2 pt-2 text-sm font-light list-disc list-inside border-t border-slate-200">
+                                    <li>{{ ft.name }}: {{ ft.details}}</li>
                                 </ul>
                             </div>
 
                             <div class="col-span-1 mx-4 pt-4 px-2.5 text-sm md:text-base rounded border border-slate-200">
                                 <p class="mb-2 font-medium uppercase font-light">What's in the Box?</p>
                                 <ul class="mb-2 pt-2 font-light list-disc list-inside border-t border-slate-200">
-                                    <li>Samsung Galaxy A23 Handset</li>
-                                    <li>Charger</li>
-                                    <li>User Manual</li>
+                                    <li>Lorem Ipsum things</li>
+                                    <li>Thing 1</li>
+                                    <li>Thing 2</li>
+                                    <li>Another Thing</li>
+                                    <li>Last Thing</li>
                                 </ul>
                             </div>
 
                             <div class="col-span-1 mx-4 pt-4 px-2.5 text-sm md:text-base rounded border border-slate-200">
                                 <p class="mb-2 font-medium uppercase font-light">Specifications</p>
-                                <ul class="mb-2 pt-2 font-light border-t border-slate-200">
-                                    <li><span class="font-semibold">SKU</span>: SA948MP1EB7I0NAFAMZ</li>
-                                    <li><span class="font-semibold">Model</span>: Galaxy A23</li>
-                                    <li><span class="font-semibold">Size (L x W x H cm)</span>: -</li>
-                                    <li><span class="font-semibold">Weight (kg)</span>: 0.195</li>
-                                    <li><span class="font-semibold">Main Material</span>: -</li>
-                                    <li><span class="font-semibold">Shop Type</span>: Jumia Mall</li>
+                                <ul v-for="feat in features" class="mb-2 pt-2 font-light border-t border-slate-200">
+                                    <li><span class="font-semibold">{{ feat.name }}</span>: {{ feat.details }}</li>
                                 </ul>
                             </div>
 
@@ -777,10 +718,10 @@ import AppLayout from "../../Layouts/AppLayout.vue";
 import Slider from "../../Components/Slider.vue";
 import {Link, usePage} from "@inertiajs/vue3";
 import SmallImage from '../../Components/SmallImage.vue'
-import { defineProps, computed } from 'vue'
+import {computed, defineProps, onBeforeMount, onMounted, ref} from 'vue'
 
 
-defineProps({
+const props = defineProps({
     product: Object,
     category: Object,
     tag: Object,
@@ -789,18 +730,28 @@ defineProps({
     reviews: Object,
     features: Object,
     keyFeatures: Object,
-    specification: Object,
+    specifications: Object,
     images: Object
 });
 
-const activeImage = computed(() => {
-    const mainImage = Object.values(images).find(image => image.is_main === 1)
-    return mainImage ? mainImage.id : 0
-})
+const activeImage = ref(usePage().props.images[0]?.id)
 
-const activeImagePath = computed(() => {
-    const activeImageObj = images[activeImage.value]
-    return activeImageObj ? activeImageObj.path : ''
+function onSelectImage(image) {
+    if (image) {
+        activeImage.value = image.id
+    }
+}
+
+const specTypes = ref([]);
+onMounted(()=> {
+    console.log(specTypes.value);
 })
+onBeforeMount(() => {
+    for (const spec of props.specifications) {
+        if (!specTypes.value.includes(spec.type)) {
+            specTypes.value.push(spec.type);
+        }
+    }
+});
 
 </script>
