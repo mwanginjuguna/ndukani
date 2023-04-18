@@ -35,7 +35,7 @@ import HeroLandscapeSlider from "./Partials/HeroLandscapeSlider.vue";
                                         <h3 class="font-bold text-black text-xl font-serif underline underline-offset-4">Masaa Machache</h3>
                                         <div class="mt-2">
                                             <p class="text-sm text-justify leading-tight"><span class="font-semibold">Features: </span>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-                                                <Link :href="route('coming-soon')" class="text-blue-900 text-xs font-semibold flex items-center ">
+                                                <Link :href="route('product.show', 8)" class="text-blue-900 text-xs font-semibold flex items-center ">
                                                     More Details
                                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="w-5 h-5 fill-indigo-500">
                                                         <path fill-rule="evenodd" d="M5 10a.75.75 0 01.75-.75h6.638L10.23 7.29a.75.75 0 111.04-1.08l3.5 3.25a.75.75 0 010 1.08l-3.5 3.25a.75.75 0 11-1.04-1.08l2.158-1.96H5.75A.75.75 0 015 10z" clip-rule="evenodd" />

@@ -132,18 +132,7 @@ class ProductController extends Controller
     {
         // Load the product and its relationships
         $product->load('category', 'tag', 'brand', 'seller', 'reviews', 'features', 'keyFeatures', 'specifications', 'images');
-        $getTypes = [];
-        foreach ($product->specifications as $spec) {
-            $getTypes[] = $spec->type;
-        }
-        $specs = [];
-        foreach ($getTypes as $type) {
-            $specs[] = Specification::query()
-                ->where('type', $type)
-                ->where('product_id', $product->id)
-                ->get();
-        }
-        // dd($product->specifications);
+
         // Create an array of the product's relationships to be passed as individual props to the Vue component
         $props = [
             'product' => $product,

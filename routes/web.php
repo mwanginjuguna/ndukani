@@ -66,6 +66,10 @@ Route::middleware([
         return Inertia::render('Products/ProductIndex');
     })->name('products');
 
+    Route::get('/smartphones', function () {
+        return Inertia::render('Products/ProductIndex');
+    })->name('smartphones');
+
     Route::get('/categories', function () {
         return Inertia::render('Categories/CategoryIndex', ['categories' => Category::all()]);
     })->name('categories');
