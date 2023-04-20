@@ -1,16 +1,20 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
-import {Link} from "@inertiajs/vue3";
+import {Link, usePage} from "@inertiajs/vue3";
 import PrimaryButton from '@/Components/PrimaryButton.vue';
-import HeroLandscapeSlider from "./Partials/HeroLandscapeSlider.vue";
+import useCart from "../../Composables/useCart";
+
+const { addToCart } = useCart();
 
 </script>
 
 <template>
     <AppLayout title="Dashboard">
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-700 uppercase leading-tight">
-                Dukani Products
+            <h2 class="pt-3 pl-1.5 flex bg-white text-2xl text-amber-900 font-serif font-extrabold italic flex flex-wrap gap-x-6">
+                Duka Products - Karibu Kastoma!
+                <svg height="44px" width="44px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve" fill="#000000">
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path style="fill:#D55400;" d="M433.253,125.646h-68.299c-10.777,0-19.514-8.737-19.514-19.514V82.324 c0-29.59,24.074-53.664,53.664-53.664s53.664,24.074,53.664,53.664v23.807C452.767,116.909,444.031,125.646,433.253,125.646z"></path> <path style="fill:#D55400;" d="M433.253,483.34h-68.299c-10.777,0-19.514-8.737-19.514-19.514v-120.61 c0-10.777,8.737-19.514,19.514-19.514h68.299c10.777,0,19.514,8.737,19.514,19.514v120.61 C452.767,474.604,444.031,483.34,433.253,483.34z"></path> </g> <g> <path style="fill:#E87E04;" d="M147.045,125.646H78.746c-10.777,0-19.514-8.737-19.514-19.514V82.324 c0-29.59,24.074-53.664,53.664-53.664s53.664,24.074,53.664,53.664v23.807C166.56,116.909,157.822,125.646,147.045,125.646z"></path> <path style="fill:#E87E04;" d="M147.045,483.34H78.746c-10.777,0-19.514-8.737-19.514-19.514v-120.61 c0-10.777,8.737-19.514,19.514-19.514h68.299c10.777,0,19.514,8.737,19.514,19.514v120.61 C166.56,474.604,157.822,483.34,147.045,483.34z"></path> </g> <path style="fill:#F2C500;" d="M466.467,362.729H45.533C20.426,362.729,0,342.303,0,317.196V132.15 c0-25.107,20.426-45.533,45.533-45.533h420.934c25.107,0,45.533,20.426,45.533,45.533v185.046 C512,342.303,491.573,362.729,466.467,362.729z"></path> <path style="fill:#F59D00;" d="M466.467,86.617H255.999v276.112h210.466c25.107,0,45.533-20.426,45.533-45.533V132.15 C512,107.043,491.573,86.617,466.467,86.617z"></path> <g> <path style="fill:#808285;" d="M116.532,246.625c-2.036,5.935-15.559,5.491-16.815,0l-4.285-19.534l-4.287,19.534 c-1.274,5.569-14.975,5.854-16.813,0L57.93,196.349c-1.698-5.081,10.836-8.842,12.281-3.791l12.528,42.282l6.511-27.858 c0.998-4.493,11.366-4.49,12.363,0l6.511,27.858l12.528-42.282c1.439-5.04,13.96-1.31,12.281,3.791L116.532,246.625z"></path> <path style="fill:#808285;" d="M157.254,215.305h12.363c5.083,0,5.24,9.891,0,9.891h-12.363v14.011h22.089 c5.096,0,5.255,11.209,0,11.209h-29.341c-2.802,0-5.606-1.319-5.606-3.956v-52.337c0-2.637,2.802-3.956,5.606-3.956h29.341 c5.258,0,5.093,11.209,0,11.209h-22.089V215.305z"></path> <path style="fill:#808285;" d="M201.022,250.416c-2.802,0-5.606-1.319-5.606-3.956v-52.42c0-2.72,3.215-3.873,6.428-3.873 c3.216,0,6.429,1.154,6.429,3.873v45.166h18.791c4.946,0,4.946,11.209,0,11.209h-26.042V250.416z"></path> <path style="fill:#808285;" d="M261.275,201.376c-4.698,0-7.418,2.637-7.418,8.243v21.842c0,5.604,2.72,8.241,7.5,8.241 c6.593,0,7.007-5.028,7.253-8.241c0.247-3.049,3.051-3.874,6.347-3.874c4.451,0,6.511,1.154,6.511,6.1 c0,21.775-40.468,25.498-40.468-2.226v-21.842c0-27.783,40.468-23.656,40.468-3.049c0,4.945-2.061,6.099-6.428,6.099 c-3.462,0-6.265-0.907-6.429-3.874C268.526,206.651,268.28,201.376,261.275,201.376z"></path> <path style="fill:#808285;" d="M293.917,231.46v-21.842c0-14.176,8.819-19.452,20.195-19.452c11.373,0,20.275,5.275,20.275,19.452 v21.842c0,14.176-8.902,19.452-20.275,19.452C302.736,250.911,293.917,245.637,293.917,231.46z M321.526,209.619 c0-5.688-2.801-8.243-7.417-8.243s-7.336,2.555-7.336,8.243v21.842c0,5.686,2.72,8.241,7.336,8.241s7.417-2.555,7.417-8.241 V209.619z"></path> <path style="fill:#808285;" d="M378.236,229.071c-1.841,3.116-6.593,3.32-8.323,0l-7.829-14.342v31.733 c0,5.275-12.859,5.275-12.859,0v-49.865c0-4.698,3.215-6.428,6.429-6.428c4.614,0,6.593,0.494,9.972,6.428l8.49,14.836 l8.489-14.836c3.38-5.935,5.356-6.428,9.973-6.428c3.295,0,6.428,1.73,6.428,6.428v49.865c0,5.275-12.859,5.275-12.859,0v-30.908 L378.236,229.071z"></path> <path style="fill:#808285;" d="M427.363,215.305h12.363c5.083,0,5.24,9.891,0,9.891h-12.363v14.011h22.089 c5.096,0,5.254,11.209,0,11.209h-29.341c-2.802,0-5.606-1.319-5.606-3.956v-52.337c0-2.637,2.802-3.956,5.606-3.956h29.341 c5.256,0,5.094,11.209,0,11.209h-22.089V215.305z"></path> </g> <g> <path style="fill:#6D6E71;" d="M274.954,227.589c-3.291,0-6.101,0.82-6.349,3.877c-0.247,3.213-0.65,8.235-7.246,8.235 c-2.277,0-4.085-0.598-5.36-1.847v12.814c11.526,2.368,25.472-4.189,25.472-16.977 C281.472,228.745,279.403,227.589,274.954,227.589z M255.999,190.433v12.762c1.249-1.224,3.031-1.821,5.269-1.821 c7.012,0,7.259,5.282,7.337,7.415c0.169,2.966,2.966,3.877,6.427,3.877c4.371,0,6.44-1.158,6.44-6.101 C281.472,194.465,267.513,188.052,255.999,190.433z"></path> <path style="fill:#6D6E71;" d="M293.917,231.46v-21.842c0-14.176,8.819-19.452,20.195-19.452c11.373,0,20.275,5.275,20.275,19.452 v21.842c0,14.176-8.902,19.452-20.275,19.452C302.736,250.911,293.917,245.637,293.917,231.46z M321.526,209.619 c0-5.688-2.801-8.243-7.417-8.243s-7.336,2.555-7.336,8.243v21.842c0,5.686,2.72,8.241,7.336,8.241s7.417-2.555,7.417-8.241 V209.619z"></path> <path style="fill:#6D6E71;" d="M378.236,229.071c-1.841,3.116-6.593,3.32-8.323,0l-7.829-14.342v31.733 c0,5.275-12.859,5.275-12.859,0v-49.865c0-4.698,3.215-6.428,6.429-6.428c4.614,0,6.593,0.494,9.972,6.428l8.49,14.836 l8.489-14.836c3.38-5.935,5.356-6.428,9.973-6.428c3.295,0,6.428,1.73,6.428,6.428v49.865c0,5.275-12.859,5.275-12.859,0v-30.908 L378.236,229.071z"></path> <path style="fill:#6D6E71;" d="M427.363,215.305h12.363c5.083,0,5.24,9.891,0,9.891h-12.363v14.011h22.089 c5.096,0,5.254,11.209,0,11.209h-29.341c-2.802,0-5.606-1.319-5.606-3.956v-52.337c0-2.637,2.802-3.956,5.606-3.956h29.341 c5.256,0,5.094,11.209,0,11.209h-22.089V215.305z"></path> </g> </g></svg>
             </h2>
         </template>
 
@@ -19,9 +23,6 @@ import HeroLandscapeSlider from "./Partials/HeroLandscapeSlider.vue";
                 <div class="bg-gray-50 shadow-xl sm:rounded-lg overflow-hidden">
                     <!--content-->
                     <div class="max-w-6xl">
-                        <div class="pt-3 flex justify-center bg-white text-5xl text-amber-500 font-serif font-extrabold italic">
-                            Karibu Kastoma!
-                        </div>
 
                         <!--Masaa machache-->
                         <div class="mt-3">
@@ -35,7 +36,7 @@ import HeroLandscapeSlider from "./Partials/HeroLandscapeSlider.vue";
                                         <h3 class="font-bold text-black text-xl font-serif underline underline-offset-4">Masaa Machache</h3>
                                         <div class="mt-2">
                                             <p class="text-sm text-justify leading-tight"><span class="font-semibold">Features: </span>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-                                                <Link :href="route('product.show', 8)" class="text-blue-900 text-xs font-semibold flex items-center ">
+                                                <Link :href="route('product-show', 8)" class="text-blue-900 text-xs font-semibold flex items-center ">
                                                     More Details
                                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="w-5 h-5 fill-indigo-500">
                                                         <path fill-rule="evenodd" d="M5 10a.75.75 0 01.75-.75h6.638L10.23 7.29a.75.75 0 111.04-1.08l3.5 3.25a.75.75 0 010 1.08l-3.5 3.25a.75.75 0 11-1.04-1.08l2.158-1.96H5.75A.75.75 0 015 10z" clip-rule="evenodd" />
@@ -49,7 +50,7 @@ import HeroLandscapeSlider from "./Partials/HeroLandscapeSlider.vue";
                                             <p class="text-orange-200 text-xs line-through align-super">was $168.99</p>
                                             <p class="text-green-900 text-sm font-semibold">Now <span class="underline text-lg">$99.99</span></p>
                                         </div>
-                                        <PrimaryButton class="mt-3" @click.prevent="addToCart">Add to Cart</PrimaryButton>
+                                        <PrimaryButton class="mt-3" @click.prevent="addToCart(8)">Add to Cart</PrimaryButton>
                                     </div>
                                 </div>
                             </div>
@@ -59,7 +60,7 @@ import HeroLandscapeSlider from "./Partials/HeroLandscapeSlider.vue";
                         <div class="px-4 p-2 pb-3 bg-white rounded">
                             <div class="mt-5 py-6 flex justify-between">
                                 <h3 class="font-semibold text-lg text-slate-900">Recently Viewed</h3>
-                                <Link :href="route('samsung-show')" class="text-amber-600 font-semibold flex flex-row place-content-center">
+                                <Link :href="route('products')" class="text-amber-600 font-semibold flex flex-row place-content-center">
                                     <p class="pr-2">See All</p>
                                     <svg width="18px" height="18px" class="pt-1.5" viewBox="-4.5 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>arrow_right [#336]</title> <desc>Created with Sketch.</desc> <defs> </defs> <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Dribbble-Light-Preview" transform="translate(-305.000000, -6679.000000)" fill="#d97706"> <g id="icons" transform="translate(56.000000, 160.000000)"> <path d="M249.365851,6538.70769 L249.365851,6538.70769 C249.770764,6539.09744 250.426289,6539.09744 250.830166,6538.70769 L259.393407,6530.44413 C260.202198,6529.66364 260.202198,6528.39747 259.393407,6527.61699 L250.768031,6519.29246 C250.367261,6518.90671 249.720021,6518.90172 249.314072,6519.28247 L249.314072,6519.28247 C248.899839,6519.67121 248.894661,6520.31179 249.302681,6520.70653 L257.196934,6528.32352 C257.601847,6528.71426 257.601847,6529.34685 257.196934,6529.73759 L249.365851,6537.29462 C248.960938,6537.68437 248.960938,6538.31795 249.365851,6538.70769" id="arrow_right-[#336]"> </path> </g> </g> </g> </g></svg>
                                 </Link>
@@ -109,7 +110,7 @@ import HeroLandscapeSlider from "./Partials/HeroLandscapeSlider.vue";
                         <div class="px-4 p-2 pb-3 bg-white rounded">
                             <div class="mt-5 py-3 px-4 flex justify-between bg-red-600">
                                 <h3 class="font-semibold text-lg text-amber-300">Flash Sale</h3>
-                                <Link :href="route('samsung-show')" class="text-amber-300 font-semibold flex flex-row place-content-center">
+                                <Link :href="route('products')" class="text-amber-300 font-semibold flex flex-row place-content-center">
                                     <p class="pr-2">See All</p>
                                     <svg width="18px" height="18px" class="pt-1.5" viewBox="-4.5 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>arrow_right [#336]</title> <desc>Created with Sketch.</desc> <defs> </defs> <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Dribbble-Light-Preview" transform="translate(-305.000000, -6679.000000)" fill="#d97706"> <g id="icons" transform="translate(56.000000, 160.000000)"> <path d="M249.365851,6538.70769 L249.365851,6538.70769 C249.770764,6539.09744 250.426289,6539.09744 250.830166,6538.70769 L259.393407,6530.44413 C260.202198,6529.66364 260.202198,6528.39747 259.393407,6527.61699 L250.768031,6519.29246 C250.367261,6518.90671 249.720021,6518.90172 249.314072,6519.28247 L249.314072,6519.28247 C248.899839,6519.67121 248.894661,6520.31179 249.302681,6520.70653 L257.196934,6528.32352 C257.601847,6528.71426 257.601847,6529.34685 257.196934,6529.73759 L249.365851,6537.29462 C248.960938,6537.68437 248.960938,6538.31795 249.365851,6538.70769" id="arrow_right-[#336]"> </path> </g> </g> </g> </g></svg>
                                 </Link>
@@ -164,10 +165,10 @@ import HeroLandscapeSlider from "./Partials/HeroLandscapeSlider.vue";
                                         <img alt="phone-image" class="max-w-xs rounded-lg max-h-[36rem] object-cover" :src="`https://www.mobilephonemuseum.com/assets/static/e57d5c2a34aef9308ac96a89187daa3b/9d75f/fd09a85d-5dfd-436d-be83-4667ecd73e05.png`">
                                     </div>
                                     <div class="md:my-auto">
-                                        <h3 class="font-bold text-black text-xl font-serif underline underline-offset-4">Somsong Max Pro</h3>
+                                        <Link :href="route('product')" class="font-bold text-black text-xl font-serif underline underline-offset-4">Somsong Max Pro</Link>
                                         <div class="mt-2">
                                             <p class="text-sm text-justify leading-tight"><span class="font-semibold">Features: </span>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-                                                <Link class="text-blue-900 text-xs font-semibold flex items-center ">
+                                                <Link :href="route('product')" class="text-blue-900 text-xs font-semibold flex items-center ">
                                                     More Details
                                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="w-5 h-5 fill-indigo-500">
                                                         <path fill-rule="evenodd" d="M5 10a.75.75 0 01.75-.75h6.638L10.23 7.29a.75.75 0 111.04-1.08l3.5 3.25a.75.75 0 010 1.08l-3.5 3.25a.75.75 0 11-1.04-1.08l2.158-1.96H5.75A.75.75 0 015 10z" clip-rule="evenodd" />
@@ -191,7 +192,7 @@ import HeroLandscapeSlider from "./Partials/HeroLandscapeSlider.vue";
                         <div class="mt-5 p-2 pb-3 bg-white rounded">
                             <div class="flex justify-between py-3 px-4 bg-amber-200">
                                 <h3 class="font-semibold text-lg text-slate-900">Limited Edition</h3>
-                                <Link :href="route('samsung-show')" class="text-amber-700 font-semibold flex flex-row place-content-center">
+                                <Link :href="route('products')" class="text-amber-700 font-semibold flex flex-row place-content-center">
                                     <p class="pr-2">See All</p>
                                     <svg width="18px" height="18px" class="pt-1.5" viewBox="-4.5 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>arrow_right [#336]</title> <desc>Created with Sketch.</desc> <defs> </defs> <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Dribbble-Light-Preview" transform="translate(-305.000000, -6679.000000)" fill="#d97706"> <g id="icons" transform="translate(56.000000, 160.000000)"> <path d="M249.365851,6538.70769 L249.365851,6538.70769 C249.770764,6539.09744 250.426289,6539.09744 250.830166,6538.70769 L259.393407,6530.44413 C260.202198,6529.66364 260.202198,6528.39747 259.393407,6527.61699 L250.768031,6519.29246 C250.367261,6518.90671 249.720021,6518.90172 249.314072,6519.28247 L249.314072,6519.28247 C248.899839,6519.67121 248.894661,6520.31179 249.302681,6520.70653 L257.196934,6528.32352 C257.601847,6528.71426 257.601847,6529.34685 257.196934,6529.73759 L249.365851,6537.29462 C248.960938,6537.68437 248.960938,6538.31795 249.365851,6538.70769" id="arrow_right-[#336]"> </path> </g> </g> </g> </g></svg>
                                 </Link>
@@ -241,7 +242,7 @@ import HeroLandscapeSlider from "./Partials/HeroLandscapeSlider.vue";
                         <div class="mt-5 p-2 pb-3 bg-white rounded">
                             <div class="flex justify-between py-3 px-4">
                                 <h3 class="font-semibold text-lg text-slate-900">Trending Products</h3>
-                                <Link :href="route('samsung-show')" class="text-amber-600 font-semibold flex flex-row place-content-center">
+                                <Link :href="route('products')" class="text-amber-600 font-semibold flex flex-row place-content-center">
                                     <p class="pr-2">See All</p>
                                     <svg width="18px" height="18px" class="pt-1.5" viewBox="-4.5 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000">
                                         <g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>arrow_right [#336]</title> <desc>Created with Sketch.</desc> <defs> </defs> <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Dribbble-Light-Preview" transform="translate(-305.000000, -6679.000000)" fill="#d97706"> <g id="icons" transform="translate(56.000000, 160.000000)"> <path d="M249.365851,6538.70769 L249.365851,6538.70769 C249.770764,6539.09744 250.426289,6539.09744 250.830166,6538.70769 L259.393407,6530.44413 C260.202198,6529.66364 260.202198,6528.39747 259.393407,6527.61699 L250.768031,6519.29246 C250.367261,6518.90671 249.720021,6518.90172 249.314072,6519.28247 L249.314072,6519.28247 C248.899839,6519.67121 248.894661,6520.31179 249.302681,6520.70653 L257.196934,6528.32352 C257.601847,6528.71426 257.601847,6529.34685 257.196934,6529.73759 L249.365851,6537.29462 C248.960938,6537.68437 248.960938,6538.31795 249.365851,6538.70769" id="arrow_right-[#336]"> </path> </g> </g> </g> </g></svg>
@@ -296,10 +297,10 @@ import HeroLandscapeSlider from "./Partials/HeroLandscapeSlider.vue";
                                         <img alt="phone-image" class="max-w-xs rounded-lg max-h-[36rem] object-cover" :src="`https://ke.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/40/676158/1.jpg?9873`">
                                     </div>
                                     <div class="md:my-auto">
-                                        <h3 class="font-bold text-black text-xl font-serif underline underline-offset-4">Kitenge Tupu</h3>
+                                        <Link :href="route('product-show', 6)" class="font-bold text-black text-xl font-serif underline underline-offset-4">Kitenge Tupu</Link>
                                         <div class="mt-2">
                                             <p class="text-sm text-justify leading-tight"><span class="font-semibold">Features: </span>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-                                                <Link class="text-blue-900 text-xs font-semibold flex items-center ">
+                                                <Link :href="route('product-show', 6)" class="text-blue-900 text-xs font-semibold flex items-center ">
                                                     More Details
                                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="w-5 h-5 fill-indigo-500">
                                                         <path fill-rule="evenodd" d="M5 10a.75.75 0 01.75-.75h6.638L10.23 7.29a.75.75 0 111.04-1.08l3.5 3.25a.75.75 0 010 1.08l-3.5 3.25a.75.75 0 11-1.04-1.08l2.158-1.96H5.75A.75.75 0 015 10z" clip-rule="evenodd" />
@@ -313,7 +314,7 @@ import HeroLandscapeSlider from "./Partials/HeroLandscapeSlider.vue";
                                             <p class="text-orange-200 text-xs line-through align-super">was $168.99</p>
                                             <p class="text-green-900 text-sm font-semibold">Now <span class="underline text-lg">$99.99</span></p>
                                         </div>
-                                        <PrimaryButton class="mt-3" @click.prevent="addToCart">Add to Cart</PrimaryButton>
+                                        <PrimaryButton class="mt-3" @click.prevent="addToCart(6)">Add to Cart</PrimaryButton>
                                     </div>
                                 </div>
                             </div>
@@ -323,7 +324,7 @@ import HeroLandscapeSlider from "./Partials/HeroLandscapeSlider.vue";
                         <div class="mt-5 p-2 pb-3 bg-white rounded">
                             <div class="flex justify-between py-3 px-4 bg-lime-700">
                                 <h3 class="font-semibold text-lg text-slate-100">Savannist Fashion</h3>
-                                <Link :href="route('samsung-show')" class="text-amber-300 font-semibold flex flex-row place-content-center">
+                                <Link :href="route('products')" class="text-amber-300 font-semibold flex flex-row place-content-center">
                                     <p class="pr-2">See All</p>
                                     <svg width="18px" height="18px" class="pt-1.5" viewBox="-4.5 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>arrow_right [#336]</title> <desc>Created with Sketch.</desc> <defs> </defs> <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Dribbble-Light-Preview" transform="translate(-305.000000, -6679.000000)" fill="#d97706"> <g id="icons" transform="translate(56.000000, 160.000000)"> <path d="M249.365851,6538.70769 L249.365851,6538.70769 C249.770764,6539.09744 250.426289,6539.09744 250.830166,6538.70769 L259.393407,6530.44413 C260.202198,6529.66364 260.202198,6528.39747 259.393407,6527.61699 L250.768031,6519.29246 C250.367261,6518.90671 249.720021,6518.90172 249.314072,6519.28247 L249.314072,6519.28247 C248.899839,6519.67121 248.894661,6520.31179 249.302681,6520.70653 L257.196934,6528.32352 C257.601847,6528.71426 257.601847,6529.34685 257.196934,6529.73759 L249.365851,6537.29462 C248.960938,6537.68437 248.960938,6538.31795 249.365851,6538.70769" id="arrow_right-[#336]"> </path> </g> </g> </g> </g></svg>
                                 </Link>
@@ -373,7 +374,7 @@ import HeroLandscapeSlider from "./Partials/HeroLandscapeSlider.vue";
                         <div class="mt-5 pb-4 p-2 bg-white rounded">
                             <div class="flex justify-between py-3 px-4 bg-amber-900 text-white">
                                 <h3 class="font-semibold text-lg">Kitenge Arrivals</h3>
-                                <Link :href="route('samsung-show')" class="font-semibold flex flex-row place-content-center">
+                                <Link :href="route('products')" class="font-semibold flex flex-row place-content-center">
                                     <p class="pr-2">See All</p>
                                     <svg width="18px" height="18px" class="pt-1.5" viewBox="-4.5 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>arrow_right [#336]</title> <desc>Created with Sketch.</desc> <defs> </defs> <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Dribbble-Light-Preview" transform="translate(-305.000000, -6679.000000)" fill="#d97706"> <g id="icons" transform="translate(56.000000, 160.000000)"> <path d="M249.365851,6538.70769 L249.365851,6538.70769 C249.770764,6539.09744 250.426289,6539.09744 250.830166,6538.70769 L259.393407,6530.44413 C260.202198,6529.66364 260.202198,6528.39747 259.393407,6527.61699 L250.768031,6519.29246 C250.367261,6518.90671 249.720021,6518.90172 249.314072,6519.28247 L249.314072,6519.28247 C248.899839,6519.67121 248.894661,6520.31179 249.302681,6520.70653 L257.196934,6528.32352 C257.601847,6528.71426 257.601847,6529.34685 257.196934,6529.73759 L249.365851,6537.29462 C248.960938,6537.68437 248.960938,6538.31795 249.365851,6538.70769" id="arrow_right-[#336]"> </path> </g> </g> </g> </g></svg>
                                 </Link>
@@ -427,10 +428,10 @@ import HeroLandscapeSlider from "./Partials/HeroLandscapeSlider.vue";
                                         <img alt="phone-image" class="max-w-xs rounded-lg max-h-[36rem] object-cover" :src="`https://ke.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/02/666582/1.jpg?8617`">
                                     </div>
                                     <div class="md:my-auto">
-                                        <h3 class="font-bold text-black text-xl font-serif underline underline-offset-4">Mambo Zamani African Print Men Shirt</h3>
+                                        <Link :href="route('product-show', 7)" class="font-bold text-black text-xl font-serif underline underline-offset-4">Mambo Zamani African Print Men Shirt</Link>
                                         <div class="mt-2">
                                             <p class="text-sm text-justify leading-tight"><span class="font-semibold">Features: </span>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-                                                <Link class="text-blue-900 text-xs font-semibold flex items-center ">
+                                                <Link :href="route('product-show', 7)" class="text-blue-900 text-xs font-semibold flex items-center ">
                                                     More Details
                                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="w-5 h-5 fill-indigo-500">
                                                         <path fill-rule="evenodd" d="M5 10a.75.75 0 01.75-.75h6.638L10.23 7.29a.75.75 0 111.04-1.08l3.5 3.25a.75.75 0 010 1.08l-3.5 3.25a.75.75 0 11-1.04-1.08l2.158-1.96H5.75A.75.75 0 015 10z" clip-rule="evenodd" />
@@ -444,7 +445,7 @@ import HeroLandscapeSlider from "./Partials/HeroLandscapeSlider.vue";
                                             <p class="text-orange-200 text-xs line-through align-super">was $168.99</p>
                                             <p class="text-green-900 text-sm font-semibold">Now <span class="underline text-lg">$99.99</span></p>
                                         </div>
-                                        <PrimaryButton class="mt-3" @click.prevent="addToCart">Add to Cart</PrimaryButton>
+                                        <PrimaryButton class="mt-3" @click.prevent="addToCart(7)">Add to Cart</PrimaryButton>
                                     </div>
                                 </div>
                             </div>
@@ -458,27 +459,27 @@ import HeroLandscapeSlider from "./Partials/HeroLandscapeSlider.vue";
                         <div class="bg-white p-3 rounded shadow-sm">
                             <div class="mx-auto my-4 flex flex-col gap-y-2 text-sm">
                                 <h3 class="font-semibold uppercase text-base">Our Company</h3>
-                                <a href="#menu-col" class="pl-1.5">About</a>
-                                <a href="#menu-col" class="pl-1.5">Investor</a>
-                                <a href="#menu-col" class="pl-1.5">People</a>
-                                <a href="#menu-col" class="pl-1.5">Careers</a>
+                                <a href="/coming-soon" class="pl-1.5">About</a>
+                                <a href="/coming-soon" class="pl-1.5">Investor</a>
+                                <a href="/coming-soon" class="pl-1.5">People</a>
+                                <a href="/coming-soon" class="pl-1.5">Careers</a>
                             </div>
                         </div>
 
                         <div class="col-span-1 bg-white p-3 rounded shadow-sm">
                             <div class="mx-auto my-4 flex flex-col gap-y-2 text-sm">
                                 <h3 class="font-semibold uppercase text-base">Community Relations</h3>
-                                <a href="#menu-col" class="pl-1.5">Our Foundation</a>
-                                <a href="#menu-col" class="pl-1.5">Initiatives</a>
-                                <a href="#menu-col" class="pl-1.5">Climate Responsibility</a>
-                                <a href="#menu-col" class="pl-1.5">Sustainability Reports</a>
+                                <a href="/coming-soon" class="pl-1.5">Our Foundation</a>
+                                <a href="/coming-soon" class="pl-1.5">Initiatives</a>
+                                <a href="/coming-soon" class="pl-1.5">Climate Responsibility</a>
+                                <a href="/coming-soon" class="pl-1.5">Sustainability Reports</a>
                             </div>
                         </div>
 
                         <div class="col-span-1 bg-white p-3 rounded shadow-sm">
                             <div class="mx-auto my-4 flex flex-col gap-y-2 text-sm">
                                 <h3 class="font-semibold uppercase text-base">Contact Me</h3>
-                                <a href="#menu-col" class="pl-1.5">
+                                <a href="/coming-soon" class="pl-1.5">
                                     <span class="pr-2 font-semibold">Email: </span> francis@mwangikanothe.com
                                 </a>
 

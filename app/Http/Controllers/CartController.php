@@ -17,6 +17,8 @@ class CartController extends Controller
      */
     public function addToCart(Request $request): JsonResponse
     {
+        // dd($request);
+
         // Retrieve product and user IDs from the request
         $productId = $request->input('product_id');
         $userId = $request->input('user_id');
@@ -66,6 +68,7 @@ class CartController extends Controller
         $cartItems = Cart::with('product')
             ->where('user_id', $userId)
             ->get();
+        //dd($cartItems);
 
         return response()->json(['cart' => $cartItems]);
     }

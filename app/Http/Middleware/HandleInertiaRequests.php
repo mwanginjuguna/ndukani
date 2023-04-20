@@ -36,6 +36,7 @@ class HandleInertiaRequests extends Middleware
                     'location' => $request->url(),
                 ]);
             },
+            'csrfToken' => csrf_token(),
         ]);
     }
 }

@@ -4,6 +4,7 @@
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-4 grid grid-cols-1 md:grid-cols-4 gap-x-6">
                 <div class="col-span-1 md:col-span-4">
+                    <!--Breadcrumbs-->
                     <div class="pb-4 flex flex-wrap gap-x-1 align-middle text-xs">
 
                         <Link :href="route('home')">Home</Link>
@@ -14,11 +15,11 @@
 
                         <svg class="mt-1" width="8px" height="8px" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path fill="#000000" d="M338.752 104.704a64 64 0 0 0 0 90.496l316.8 316.8-316.8 316.8a64 64 0 0 0 90.496 90.496l362.048-362.048a64 64 0 0 0 0-90.496L429.248 104.704a64 64 0 0 0-90.496 0z"></path></g></svg>
 
-                        <Link :href="route('samsung-show')">Samsung</Link>
+                        <Link :href="route('coming-soon')">{{ brand.name }}</Link>
 
                         <svg class="mt-1" width="8px" height="8px" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path fill="#000000" d="M338.752 104.704a64 64 0 0 0 0 90.496l316.8 316.8-316.8 316.8a64 64 0 0 0 90.496 90.496l362.048-362.048a64 64 0 0 0 0-90.496L429.248 104.704a64 64 0 0 0-90.496 0z"></path></g></svg>
 
-                        <Link :href="route('home')">Galaxy S23</Link>
+                        <p>{{ product.name }}</p>
 
 
                     </div>
@@ -94,7 +95,7 @@
 
                             <div class="flex justify-between">
                                 <a
-                                    href="#"
+                                    href="/coming-soon"
                                     class="mb-1 py-1 px-1.5 bg-sky-800 rounded-sm leading-tight text-slate-50 text-xs">
                                     Official store
                                 </a>
@@ -156,7 +157,7 @@
 
                                 <!-- button -->
                                 <div id="cart-button"
-                                     class="my-5 px-8 py-3 grid grid-cols-2 flex justify-between shadow-lg drop-shadow-lg rounded-sm bg-amber-500 hover:underline hover:underline-offset-2 uppercase hover:cursor-pointer"
+                                     class="my-5 px-8 py-3 grid grid-cols-2 flex justify-between shadow-lg drop-shadow-lg rounded-sm bg-amber-500 hover:bg-amber-600 hover:underline hover:underline-offset-4 decoration-amber-500 uppercase hover:cursor-pointer transition-all ease-in-out 200ms"
                                      @click="addToCart(product.id)"
                                 >
                                     <svg fill="#ffffff" width="24px" height="24px" viewBox="0 0 24 24" data-name="Layer 1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><title></title><path d="M12.2,9h1.6V6.8H16V5.2H13.8V3H12.2V5.2H10V6.8h2.2ZM20,5v5.5L7.45,12.72,5,3H1.25a1,1,0,0,0,0,2H3.47L6.7,18H20V16H8.26l-.33-1.33L22,12.18V5ZM7,19a1.5,1.5,0,1,0,1.5,1.5A1.5,1.5,0,0,0,7,19Zm12,0a1.5,1.5,0,1,0,1.5,1.5A1.5,1.5,0,0,0,19,19Z"></path></g></svg>
@@ -197,24 +198,6 @@
 
                         <div class="pt-4 text-sm border-t border-slate-200">
                             <p>{{ product.description }}</p>
-                        </div>
-
-                        <div class="mt-2.5 mx-auto">
-                            <a href="https://postimg.cc/K4yR8DjT" target="_blank">
-                                <img alt="image" :src="`https://ke.jumia.is/cms/external/pet/SA948MP1EB7I0NAFAMZ/b6fea5e658ea1f9d38aebbb3d285a8d7.jpg`">
-                            </a>
-                        </div>
-
-                        <div class="mt-2.5 mx-auto">
-                            <a href="https://postimg.cc/Mv6HyZyK" target="_blank">
-                                <img alt="image" :src="`https://ke.jumia.is/cms/external/pet/SA948MP1EB7I0NAFAMZ/7c7b7b43fa1c32c0c7ca8bf340f4ddc7.jpg`">
-                            </a>
-                        </div>
-
-                        <div class="mt-2.5 mx-auto">
-                            <a href="https://postimg.cc/gngJ49Dy" target="_blank">
-                                <img alt="image" :src="`https://ke.jumia.is/cms/external/pet/SA948MP1EB7I0NAFAMZ/d9d863e8adfb36bab4c8fb3cf951685e.jpg`">
-                            </a>
                         </div>
 
                         <div>
@@ -469,7 +452,7 @@
 
                 <!--right sidebar-->
                 <div class="col-span-1 md:col-span-1">
-                    <section id="delivery" class="mb-6 bg-white rounded divide-y text-black">
+                    <section id="delivery" class="mt-3 mb-6 bg-white rounded divide-y text-black">
                         <div class="p-2">
                             <h3 class="font-medium">Jumia Delivery and Returns</h3>
                         </div>
@@ -529,7 +512,7 @@
                                 </div>
 
                                 <div class="col-span-1">
-                                    <a href="#delivery" class="inline-flex text-sky-600 hover:text-sky-700">Details</a>
+                                    <a href="/coming-soon" class="inline-flex text-sky-600 hover:text-sky-700">Details</a>
                                 </div>
                                 <div class="col-span-4 col-start-2">
                                     <p>Delivery <strong>KSh 52</strong></p>
@@ -551,7 +534,7 @@
                                     <a href="#delivery" class="inline-flex text-sky-600 hover:text-sky-700">Details</a>
                                 </div>
                                 <div class="col-span-4 col-start-2">
-                                    <p>Easy Return, Quick Refund.<a href="#policy" class="text-sky-600">See more</a></p>
+                                    <p>Easy Return, Quick Refund.<a href="/coming-soon" class="text-sky-600">See more</a></p>
                                 </div>
                             </div>
 
@@ -566,16 +549,12 @@
                                 </div>
 
                                 <div class="col-span-1">
-                                    <a href="#delivery" class="inline-flex text-sky-600 hover:text-sky-700">Details</a>
+                                    <a href="/coming-soon" class="inline-flex text-sky-600 hover:text-sky-700">Details</a>
                                 </div>
                                 <div class="col-span-4 col-start-2">
                                     <p class="pb-3">2 Years</p>
                                 </div>
                             </div>
-
-
-
-
 
                         </div>
                     </section>
@@ -632,23 +611,23 @@
                     <!--product menu-->
                     <section id="product-menu " class="grid bg-white rounded divide-y">
 
-                        <NavLink :href="`#product-details`" :class="`flex gap-x-4 active:bg-gray-100 px-2 py-2`">
+                        <Link :href="`#product-details`" :class="`flex gap-x-4 active:bg-gray-100 px-2 py-2`">
                             <svg width="24px" height="24px" viewBox="0 0 512 512" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000">
                                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>item-details</title> <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="icon" fill="#000000" transform="translate(42.666667, 85.333333)"> <path d="M426.666667,1.42108547e-14 L426.666667,341.333333 L3.55271368e-14,341.333333 L3.55271368e-14,1.42108547e-14 L426.666667,1.42108547e-14 Z M384,42.6666667 L42.6666667,42.6666667 L42.6666667,298.666667 L384,298.666667 L384,42.6666667 Z M341.333333,213.333333 L341.333333,245.333333 L234.666667,245.333333 L234.666667,213.333333 L341.333333,213.333333 Z M341.333333,149.333333 L341.333333,181.333333 L234.666667,181.333333 L234.666667,149.333333 L341.333333,149.333333 Z M192,85.3333333 L192,170.666667 L85.3333333,170.666667 L85.3333333,85.3333333 L192,85.3333333 Z M341.333333,85.3333333 L341.333333,117.333333 L234.666667,117.333333 L234.666667,85.3333333 L341.333333,85.3333333 Z" id="Combined-Shape"> </path> </g> </g> </g></svg>
                             <p>Product details</p>
-                        </NavLink>
+                        </Link>
 
-                        <NavLink :href="`#specifications`" :class="`flex gap-x-4 pt-3 active:bg-gray-100 px-2 py-2`">
+                        <Link :href="`#specifications`" :class="`flex gap-x-4 pt-3 active:bg-gray-100 px-2 py-2`">
                             <svg width="20px" height="20px" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="http://www.w3.org/2000/svg" fill="#000000">
                                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M320 89.6h640v76.8H320V89.6z m0 768h640v76.8H320v-76.8z m-256-768h128v76.8H64V89.6z m256 384h640v76.8H320V473.6z m-256 0h128v76.8H64V473.6z m0 384h128v76.8H64v-76.8z" fill="#000000"></path></g></svg>
                             <p>Specifications</p>
-                        </NavLink>
+                        </Link>
 
-                        <NavLink :href="`#feedback`" :class="`flex gap-x-4 pt-3 active:bg-gray-100 px-2 py-2`">
+                        <Link :href="`#feedback`" :class="`flex gap-x-4 pt-3 active:bg-gray-100 px-2 py-2`">
                             <svg width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#000000">
                                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path fill="none" d="M0 0h24v24H0z"></path> <path d="M6.455 19L2 22.5V4a1 1 0 0 1 1-1h18a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H6.455zM4 18.385L5.763 17H20V5H4v13.385zM11 13h2v2h-2v-2zm0-6h2v5h-2V7z"></path> </g> </g></svg>
                             <p>Customer Feedback</p>
-                        </NavLink>
+                        </Link>
 
                     </section>
 
@@ -659,7 +638,7 @@
                             <!--all images-->
                             <!--consider a slider-->
                             <!--for image in images-->
-                            <img class="rounded object-cover" alt="image" :src="`https://ke.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/84/503736/2.jpg?1607`">
+                            <img class="ml-1.5 rounded object-cover object-center" alt="image" :src="mainImageUrl">
 
                         </div>
 
@@ -667,14 +646,18 @@
                         <div class="px-1 py-4 text-sm text-slate-800 flex flex-col gap-y-1.5">
 
                             <h2 class="h-4 overflow-hidden font-light text-xs text-slate-700 leading-tight">
-                                Samsung Galaxy A23, 6.6″, 64GB + 4GB RAM (Dual SIM), 5000mAh, Black
+                                {{ product.name }}
                             </h2>
 
                             <div>
                                 <div class="py-2">
-                                    <p class="text-base text-black font-sans font-bold">KSh 28,399</p>
+                                    <p class="text-base text-black font-sans font-bold">
+                                        {{ product.currency }} {{ product.price }}
+                                    </p>
                                     <div class="mt-1.5 flex flex-wrap gap-x-2">
-                                        <p class="pr-2 font-light text-xs text-slate-400 line-through">KSh 31,999</p>
+                                        <p class="pr-2 font-light text-xs text-slate-400 line-through">
+                                            {{ product.currency }} {{ Number((1.3 * product.price).toFixed(2)) }}
+                                        </p>
                                         <p class="-mt-px p-1 text-xs text-[#f68b1e] bg-[#fef3e9]">-11%</p>
                                     </div>
                                 </div>
@@ -685,7 +668,7 @@
                         <!-- button -->
                         <div id="cart-button"
                              class="col-span-2 mx-2 px-4 py-2 flex gap-x-4 shadow-lg drop-shadow-lg rounded-sm bg-amber-500 hover:bg-amber-600 hover:cursor-pointer uppercase"
-                             @click="addToCart(33)"
+                             @click="addToCart(product.id)"
                         >
                             <svg fill="#ffffff" width="24px" height="24px" viewBox="0 0 24 24" data-name="Layer 1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><title></title><path d="M12.2,9h1.6V6.8H16V5.2H13.8V3H12.2V5.2H10V6.8h2.2ZM20,5v5.5L7.45,12.72,5,3H1.25a1,1,0,0,0,0,2H3.47L6.7,18H20V16H8.26l-.33-1.33L22,12.18V5ZM7,19a1.5,1.5,0,1,0,1.5,1.5A1.5,1.5,0,0,0,7,19Zm12,0a1.5,1.5,0,1,0,1.5,1.5A1.5,1.5,0,0,0,19,19Z"></path></g></svg>
                             <p class="font-bold text-base text-white pl-3">Add to cart</p>
@@ -707,8 +690,6 @@
                 </div>
 
             </div>
-
-            <!--navigation-->
         </div>
     </AppLayout>
 </template>
@@ -717,9 +698,9 @@
 import AppLayout from "../../Layouts/AppLayout.vue";
 import Slider from "../../Components/Slider.vue";
 import {Link, usePage} from "@inertiajs/vue3";
-import SmallImage from '../../Components/SmallImage.vue'
-import {computed, defineProps, onBeforeMount, onMounted, ref} from 'vue'
-
+import SmallImage from '../../Components/SmallImage.vue';
+import {defineProps, onBeforeMount, onMounted, ref} from 'vue';
+import useCart from '@/composables/useCart';
 
 const props = defineProps({
     product: Object,
@@ -734,6 +715,9 @@ const props = defineProps({
     images: Object
 });
 
+const { addToCart } = useCart();
+
+
 const activeImage = ref(usePage().props.images[0]?.id)
 
 function onSelectImage(image) {
@@ -745,11 +729,20 @@ function onSelectImage(image) {
 const specTypes = ref([]);
 onMounted(()=> {
     console.log(specTypes.value);
-})
+});
+
+const mainImageUrl = ref('');
+
 onBeforeMount(() => {
     for (const spec of props.specifications) {
         if (!specTypes.value.includes(spec.type)) {
             specTypes.value.push(spec.type);
+        }
+    }
+
+    for (const img of props.images) {
+        if (img.is_main) {
+            mainImageUrl.value = img.path;
         }
     }
 });
