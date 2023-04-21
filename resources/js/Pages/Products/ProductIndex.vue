@@ -314,7 +314,7 @@ const { addToCart } = useCart();
                                             <p class="text-orange-200 text-xs line-through align-super">was $168.99</p>
                                             <p class="text-green-900 text-sm font-semibold">Now <span class="underline text-lg">$99.99</span></p>
                                         </div>
-                                        <PrimaryButton class="mt-3" @click.prevent="addToCart(6)">Add to Cart</PrimaryButton>
+                                        <PrimaryButton class="mt-3" @click.prevent="addToCart(7)">Add to Cart</PrimaryButton>
                                     </div>
                                 </div>
                             </div>
@@ -445,7 +445,7 @@ const { addToCart } = useCart();
                                             <p class="text-orange-200 text-xs line-through align-super">was $168.99</p>
                                             <p class="text-green-900 text-sm font-semibold">Now <span class="underline text-lg">$99.99</span></p>
                                         </div>
-                                        <PrimaryButton class="mt-3" @click.prevent="addToCart(7)">Add to Cart</PrimaryButton>
+                                        <PrimaryButton class="mt-3" @click.prevent="addToCart(6)">Add to Cart</PrimaryButton>
                                     </div>
                                 </div>
                             </div>

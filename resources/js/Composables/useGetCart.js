@@ -1,15 +1,14 @@
-import { ref } from 'vue'
-import { usePage } from '@inertiajs/inertia-vue3'
-import {useFlash} from "./useFlash";
+import { ref, watch } from 'vue';
+import { useFlash } from './useFlash';
+import ca from "../../../public/build/assets/ProductShow-88f3e683";
 
-export default function useCart() {
-    const cartItemsNumber = ref(0);
-    const {flash} = useFlash();
+export default function useGetCart(csrfToken, userId) {
+    const cart  = ref({});
+    const cartItemsNumber = ref(0)
+    const { flash } = useFlash();
 
-    const cart = async () => {
+    const updateCart = async () => {
         try {
-            const csrfToken = usePage().props.csrfToken
-
             const response = await fetch(route('getCart'), {
                 method: 'POST',
                 headers: {
@@ -17,25 +16,33 @@ export default function useCart() {
                     'X-CSRF-TOKEN': csrfToken,
                 },
                 body: JSON.stringify({
-                    user_id: usePage().props.auth.user.id,
+                    user_id: userId,
                 }),
-            })
+            });
 
             if (response.ok) {
-                const data = await response.json()
+                const data = await response.json();
+                cart.value = data.cart;
+                // console.log('data: ', JSON.stringify(data.cart))
 
-                cartItemsNumber.value = Object.keys(data.cart).length
-
-                return data.cart
-
+                cartItemsNumber.value = Object.keys(data.cart).length;
+                console.log('cart composable: '+JSON.stringify(cart.value))
+                return {cart, cartItemsNumber};
             } else {
-
-                throw new Error('Failed to retrieve cart items')
+                throw new Error('Failed to retrieve cart items!');
             }
         } catch (error) {
-            flash('Error', 'Failed to retrieve cart items', 'danger')
+            flash('Error', 'Failed to retrieve cart items', 'danger');
         }
-    }
+    };
 
-    return { cart, cartItemsNumber }
+   updateCart(); // initialize cart
+    console.log('cart down: ' + cart)
+    // Watch for changes in the cart and update the cartItemsNumber and cart values accordingly
+    watch(cart, (newCart) => {
+        cartItemsNumber.value = Object.keys(newCart).length;
+        cart.value = newCart;
+    });
+
+    return { cart, cartItemsNumber, updateCart };
 }

@@ -1,9 +1,11 @@
 import { ref } from 'vue';
 import axios from 'axios';
-import { useFlash } from "./useFlash";
+import { useFlash } from './useFlash';
+import useGetCart from './useGetCart';
+import {usePage} from "@inertiajs/vue3";
 
 export default function useCart() {
-    const cart = ref([]);
+    const { cart, updateCart } = useGetCart(usePage().props.csrfToken, usePage().props.auth.user.id);
     const { flash } = useFlash();
 
     const addToCart = async (productId, quantity = 1, userId = 1) => {
@@ -13,12 +15,13 @@ export default function useCart() {
                 user_id: userId,
                 quantity: quantity,
             });
-            console.log(response.data);
+
             flash('Success', 'Added to cart.', 'success');
-            // update the cart variable with the new cart items
-            cart.value = response.data.cart;
+
+            // Call the updateCart function to update the cart and cartItemsNumber values
+            await updateCart();
+
         } catch (error) {
-            console.error(error);
             flash('Error', 'Something went wrong. Product not added to Cart.', 'danger');
         }
     };
