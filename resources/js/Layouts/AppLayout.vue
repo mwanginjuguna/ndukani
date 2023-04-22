@@ -1,5 +1,5 @@
 <script setup>
-import {getCurrentInstance, onBeforeMount, onMounted, ref} from 'vue';
+import {onBeforeMount, ref} from 'vue';
 import {Head, Link, router, usePage} from '@inertiajs/vue3';
 import ApplicationMark from '@/Components/ApplicationMark.vue';
 import Banner from '@/Components/Banner.vue';
@@ -10,26 +10,25 @@ import DropdownLink from '@/Components/DropdownLink.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 import Cart from "../Components/Cart.vue";
 import {useFlash} from "../Composables/useFlash";
-import useGetCart from "../Composables/useGetCart";
 import DialogModal from "../Components/DialogModal.vue";
 import PrimaryButton from "../Components/PrimaryButton.vue";
+import {useCartStore} from "../stores/CartStore";
+
+const cart = useCartStore();
 
 const { flash } = useFlash();
-//const cartItemsNumber = ref(0);
 
 defineProps({
     title: String,
 });
 // get all the items in cart
-let cartItems = {};
+let cartItems = ref({});
 // number of items in cart - used to show count
-let cartItemsNumber = 0;
+let cartItemsNumber = ref(0);
 
 onBeforeMount(async () => {
-    const { cart, cartItemsNumber: getCartItemsNumber } = await useGetCart(usePage().props.csrfToken, usePage().props.auth.user.id)
-    cartItems = cart
-    console.log('cart: ', cart);
-    cartItemsNumber = getCartItemsNumber.value
+    cartItems.value = cart.getCart();
+    console.log(cart.getters.cartItemsNumber)
 })
 
 const showingNavigationDropdown = ref(false);
@@ -305,10 +304,24 @@ const logout = () => {
                                 <ResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">
                                     Dashboard
                                 </ResponsiveNavLink>
+                                <ResponsiveNavLink :href="route('home')" :active="route().current('home')">
+                                    Home
+                                </ResponsiveNavLink>
+                                <ResponsiveNavLink :href="route('products')" :active="route().current('products')">
+                                    Products
+                                </ResponsiveNavLink>
                             </div>
 
                             <!-- Responsive Settings Options -->
                             <div class="pt-4 pb-1 border-t border-gray-200">
+                                <!--cart-->
+                                <button @click="showCart = !showCart" class="ml-3 relative flex pb-3">
+                                    <svg fill="#000000" width="24px" height="24px" viewBox="0 0 24 24" id="cart-add" data-name="Flat Line" xmlns="http://www.w3.org/2000/svg" class="icon flat-line">
+                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><line id="primary-upstroke" x1="10.95" y1="20.5" x2="11.05" y2="20.5" style="fill: none; stroke: #000000; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2.5;"></line><line id="primary-upstroke-2" data-name="primary-upstroke" x1="16.95" y1="20.5" x2="17.05" y2="20.5" style="fill: none; stroke: #000000; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2.5;"></line><path id="primary" d="M14,5v6m3-3H11" style="fill: none; stroke: #000000; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2;"></path><path id="primary-2" data-name="primary" d="M3,3H5.2a1,1,0,0,1,1,.78L8.82,15.22a1,1,0,0,0,1,.78h8.42a1,1,0,0,0,1-.76L21,8" style="fill: none; stroke: #000000; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2;"></path></g></svg>
+                                    <span class="w-fit -ml-1.5 -mt-1 inline-flex h-fit px-1 text-xs align-super bg-amber-500 text-white rounded-full">{{ cartItemsNumber }}</span>
+                                    <span class="text-base font-semibold text-slate-600">Cart</span>
+                                </button>
+
                                 <div class="flex items-center px-4">
                                     <div v-if="$page.props.jetstream.managesProfilePhotos" class="shrink-0 mr-3">
                                         <img class="h-10 w-10 rounded-full object-cover" :src="$page.props.auth.user.profile_photo_url" :alt="$page.props.auth.user.name">
@@ -390,7 +403,7 @@ const logout = () => {
                     </header>
 
                     <!-- Page Content -->
-                    <main class="relative" @cart-changed="cartChanged">
+                    <main class="relative" @updateCart="cartItems.value = $event && this.$inertia.reload()">
                         <slot />
                     </main>
                 </div>
@@ -413,7 +426,7 @@ const logout = () => {
             <template #content>
                 <div class="py-10 px-5">
 
-                    <Cart :cart-items="cartItems" />
+                    <Cart :cart-items="cartItems" @update-cart="refreshCart" />
 
                 </div>
             </template>

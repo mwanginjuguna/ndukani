@@ -1,6 +1,5 @@
 import { ref, watch } from 'vue';
 import { useFlash } from './useFlash';
-import ca from "../../../public/build/assets/ProductShow-88f3e683";
 
 export default function useGetCart(csrfToken, userId) {
     const cart  = ref({});
@@ -22,12 +21,11 @@ export default function useGetCart(csrfToken, userId) {
 
             if (response.ok) {
                 const data = await response.json();
+
                 cart.value = data.cart;
-                // console.log('data: ', JSON.stringify(data.cart))
 
                 cartItemsNumber.value = Object.keys(data.cart).length;
-                console.log('cart composable: '+JSON.stringify(cart.value))
-                return {cart, cartItemsNumber};
+
             } else {
                 throw new Error('Failed to retrieve cart items!');
             }
@@ -35,9 +33,8 @@ export default function useGetCart(csrfToken, userId) {
             flash('Error', 'Failed to retrieve cart items', 'danger');
         }
     };
+    updateCart(); // initialize cart
 
-   updateCart(); // initialize cart
-    console.log('cart down: ' + cart)
     // Watch for changes in the cart and update the cartItemsNumber and cart values accordingly
     watch(cart, (newCart) => {
         cartItemsNumber.value = Object.keys(newCart).length;

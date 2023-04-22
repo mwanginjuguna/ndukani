@@ -1,10 +1,18 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
-import {Link, usePage} from "@inertiajs/vue3";
+import {Link} from "@inertiajs/vue3";
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import useCart from "../../Composables/useCart";
+import {defineEmits, watch} from "vue";
 
-const { addToCart } = useCart();
+const { addToCart: addedToCart, newCartItems } = useCart();
+
+const emit = defineEmits('updateCart');
+
+function addToCart (id) {
+    addedToCart(id);
+    emit('updateCart', newCartItems)
+}
 
 </script>
 
@@ -289,6 +297,7 @@ const { addToCart } = useCart();
                             </div>
                         </div>
 
+                        <!--kitenge shirt-->
                         <div class="mt-16">
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
 

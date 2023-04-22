@@ -53,6 +53,8 @@ Route::middleware([
 
     Route::post('/cart/add', [CartController::class, 'addToCart'])->name('addToCart');
 
+    Route::post('/cart/remove', [CartController::class, 'removeFromCart'])->name('removeFromCart');
+
     Route::get('/cart', [CartController::class, 'getCart'])->name('getCart');
 
     Route::post('/cart', [CartController::class, 'getCart'])->name('getCart');

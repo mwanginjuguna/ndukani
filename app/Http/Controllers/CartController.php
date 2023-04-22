@@ -50,7 +50,9 @@ class CartController extends Controller
             $cartItem->save();
         }
 
-        return response()->json(['message' => 'Product added to cart.']);
+        $newCartItems = Cart::where('user_id', $userId)->get();
+
+        return response()->json(['message' => 'Product added to cart.', 'newCartItems' => $newCartItems]);
     }
 
     /**
@@ -106,12 +108,21 @@ class CartController extends Controller
         $productId = $request->input('product_id');
         $userId = $request->input('user_id');
 
-        // Delete the cart item with the given IDs
-        Cart::where('product_id', $productId)
+        // Delete the cart item with the given IDs or reduce quantity by 1
+        $cart = Cart::where('product_id', $productId)
             ->where('user_id', $userId)
-            ->delete();
+            ->first();
 
-        // Return a JSON response indicating success
-        return response()->json(['success' => true]);
+        if ($cart->quantity === 1) {
+            $cart->delete();
+        } else {
+            $cart->quantity -= 1;
+            $cart->save();
+        }
+
+        $newCartItems = Cart::where('user_id', $userId)->get();
+
+        // Return a JSON response indicating success with new cart items
+        return response()->json(['success' => true, 'newCartItems' => $newCartItems]);
     }
 }
