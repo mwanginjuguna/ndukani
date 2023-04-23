@@ -1,6 +1,6 @@
 <script setup>
-import {onBeforeMount, ref} from 'vue';
-import {Head, Link, router, usePage} from '@inertiajs/vue3';
+import {onBeforeMount, ref, watchEffect} from 'vue';
+import {Head, Link, router} from '@inertiajs/vue3';
 import ApplicationMark from '@/Components/ApplicationMark.vue';
 import Banner from '@/Components/Banner.vue';
 import MenuDropdown from '@/Components/MenuDropdown.vue';
@@ -14,25 +14,34 @@ import DialogModal from "../Components/DialogModal.vue";
 import PrimaryButton from "../Components/PrimaryButton.vue";
 import {useCartStore} from "../stores/CartStore";
 
-const cart = useCartStore();
+let cart = useCartStore();
 
 const { flash } = useFlash();
 
 defineProps({
     title: String,
 });
-// get all the items in cart
-let cartItems = ref({});
-// number of items in cart - used to show count
-let cartItemsNumber = ref(0);
-
-onBeforeMount(async () => {
-    cartItems.value = cart.getCart();
-    console.log(cart.getters.cartItemsNumber)
-})
 
 const showingNavigationDropdown = ref(false);
 const showCart = ref(false);
+// number of items in cart - used to show count
+let cartItemsNumber = ref(0);
+
+function updateCart() {
+    showCart.value = false;
+    window.location.reload();
+}
+
+onBeforeMount( () => {
+    cart.getCart();
+    cartItemsNumber.value = cart.cartItemsValue;
+
+    console.log('cart Items on layout', JSON.stringify(cart.cartItems))
+} );
+
+watchEffect(() => {
+    cartItemsNumber.value = cart.cartItemsValue;
+});
 
 const switchToTeam = (team) => {
     router.put(route('current-team.update'), {
@@ -50,7 +59,7 @@ const logout = () => {
 
 <template>
     <div>
-        <Head :title="title" />
+        <Head :title="title ?? 'Duka e-commerce store'" />
 
         <div class="grid grid-cols-5">
 
@@ -158,11 +167,13 @@ const logout = () => {
                                 </div>
 
                                 <div class="hidden sm:flex sm:items-center sm:ml-6">
-                                    <button @click="showCart = !showCart" class="ml-3 relative flex">
-                                        <svg fill="#000000" width="24px" height="24px" viewBox="0 0 24 24" id="cart-add" data-name="Flat Line" xmlns="http://www.w3.org/2000/svg" class="icon flat-line">
-                                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><line id="primary-upstroke" x1="10.95" y1="20.5" x2="11.05" y2="20.5" style="fill: none; stroke: #000000; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2.5;"></line><line id="primary-upstroke-2" data-name="primary-upstroke" x1="16.95" y1="20.5" x2="17.05" y2="20.5" style="fill: none; stroke: #000000; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2.5;"></line><path id="primary" d="M14,5v6m3-3H11" style="fill: none; stroke: #000000; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2;"></path><path id="primary-2" data-name="primary" d="M3,3H5.2a1,1,0,0,1,1,.78L8.82,15.22a1,1,0,0,0,1,.78h8.42a1,1,0,0,0,1-.76L21,8" style="fill: none; stroke: #000000; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2;"></path></g></svg>
-                                        <span class="w-fit -ml-1.5 -mt-1 inline-flex h-fit px-1 text-xs align-super bg-amber-500 text-white rounded-full">{{ cartItemsNumber }}</span>
-                                        <span class="text-base font-semibold text-slate-600">Cart</span>
+                                    <button @click="showCart = true" class="ml-3 relative flex">
+                                        <svg fill="#f59e0b" width="24px" height="24px" viewBox="0 0 24 24" id="cart-add" data-name="Flat Line" xmlns="http://www.w3.org/2000/svg" class="icon flat-line">
+                                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><line id="primary-upstroke" x1="10.95" y1="20.5" x2="11.05" y2="20.5" style="fill: none; stroke: #f59e0b; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2.5;"></line><line id="primary-upstroke-2" data-name="primary-upstroke" x1="16.95" y1="20.5" x2="17.05" y2="20.5" style="fill: none; stroke: #000000; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2.5;"></line><path id="primary" d="M14,5v6m3-3H11" style="fill: none; stroke: #f59e0b; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2;"></path><path id="primary-2" data-name="primary" d="M3,3H5.2a1,1,0,0,1,1,.78L8.82,15.22a1,1,0,0,0,1,.78h8.42a1,1,0,0,0,1-.76L21,8" style="fill: none; stroke: #f59e0b; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2;"></path></g></svg>
+                                        <span class="w-fit -ml-1.5 -mt-1 inline-flex h-fit px-1 text-xs align-super bg-amber-500 text-white rounded-full"  v-if="cartItemsNumber > 0">
+                                            {{ cartItemsNumber }}
+                                        </span>
+                                        <span class="text-base font-semibold text-slate-600 hover:text-amber-500">Cart</span>
                                     </button>
 
                                     <div class="ml-3 relative">
@@ -403,7 +414,7 @@ const logout = () => {
                     </header>
 
                     <!-- Page Content -->
-                    <main class="relative" @updateCart="cartItems.value = $event && this.$inertia.reload()">
+                    <main class="relative">
                         <slot />
                     </main>
                 </div>
@@ -412,7 +423,7 @@ const logout = () => {
         </div>
 
         <!--Cart Modal-->
-        <DialogModal :closeable="true" :show="showCart">
+        <DialogModal :closeable="true" :show="showCart === true">
 
             <template #title :class="`relative`">
                 <div class="pt-3 px-2 flex justify-between sticky top-20">
@@ -426,7 +437,7 @@ const logout = () => {
             <template #content>
                 <div class="py-10 px-5">
 
-                    <Cart :cart-items="cartItems" @update-cart="refreshCart" />
+                    <Cart @cart-changed="updateCart"/>
 
                 </div>
             </template>

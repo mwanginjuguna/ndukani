@@ -25,7 +25,7 @@
                     </p>
 
                     <div class="content-end text-right">
-                        <p class="text-amber-800 hover:cursor-pointer" @click="removeFromCart(item.product.id)">remove</p>
+                        <p class="text-amber-800 hover:cursor-pointer" @click="removeCartItem(item.product.id)">remove</p>
                     </div>
 
                 </div>
@@ -36,45 +36,31 @@
 </template>
 
 <script setup>
-import {defineEmits, defineProps, onMounted, ref} from "vue";
-import {usePage} from "@inertiajs/vue3";
+import {defineEmits, onBeforeMount, watch} from "vue";
 import {useFlash} from "../Composables/useFlash";
+import {useCartStore} from "../stores/CartStore";
+
+let cart = useCartStore();
 
 const { flash } = useFlash();
-const emit = defineEmits(['updateCart']);
 
-const props = defineProps({
-    cartItems: Object,
-});
-const newCartItems = ref({})
-const removeFromCart = async (productId) => {
-    try {
-        const response = await axios.post(route('removeFromCart'), {
-            user_id: usePage().props.auth.user.id,
-            product_id: productId,
-            csrfToken: usePage().props.csrfToken
-        });
+// get all the items in cart
+let cartItems = {};
 
-        if (response.status === 200) {
-            // console.log(response.data);
-            flash('Sucess', 'Removed item from the cart!', 'success')
-
-            const data = await response.data
-
-            newCartItems.value = data.newCartItems;
-
-            // console.log('New cart Items: ', JSON.stringify(newCartItems.value))
-
-            emit('updateCart', newCartItems.value);
-
-            // this.$inertia.reload({ preserveState: true, preserveScroll: true });
-        }
-        else {
-            flash('Error', `Failed to remove the item from the cart! Server responded with ${response.status} status!`, 'danger')
-        }
-    } catch (error) {
-        flash('Error', 'Could not establish a connection to the server or the server terminated the operation!', 'danger')
-    }
-
+function removeCartItem(productId) {
+    cart.removeFromCart(productId);
+    emit('cartChanged')
 }
+
+const emit = defineEmits(['cartChanged'])
+
+onBeforeMount(() => {
+    cart.getCart();
+    cartItems = cart.cartItems;
+})
+
+watch(() => cart.cartItems, (newCartItems) => {
+    cartItems = newCartItems;
+})
+
 </script>

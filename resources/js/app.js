@@ -6,7 +6,7 @@ import { createInertiaApp } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m';
 import store from './store';
-import { createPinia } from "pinia/dist/pinia";
+import { createPinia } from "pinia";
 
 const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Duka e-commerce';
 
