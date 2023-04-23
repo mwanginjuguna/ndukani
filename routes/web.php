@@ -59,6 +59,10 @@ Route::middleware([
 
     Route::post('/cart', [CartController::class, 'getCart'])->name('getCart');
 
+    Route::get('/checkout', function () {
+        return Inertia::render('Checkout');
+    })->name('checkout');
+
     Route::get('/product/new', function () {
         return Inertia::render('Products/ProductCreate', [
             "categories" => Category::all(),
