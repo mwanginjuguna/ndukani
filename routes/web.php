@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\WishlistController;
 use App\Models\Brand;
@@ -62,6 +63,10 @@ Route::middleware([
     Route::get('/checkout', function () {
         return Inertia::render('Checkout');
     })->name('checkout');
+
+    Route::get('/orders', [OrderController::class, 'index'])->name('orders');
+
+    Route::get('/order/{order}', [OrderController::class, 'show'])->name('order.show');
 
     Route::get('/product/new', function () {
         return Inertia::render('Products/ProductCreate', [

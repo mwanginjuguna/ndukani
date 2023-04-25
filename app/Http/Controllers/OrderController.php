@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\OrderItem;
+use App\Models\Product;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
+use Inertia\Response;
 
 class OrderController extends Controller
 {
@@ -12,9 +16,9 @@ class OrderController extends Controller
      * Display a listing of the resource.
      *
      * @param Request $request
-     * @return JsonResponse
+     * @return Response
      */
-    public function index(Request $request): JsonResponse
+    public function index(Request $request): Response
     {
         $orders = Order::query();
 
@@ -49,8 +53,9 @@ class OrderController extends Controller
         $perPage = 10;
         $orders = $orders->paginate($perPage);
 
-        // Return orders as JSON
-        return response()->json($orders);
+        return Inertia::render('Orders/OrdersIndex', [
+            'orders' => $orders
+        ]);
     }
 
     /**
@@ -106,5 +111,18 @@ class OrderController extends Controller
         $order->save();
 
         return response()->json(['order' => $order]);
+    }
+
+    public function show(Request $request, Order $order): Response
+    {
+        $order->load('items.product');
+
+        // dd($order->items);
+
+        return Inertia::render('Orders/OrderShow', [
+            'products' => $order->items->pluck('product'),
+            'orderItems' => $order->items,
+            'order' => $order
+        ]);
     }
 }

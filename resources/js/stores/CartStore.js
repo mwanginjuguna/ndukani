@@ -21,11 +21,8 @@ export let useCartStore = defineStore('cart',{
                 });
 
                 if (response.status === 200) {
-                    console.log('server ok.')
 
                     flash('Success', 'Added to cart.', 'success');
-
-                    console.log('flash ok.')
 
                     this.cartItems = await  response.data.newCartItems;
 
@@ -68,8 +65,6 @@ export let useCartStore = defineStore('cart',{
 
                 if (response.status === 200) {
                     const data = await response.data;
-
-                    console.log('Cart loaded', JSON.stringify(data.cart));
 
                     this.cartItems = data.cart;
 
