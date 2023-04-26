@@ -42,6 +42,20 @@
 
             </div>
 
+            <!--payment buttons-->
+            <div class="mt-12 grid grid-cols-3 gap-x-4">
+                <div>
+                    <!--Pay with paypal-->
+                    <PayPalButtons />
+                </div>
+                <div class="mt-5 mx-auto place-content-center">
+                    <Link :as="`button`" :class="`px-4 py-2 bg-blue-900 text-white rounded-lg`">Pay with Stripe</Link>
+                </div>
+                <div class="mt-5 mx-auto place-content-center">
+                    <Link :as="`button`" :class="`px-4 py-2 bg-green-500 text-white rounded-lg`">Pay with Mpesa</Link>
+                </div>
+            </div>
+
             <Link :href="route('orders')"
                  class="w-fit mt-4 p-3 md:px-5 flex bg-slate-200 hover:bg-slate-300 text-blue-600 rounded-lg">
                 <p class="pr-2 font-semibold">Go Back</p>
@@ -56,6 +70,7 @@
 import AppLayout from "../../Layouts/AppLayout.vue";
 import {defineProps} from "vue";
 import {Link} from "@inertiajs/vue3";
+import PayPalButtons from "../../Components/PayPalButtons.vue";
 
 defineProps({
     order: Object,

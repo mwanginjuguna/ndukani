@@ -4,6 +4,7 @@ use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\ReviewController;
@@ -21,6 +22,8 @@ use App\Http\Controllers\ProductController;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+
+Route::post('/order/{order}/payWithPayPal', [PaymentController::class, 'payWithPayPal'])->name('payWithPayPal');
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
