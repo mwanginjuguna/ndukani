@@ -24,6 +24,8 @@ use App\Http\Controllers\ProductController;
 */
 
 Route::post('/order/{order}/payWithPayPal', [PaymentController::class, 'payWithPayPal'])->name('payWithPayPal');
+Route::post('/order/{order}/capturePayPal', [PaymentController::class, 'capturePayPal'])->name('capturePayPal');
+Route::post('/order/{order}/cancelPayPal', [PaymentController::class, 'cancelPayPal'])->name('cancelPayPal');
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

@@ -4,16 +4,24 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Models\Payment;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Srmklive\PayPal\Services\PayPal;
+use Throwable;
 
 class PaymentController extends Controller
 {
     /**
      * Make order payment using PayPal
+     * @param Request $request
+     * @param Order $order
+     * @return JsonResponse
+     * @throws Throwable
      */
-    public function payWithPayPal(Request $request, Order $order)
+    public function payWithPayPal(Request $request, Order $order): JsonResponse
     {
+        //dd($request);
+
         $amount = $order->getTotalAmount();
 
         $provider = new PayPal();
@@ -39,8 +47,8 @@ class PaymentController extends Controller
                     Payment::updateOrCreate([
                         'user_id' => $request->input('user_id'),
                         'order_id' => $order->id,
-                        'paypal_transaction_id' => $provider['id'],
-                        'transaction_status' => $provider['status']
+                        'paypal_transaction_id' => $paypalOrder['id'],
+                        'transaction_status' => $paypalOrder['status']
                     ]);
                     return response()->json($paypalOrder);
                 }
@@ -49,15 +57,19 @@ class PaymentController extends Controller
 
         return response()->json([
             'status' => 500,
-            'message' => 'Something went wrong when initializing paypal order',
+            'message' => 'Something went wrong when initializing paypal order.',
             'paypal_order' => $paypalOrder
         ]);
     }
 
     /**
      * Capture paypal transaction after successful Payments.
+     * @param Request $request
+     * @param Order $order
+     * @return JsonResponse
+     * @throws Throwable
      */
-    public function payPalCapture(Request $request, Order $order)
+    public function capturePayPal(Request $request, Order $order): JsonResponse
     {
         $payPalOrderId = $request->input('orderId');
 
@@ -68,15 +80,15 @@ class PaymentController extends Controller
 
         $response = $provider->capturePaymentOrder($payPalOrderId);
 
-        if (isset($response->status) && $response->status === 'COMPLETED') {
-            $payment = Payment::where('order_id', $order->id);
-
-            // update payment details
+        if (isset($response->status) && $response->status === 'COMPLETED')
+        {
             $payerId = $request->input('payerId');
             $paidAmount = $response['purchase_units'][0]['payments']['captures'][0]['amount']['value'];
             $payerName = $response['purchase_units'][0]['shipping']['name']['full_name'];
-
             $paypalFacilitatorAccessToken = $request->input('facilitatorAccessToken');
+
+            // update payment details
+            $payment = Payment::query()->where('order_id', $order->id)->first();
             $payment->transaction_status = $response['status'];
             $payment->paypal_transaction_id = $payPalOrderId;
             $payment->paypal_payer_id = $payerId;
@@ -97,7 +109,9 @@ class PaymentController extends Controller
 
             // return response
             return response()->json($response);
-        } elseif (isset($response['debug_ID'])) {
+        }
+        elseif (isset($response['debug_ID']))
+        {
             $paymentError = [
                 "name" => $response['name'],
                 "debug_ID" => $response['debug_ID'],
@@ -108,15 +122,20 @@ class PaymentController extends Controller
 
             // respond with payment error
             return response()->json($paymentError);
-        } else {
+        }
+        else
+        {
             return response()->json($response);
         }
     }
 
     /**
      * Handle payment cancellation by user
+     * @param Request $request
+     * @param Order $order
+     * @return JsonResponse
      */
-    public function cancelPayPal(Request $request, Order $order)
+    public function cancelPayPal(Request $request, Order $order): JsonResponse
     {
         $payment = Payment::where('order_id', $order->id);
         $payment->transaction_status = 'CANCELLED';

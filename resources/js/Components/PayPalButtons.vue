@@ -9,11 +9,27 @@
 import {defineProps, onMounted} from "vue";
 import {loadScript} from '@paypal/paypal-js';
 import {usePage} from "@inertiajs/vue3";
+import {useFlash} from "../Composables/useFlash";
+import axios from "axios";
 
 const props = defineProps({
     currency: String,
     order: Object
 });
+
+const {flash} = useFlash();
+
+function paid() {
+    console.log('Running paid() function to redirect to recent orders')
+    const a = Object.assign(
+        document.createElement('a'),
+        {
+            href: "/orders",
+            style:"display: none",
+        });
+    document.body.appendChild(a);
+    a.click();
+}
 
 onMounted( async () => {
     try {
@@ -39,7 +55,8 @@ onMounted( async () => {
                     },
                     body: JSON.stringify({
                         user_id: userId,
-                    }),
+                        currency: props.currency
+                    })
                 }).then(function (res) {
                     return res.json();
                 }).then(function (orderData) {
@@ -49,8 +66,18 @@ onMounted( async () => {
 
             // Call your server to finalize the transaction
             onApprove: function (data, actions) {
-                return fetch('/demo/checkout/api/paypal/order/' + data.orderID + '/capture/', {
-                    method: 'post'
+                console.log('Data before capture: ', data)
+                return fetch(route('capturePayPal', props.order.id), {
+                    method: 'post',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': csrfToken,
+                    },
+                    body: JSON.stringify({
+                        orderId : data.orderID,
+                        payerId : data.payerID,
+                        facilitatorAccessToken : data.facilitatorAccessToken,
+                    })
                 }).then(function (res) {
                     return res.json();
                 }).then(function (orderData) {
@@ -59,37 +86,50 @@ onMounted( async () => {
                     //   (2) Other non-recoverable errors -> Show a failure message
                     //   (3) Successful transaction -> Show confirmation or thank you
 
-                    // This example reads a v2/checkout/orders capture response, propagated from the server
-                    // You could use a different API or structure for your 'orderData'
                     var errorDetail = Array.isArray(orderData.details) && orderData.details[0];
 
                     if (errorDetail && errorDetail.issue === 'INSTRUMENT_DECLINED') {
-                        return actions.restart(); // Recoverable state, per:
-                        // https://developer.paypal.com/docs/checkout/integration-features/funding-failure/
+                        return actions.restart();
                     }
 
                     if (errorDetail) {
                         var msg = 'Sorry, your transaction could not be processed.';
                         if (errorDetail.description) msg += '\n\n' + errorDetail.description;
+
                         if (orderData.debug_id) msg += ' (' + orderData.debug_id + ')';
-                        return alert(msg); // Show a failure message (try to avoid alerts in production environments)
+
+                        return flash('Error!', msg, 'danger'); // Show a failure message
                     }
 
                     // Successful capture! For demo purposes:
                     console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
                     var transaction = orderData.purchase_units[0].payments.captures[0];
-                    alert('Transaction ' + transaction.status + ': ' + transaction.id + '\n\nSee console for all available details');
+                    flash('Success. Order paid!','Transaction ' + transaction.status + ': Transaction ID' + transaction.id, 'danger');
 
                     // Replace the above to show a success message within this page, e.g.
-                    // const element = document.getElementById('paypal-button-container');
-                    // element.innerHTML = '';
-                    // element.innerHTML = '<h3>Thank you for your payment!</h3>';
-                    // Or go to another URL:  actions.redirect('thank_you.html');
+                    const element = document.getElementById('paypal-button-container');
+                    element.innerHTML = '';
+                    element.innerHTML = '<h3>Thank you for your payment!</h3>';
+                    setInterval(paid(),3000);
+                });
+            },
+
+            onCancel: function (data, actions) {
+                return fetch(route('cancelPayPal', props.order.id), {
+                    method: 'post',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': csrfToken,
+                    }
+                }).then( (res) => res.json()).then( (orderData) => {
+                    flash(`Error! ${orderData.status}`, `${orderData.message}`, 'danger');
+                    console.log(JSON.stringify(orderData));
                 });
             }
 
         }).render('#paypal-button-container');
     } catch (error) {
+        flash('Error', 'An Error Occurred. Could not Connect!', 'danger');
         console.log(error)
     }
 })
