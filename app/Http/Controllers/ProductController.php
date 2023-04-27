@@ -132,7 +132,6 @@ class ProductController extends Controller
     {
         // Load the product and its relationships
         $product->load('category', 'tag', 'brand', 'seller', 'reviews', 'features', 'keyFeatures', 'specifications', 'images');
-
         // Create an array of the product's relationships to be passed as individual props to the Vue component
         $props = [
             'product' => $product,

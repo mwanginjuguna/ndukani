@@ -8,24 +8,38 @@
 
 import {defineProps, onMounted} from "vue";
 import {loadScript} from '@paypal/paypal-js';
+import {usePage} from "@inertiajs/vue3";
 
 const props = defineProps({
-    currency: String
+    currency: String,
+    order: Object
 });
 
 onMounted( async () => {
     try {
         const paypal = await loadScript({
             'client-id': "AXByLC0wuw6fznWnZABRuNWsYOAlGx_JVw2dJzRSntIaSRL7V0D-hk7SiH3tMNtHWNrtcxEl38xlMXik",
-            'currency': props.currency
+            'currency': props.currency ?? 'USD'
         });
+
+        const csrfToken = usePage().props.csrfToken;
+        const userId = usePage().props.auth.user.id;
         // Render the PayPal button into #paypal-button-container
         await paypal.Buttons({
 
             // Call your server to set up the transaction
             createOrder: function (data, actions) {
-                return fetch('/demo/checkout/api/paypal/order/create/', {
-                    method: 'post'
+                console.log('data before fetch pay', JSON.stringify(data));
+
+                return fetch(route('payWithPayPal', props.order.id), {
+                    method: 'post',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': csrfToken,
+                    },
+                    body: JSON.stringify({
+                        user_id: userId,
+                    }),
                 }).then(function (res) {
                     return res.json();
                 }).then(function (orderData) {

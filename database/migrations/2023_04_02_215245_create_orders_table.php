@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('payment_id')->nullable();
             $table->text('notes')->nullable();
             $table->string('status')->default("processing");
+            $table->boolean('is_paid')->default(false);
             $table->timestamps();
         });
     }

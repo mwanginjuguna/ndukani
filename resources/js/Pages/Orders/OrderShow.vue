@@ -46,7 +46,7 @@
             <div class="mt-12 grid grid-cols-3 gap-x-4">
                 <div>
                     <!--Pay with paypal-->
-                    <PayPalButtons />
+                    <PayPalButtons :order="order" :currency="`USD`" />
                 </div>
                 <div class="mt-5 mx-auto place-content-center">
                     <Link :as="`button`" :class="`px-4 py-2 bg-blue-900 text-white rounded-lg`">Pay with Stripe</Link>

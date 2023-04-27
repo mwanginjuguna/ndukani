@@ -18,13 +18,14 @@ return new class extends Migration
                 ->nullable()
                 ->unique()
                 ->constrained()->nullOnDelete();
-            $table->text('paypal_transaction_id')->nullable();
-            $table->text('paypal_payer_id')->nullable();
+            $table->string('paypal_transaction_id')->nullable();
+            $table->string('stripe_session_id')->nullable();
+            $table->string('paypal_payer_id')->nullable();
             $table->text('paypal_facilitator_access_token_id')->nullable();
-            $table->float('total_paid')->nullable();
-            $table->text('user_name')->nullable();
-            $table->text('payer_country_code')->nullable();
-            $table->text('transaction_status')->nullable();
+            $table->decimal('total_paid', 6, 2)->nullable();
+            $table->string('user_name')->nullable();
+            $table->string('payer_country_code')->nullable();
+            $table->string('transaction_status')->nullable();
             $table->text('transaction_debug_id')->nullable();
             $table->text('transaction_message')->nullable();
             $table->text('transaction_name')->nullable();
