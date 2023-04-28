@@ -8,6 +8,9 @@
         <!-- Include the PayPal JavaScript SDK -->
         <script src="https://www.paypal.com/sdk/js?client-id=AXByLC0wuw6fznWnZABRuNWsYOAlGx_JVw2dJzRSntIaSRL7V0D-hk7SiH3tMNtHWNrtcxEl38xlMXik&currency=USD"></script>
 
+        <!-- Include Stripe JS -->
+        <script src="https://js.stripe.com/v3/"></script>
+
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />

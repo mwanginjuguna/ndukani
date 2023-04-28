@@ -23,9 +23,16 @@ use App\Http\Controllers\ProductController;
 |
 */
 
+// Paypal API
 Route::post('/order/{order}/payWithPayPal', [PaymentController::class, 'payWithPayPal'])->name('payWithPayPal');
 Route::post('/order/{order}/capturePayPal', [PaymentController::class, 'capturePayPal'])->name('capturePayPal');
 Route::post('/order/{order}/cancelPayPal', [PaymentController::class, 'cancelPayPal'])->name('cancelPayPal');
+
+// Stripe API
+Route::post('/order/{order}/stripePay', [PaymentController::class, 'payWithStripe'])->name('payWithStripe');
+Route::post('/order/{order}/stripePayComplete', [PaymentController::class, 'stripeComplete'])->name('stripeComplete');
+Route::post('/order/{order}/stripePayFail', [PaymentController::class, 'stripeFail'])->name('stripeFail');
+
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

@@ -49,7 +49,7 @@
                     <PayPalButtons :order="order" :currency="`USD`" />
                 </div>
                 <div class="mt-5 mx-auto place-content-center">
-                    <Link :as="`button`" :class="`px-4 py-2 bg-blue-900 text-white rounded-lg`">Pay with Stripe</Link>
+                    <StripeOneTime :order="order" />
                 </div>
                 <div class="mt-5 mx-auto place-content-center">
                     <Link :as="`button`" :class="`px-4 py-2 bg-green-500 text-white rounded-lg`">Pay with Mpesa</Link>
@@ -71,6 +71,7 @@ import AppLayout from "../../Layouts/AppLayout.vue";
 import {defineProps} from "vue";
 import {Link} from "@inertiajs/vue3";
 import PayPalButtons from "../../Components/PayPalButtons.vue";
+import StripeOneTime from "../../Components/StripeOneTime.vue";
 
 defineProps({
     order: Object,

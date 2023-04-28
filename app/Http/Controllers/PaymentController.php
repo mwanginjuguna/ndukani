@@ -7,6 +7,8 @@ use App\Models\Payment;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Srmklive\PayPal\Services\PayPal;
+use Stripe\Stripe as StripeGateway;
+use Stripe\StripeClient;
 use Throwable;
 
 class PaymentController extends Controller
@@ -143,6 +145,65 @@ class PaymentController extends Controller
         return response()->json([
             "status" => 'Cancelled',
             "message" => "Payment Cancelled. Try again."
+        ]);
+    }
+
+    /**
+     * Initialize Stripe payment
+     * @param
+     * @return
+     */
+    public function payWithStripe(Request $request, Order $order)
+    {
+        $amount = 60.50;
+        $currency = 'usd';
+        $orderNumber = $order->order_number;
+
+        $stripe = new StripeClient(env('STRIPE_SECRET'));
+        $checkout = $stripe->checkout->sessions->create([
+            'success_url' => route('stripeComplete', $order->id),
+            'cancel_url' => route('stripeFail', $order->id),
+            'line_items' => [
+                [
+                    'price_data' => [
+                        'unit_amount' => $amount * 100,
+                        'currency' => $currency,
+                        'product_data' => [
+                            'name' => $orderNumber,
+                            ]
+                    ],
+                    'quantity' => 1,
+                ],
+            ],
+            'mode' => 'payment'
+        ]);
+
+        return response()->json($checkout);
+    }
+
+    /**
+     * Initialize Stripe payment
+     * @param
+     * @return
+     */
+    public function stripeComplete(Request $request, Order $order)
+    {
+        return response()->json([
+            "status" => 200,
+            "message" => "successful stripeComplete call."
+        ]);
+    }
+
+    /**
+     * Initialize Stripe payment
+     * @param
+     * @return
+     */
+    public function stripeFail(Request $request, Order $order)
+    {
+        return response()->json([
+            "status" => 200,
+            "message" => "successful stripeFail call."
         ]);
     }
 }

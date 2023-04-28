@@ -66,6 +66,10 @@ Route::middleware([
 
     Route::get('/orders', [OrderController::class, 'index'])->name('orders');
 
+    Route::get('/orders/pay-status', function () {
+        return Inertia::render('Orders/PaymentStatus');
+    })->name('paymentStatus');
+
     Route::get('/order/{order}', [OrderController::class, 'show'])->name('order.show');
 
     Route::get('/product/new', function () {

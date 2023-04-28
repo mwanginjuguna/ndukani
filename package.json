@@ -21,6 +21,7 @@
     "dependencies": {
         "@inertiajs/inertia": "^0.11.1",
         "@paypal/paypal-js": "^5.1.6",
+        "@vue-stripe/vue-stripe": "^4.5.0",
         "pinia": "^2.0.35",
         "sweetalert": "^2.1.2",
         "swiper": "^9.1.1",
