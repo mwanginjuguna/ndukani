@@ -6,6 +6,7 @@ use App\Models\Order;
 use App\Models\Payment;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Srmklive\PayPal\Services\PayPal;
 use Stripe\Stripe as StripeGateway;
 use Stripe\StripeClient;
@@ -179,6 +180,36 @@ class PaymentController extends Controller
         ]);
 
         return response()->json($checkout);
+    }
+
+    /**
+     * Initialize Stripe after-payment webhook
+     * @param Request $request
+     * @param Order $order
+     * @return JsonResponse
+     */
+    public function stripeWebhook(Request $request, Order $order): JsonResponse
+    {
+        $endpoint_secret = env('STRIPE_WEBHOOK_KEY');
+        $sig_header = $_SERVER['HTTP_STRIPE_SIGNATURE'];
+        $payload = @file_get_contents('php://input');
+        try {
+            $event = \Stripe\Webhook::constructEvent($payload, $sig_header, $endpoint_secret);
+        } catch (\Stripe\Exception\SignatureVerificationException $exception) {
+            echo 'Webhook error while validating signature!';
+            http_response_code(400);
+            exit();
+        }
+
+        if ($request->type == 'checkout.session.completed') {
+            Log::info('Stripe pay completed!');
+        }
+        Log::info('Stipe webhook hit!');
+
+        return response()->json([
+            "status" => 200,
+            "message" => "successful stripeComplete call."
+        ]);
     }
 
     /**

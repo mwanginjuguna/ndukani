@@ -32,7 +32,8 @@ Route::post('/order/{order}/cancelPayPal', [PaymentController::class, 'cancelPay
 Route::post('/order/{order}/stripePay', [PaymentController::class, 'payWithStripe'])->name('payWithStripe');
 Route::post('/order/{order}/stripePayComplete', [PaymentController::class, 'stripeComplete'])->name('stripeComplete');
 Route::post('/order/{order}/stripePayFail', [PaymentController::class, 'stripeFail'])->name('stripeFail');
-
+// stripe webhook for after-payment handling
+Route::post('/stripe/webhook', [PaymentController::class, 'stripeWebhook'])->name('stripeWebhook');
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
