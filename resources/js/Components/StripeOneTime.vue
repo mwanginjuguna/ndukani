@@ -34,6 +34,7 @@ async function getSession() {
 }
 
 onMounted(() => {
+    console.log('Order: ', props.order)
     console.log('component mounted!')
     getSession();
 })

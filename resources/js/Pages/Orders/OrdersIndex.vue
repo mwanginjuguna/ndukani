@@ -5,7 +5,7 @@
                 <h1 class="p-4 text-2xl font-extrabold">My Orders</h1>
             </div>
             <div
-                class="px-5 py-4 grid grid-cols-3 gap-x-1.5 bg-white rounded-lg shadow-md"
+                class="mt-5 px-5 py-4 grid grid-cols-3 gap-x-1.5 bg-white rounded-lg shadow-md"
                 v-for="order in orders.data" :key="order.id">
 
                 <div class="col-span-1 text-sm px-3 flex flex-col gap-y-2">

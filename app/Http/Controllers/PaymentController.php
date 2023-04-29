@@ -7,7 +7,10 @@ use App\Models\Payment;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Inertia\Inertia;
+use Inertia\Response;
 use Srmklive\PayPal\Services\PayPal;
+use Stripe\Exception\ApiErrorException;
 use Stripe\Stripe as StripeGateway;
 use Stripe\StripeClient;
 use Throwable;
@@ -136,31 +139,37 @@ class PaymentController extends Controller
      * Handle payment cancellation by user
      * @param Request $request
      * @param Order $order
-     * @return JsonResponse
+     * @return Response
      */
-    public function cancelPayPal(Request $request, Order $order): JsonResponse
+    public function cancelPayPal(Request $request, Order $order): Response
     {
         $payment = Payment::where('order_id', $order->id);
         $payment->transaction_status = 'CANCELLED';
         $payment->save();
-        return response()->json([
+        return Inertia::render('Orders/PaymentStatus', [
             "status" => 'Cancelled',
-            "message" => "Payment Cancelled. Try again."
+            "message" => "Payment Cancelled. Try again.",
+            "order" => $order
         ]);
     }
 
     /**
      * Initialize Stripe payment
-     * @param
-     * @return
+     * @param Request $request
+     * @param Order $order
+     * @return JsonResponse
+     * @throws ApiErrorException
      */
-    public function payWithStripe(Request $request, Order $order)
+    public function payWithStripe(Request $request, Order $order): JsonResponse
     {
-        $amount = 60.50;
+        $amount = 6.50;
         $currency = 'usd';
         $orderNumber = $order->order_number;
 
+        // init stripe client
         $stripe = new StripeClient(env('STRIPE_SECRET'));
+
+        // init stripe checkout session
         $checkout = $stripe->checkout->sessions->create([
             'success_url' => route('stripeComplete', $order->id),
             'cancel_url' => route('stripeFail', $order->id),
@@ -178,6 +187,27 @@ class PaymentController extends Controller
             ],
             'mode' => 'payment'
         ]);
+
+        if (isset($checkout['id'])) {
+            // Get the payment record from the database based on its ID
+            $payment = Payment::where('order_id', $order->id)->first();
+
+            // Check if the payment record exists
+            if ($payment) {
+                // Payment record already exists in the database, update stripe session
+                $payment->stripe_session_id = $checkout['id'];
+                $payment->save();
+                return response()->json($checkout);
+            } else {
+                // Payment record doesn't exist in the database, create new
+                Payment::create([
+                    'user_id' => $request->input('user_id') ?? auth()->id(),
+                    'order_id' => $order->id,
+                    'stripe_session_id' => $checkout['id'],
+                    'transaction_status' => $checkout['status']
+                ]);
+            }
+        }
 
         return response()->json($checkout);
     }
@@ -214,14 +244,45 @@ class PaymentController extends Controller
 
     /**
      * Initialize Stripe payment
-     * @param
-     * @return
+     * @param Request $request
+     * @param Order $order
+     * @return Response
+     * @throws ApiErrorException
      */
-    public function stripeComplete(Request $request, Order $order)
+    public function stripeComplete(Request $request, Order $order): Response
     {
-        return response()->json([
-            "status" => 200,
-            "message" => "successful stripeComplete call."
+        $payment = Payment::where('order_id', $order->id)->first();
+
+        $stripe = new \Stripe\StripeClient(
+            env('STRIPE_SECRET')
+        );
+
+        $stripeSession = $stripe->checkout->sessions->retrieve(
+            $payment->stripe_session_id
+        );
+
+        // dd($stripeSession);
+
+        // update payment details
+        $payment->total_paid = $stripeSession['amount_total'];
+        $payment->user_name = $stripeSession['customer_details']['name'];
+        $payment->payer_country_code = $stripeSession['customer_details']['address']['country'];
+        $payment->transaction_status = $stripeSession['status'];
+        $payment->save();
+
+        // update order details
+        $order->payment_gateway = 'stripe';
+        $order->payment_id = $stripeSession['id'];
+        $order->is_paid = true;
+        $order->status = 'shipping';
+        $order->notes = $stripeSession['currency'].' '.($stripeSession['amount_total']/100).' paid by'.$stripeSession['customer_details']['email'];
+        $order->save();
+
+
+        return Inertia::render('Orders/PaymentStatus', [
+            "status" => "success",
+            "message" => "successful stripeComplete call.",
+            "order" => $order
         ]);
     }
 
@@ -232,9 +293,9 @@ class PaymentController extends Controller
      */
     public function stripeFail(Request $request, Order $order)
     {
-        return response()->json([
-            "status" => 200,
-            "message" => "successful stripeFail call."
+        return Inertia::render('Orders/PaymentStatus', [
+            "status" => "failed",
+            "message" => "Payment was not successful."
         ]);
     }
 }
