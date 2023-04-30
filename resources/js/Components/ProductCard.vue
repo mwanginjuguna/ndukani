@@ -23,7 +23,7 @@ watchEffect(() => {
     }
 })
 
-
+const emit = defineEmits(['addToCart'])
 
 </script>
 
@@ -32,7 +32,7 @@ watchEffect(() => {
         <div v-if="imageUrl" class="flex flex-row place-content-center">
             <img alt="product-1"
                  :src="imageUrl"
-                 class="h-[20rem] object-contain rounded-xl w-3/4 max-w-xs">
+                 class="max-h-[20rem] object-contain rounded-xl w-3/4 max-w-xs">
             <p class="w-fit h-fit p-2 rounded-full py-3.5 -ml-8 mt-2 bg-slate-700 text-lime-300">
                 -{{ percentOff ? percentOff : 15 }}%
             </p>
@@ -67,7 +67,7 @@ watchEffect(() => {
                     </p>
                 </div>
             </div>
-            <PrimaryButton class="mt-3 mx-4 md:mx-0" @click.prevent="addToCart">
+            <PrimaryButton class="w-fit mt-3 px-4 md:mx-0" @click.prevent="emit('addToCart')">
                 Add to Cart
             </PrimaryButton>
         </div>

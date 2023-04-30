@@ -1,12 +1,16 @@
 <script setup>
 import { Head, Link } from '@inertiajs/vue3';
-import ProductCard from "../Components/ProductCard.vue";
 import PrimaryButton from "../Components/PrimaryButton.vue";
-import Dropdown from "../Components/Dropdown.vue";
-import DropdownLink from "../Components/DropdownLink.vue";
 import {ref} from "vue";
 import MenuDropdown from "../Components/MenuDropdown.vue";
 import HeroLandscapeSlider from "./Products/Partials/HeroLandscapeSlider.vue";
+import {useCartStore} from "../stores/CartStore";
+import {useFlash} from "../Composables/useFlash";
+
+let cart = useCartStore();
+
+let {flash} = useFlash();
+
 
 const showMenu = ref(false);
 
@@ -281,56 +285,6 @@ function toggleMenu() {
                 </div>
             </div>
 
-            <!--recently viewed-->
-            <div class="px-4 p-2 pb-3 bg-white rounded">
-                <div class="mt-5 py-6 flex justify-between">
-                    <h3 class="font-semibold text-lg text-slate-900">Recently Viewed</h3>
-                    <Link :href="route('products')" class="text-amber-600 font-semibold flex flex-row place-content-center">
-                        <p class="pr-2">See All</p>
-                        <svg width="18px" height="18px" class="pt-1.5" viewBox="-4.5 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>arrow_right [#336]</title> <desc>Created with Sketch.</desc> <defs> </defs> <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Dribbble-Light-Preview" transform="translate(-305.000000, -6679.000000)" fill="#d97706"> <g id="icons" transform="translate(56.000000, 160.000000)"> <path d="M249.365851,6538.70769 L249.365851,6538.70769 C249.770764,6539.09744 250.426289,6539.09744 250.830166,6538.70769 L259.393407,6530.44413 C260.202198,6529.66364 260.202198,6528.39747 259.393407,6527.61699 L250.768031,6519.29246 C250.367261,6518.90671 249.720021,6518.90172 249.314072,6519.28247 L249.314072,6519.28247 C248.899839,6519.67121 248.894661,6520.31179 249.302681,6520.70653 L257.196934,6528.32352 C257.601847,6528.71426 257.601847,6529.34685 257.196934,6529.73759 L249.365851,6537.29462 C248.960938,6537.68437 248.960938,6538.31795 249.365851,6538.70769" id="arrow_right-[#336]"> </path> </g> </g> </g> </g></svg>
-                    </Link>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-5 gap-x-1 mt-1 font-light ">
-
-                    <div class="bg-slate-50 px-1 hover:bg-white hover:shadow-md hover:rounded">
-                        <img :src="`https://ke.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/56/709275/1.jpg?4535`" alt="product">
-                        <p class="h-6 mt-1 overflow-hidden">Men Official</p>
-                        <p class="mt-1 font-semibold">$ 1,758.25</p>
-                        <p class="text-xs text-gray-600 line-through">$ 1,676.25</p>
-                    </div>
-
-                    <div class="bg-slate-50 px-1 hover:bg-white hover:shadow-md hover:rounded">
-                        <img :src="`https://ke.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/23/638454/1.jpg?6012`" alt="product">
-                        <p class="h-6 mt-1 overflow-hidden">E =mc<span class="align-super text-xs">2</span></p>
-                        <p class="mt-1 font-semibold">299,792,458 m/s</p>
-                        <p class="text-xs text-gray-600 line-through">3×108 m/s</p>
-                    </div>
-
-                    <div class="bg-slate-50 px-1 hover:bg-white hover:shadow-md hover:rounded">
-                        <img :src="`https://ke.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/68/490956/1.jpg?4111`" alt="product">
-                        <p class="h-6 mt-1 overflow-hidden">High Heels</p>
-                        <p class="mt-1 font-semibold">$ 100.00</p>
-                        <p class="text-xs text-gray-600 line-through">$ 110.99</p>
-                    </div>
-
-                    <div class="bg-slate-50 px-1 hover:bg-white hover:shadow-md hover:rounded">
-                        <img :src="`https://ke.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/07/390244/1.jpg?9969`" alt="product">
-                        <p class="h-6 mt-1 overflow-hidden">Winter Kinamba Heavy Wear</p>
-                        <p class="mt-1 font-semibold">$ 5.99</p>
-                        <p class="text-xs text-gray-600 line-through">$ 6.50</p>
-                    </div>
-
-                    <div class="bg-slate-50 px-1 hover:bg-white hover:shadow-md hover:rounded">
-                        <img :src="`https://ke.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/84/751906/1.jpg?5258`" alt="product">
-                        <p class="h-6 mt-1 overflow-hidden">Ladies Shoes</p>
-                        <p class="mt-1 font-semibold">$ 104,758.99</p>
-                        <p class="text-xs text-gray-600 line-through">$ 155,676.00</p>
-                    </div>
-
-                </div>
-            </div>
-
             <!--Flash Sale-->
             <div class="px-4 p-2 pb-3 bg-white rounded">
                 <div class="mt-5 py-3 px-4 flex justify-between bg-red-600">
@@ -381,6 +335,56 @@ function toggleMenu() {
                 </div>
             </div>
 
+            <!--kitenge arrivals-->
+            <div class="mt-5 pb-4 p-2 bg-white rounded">
+                <div class="flex justify-between py-3 px-4 bg-amber-900 text-white">
+                    <h3 class="font-semibold text-lg">Kitenge Arrivals</h3>
+                    <Link :href="route('products')" class="font-semibold flex flex-row place-content-center">
+                        <p class="pr-2">See All</p>
+                        <svg width="18px" height="18px" class="pt-1.5" viewBox="-4.5 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>arrow_right [#336]</title> <desc>Created with Sketch.</desc> <defs> </defs> <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Dribbble-Light-Preview" transform="translate(-305.000000, -6679.000000)" fill="#d97706"> <g id="icons" transform="translate(56.000000, 160.000000)"> <path d="M249.365851,6538.70769 L249.365851,6538.70769 C249.770764,6539.09744 250.426289,6539.09744 250.830166,6538.70769 L259.393407,6530.44413 C260.202198,6529.66364 260.202198,6528.39747 259.393407,6527.61699 L250.768031,6519.29246 C250.367261,6518.90671 249.720021,6518.90172 249.314072,6519.28247 L249.314072,6519.28247 C248.899839,6519.67121 248.894661,6520.31179 249.302681,6520.70653 L257.196934,6528.32352 C257.601847,6528.71426 257.601847,6529.34685 257.196934,6529.73759 L249.365851,6537.29462 C248.960938,6537.68437 248.960938,6538.31795 249.365851,6538.70769" id="arrow_right-[#336]"> </path> </g> </g> </g> </g></svg>
+                    </Link>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-x-1 font-light ">
+
+                    <div class="bg-slate-50 px-1 hover:bg-white hover:shadow-md hover:rounded">
+                        <img :src="`https://ke.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/30/300581/1.jpg?0437`" alt="product">
+                        <p class="h-6 mt-1 overflow-hidden">Laghunya T</p>
+                        <p class="mt-1 font-semibold">$ 258.50</p>
+                        <p class="text-xs text-gray-600 line-through">$ 676.50</p>
+                    </div>
+
+                    <div class="bg-slate-50 px-1 hover:bg-white hover:shadow-md hover:rounded">
+                        <img :src="`https://ke.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/39/572158/1.jpg?3872`" alt="product">
+                        <p class="h-6 mt-1 overflow-hidden">Lion Man</p>
+                        <p class="mt-1 font-semibold">$ 478.05</p>
+                        <p class="text-xs text-gray-600 line-through">$ 576.05</p>
+                    </div>
+
+                    <div class="bg-slate-50 px-1 hover:bg-white hover:shadow-md hover:rounded">
+                        <img :src="`https://ke.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/88/286613/1.jpg?0668`" alt="product">
+                        <p class="h-6 mt-1 overflow-hidden">Usiku Sacco</p>
+                        <p class="mt-1 font-semibold">$ 58.99</p>
+                        <p class="text-xs text-gray-600 line-through">$ 76.99</p>
+                    </div>
+
+                    <div class="bg-slate-50 px-1 hover:bg-white hover:shadow-md hover:rounded">
+                        <img :src="`https://ke.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/44/0880001/1.jpg?7129`" alt="product">
+                        <p class="h-6 mt-1 overflow-hidden">Samsung Blah Blah Pro Max XD HD YT MD</p>
+                        <p class="mt-1 font-semibold">$ 4,758.00</p>
+                        <p class="text-xs text-gray-600 line-through">$ 5,676.00</p>
+                    </div>
+
+                    <div class="bg-slate-50 px-1 hover:bg-white hover:shadow-md hover:rounded">
+                        <img :src="`https://ke.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/05/440354/1.jpg?5572`" alt="product">
+                        <p class="h-6 mt-1 overflow-hidden">Kiondo Special</p>
+                        <p class="mt-1 font-semibold">$ 40.25</p>
+                        <p class="text-xs text-gray-600 line-through">$ 56.25</p>
+                    </div>
+
+                </div>
+            </div>
+
             <!--Somsong-->
             <div class="mt-16">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
@@ -407,7 +411,7 @@ function toggleMenu() {
                                 <p class="text-orange-200 text-xs line-through align-super">was $168.99</p>
                                 <p class="text-green-900 text-sm font-semibold">Now <span class="underline text-lg">$99.99</span></p>
                             </div>
-                            <PrimaryButton class="mt-3" @click.prevent="addToCart">Add to Cart</PrimaryButton>
+                            <PrimaryButton class="mt-3" @click.prevent="flash('Oops!', 'This product is out of stock. Come back soon when we have restocked.', 'info')">Add to Cart</PrimaryButton>
                         </div>
                     </div>
                 </div>
@@ -598,51 +602,51 @@ function toggleMenu() {
                 </div>
             </div>
 
-            <!--kitenge arrivals-->
-            <div class="mt-5 pb-4 p-2 bg-white rounded">
-                <div class="flex justify-between py-3 px-4 bg-amber-900 text-white">
-                    <h3 class="font-semibold text-lg">Kitenge Arrivals</h3>
-                    <Link :href="route('products')" class="font-semibold flex flex-row place-content-center">
+            <!--recently viewed-->
+            <div class="px-4 p-2 pb-3 bg-white rounded">
+                <div class="mt-5 py-6 flex justify-between">
+                    <h3 class="font-semibold text-lg text-slate-900">Recently Viewed</h3>
+                    <Link :href="route('products')" class="text-amber-600 font-semibold flex flex-row place-content-center">
                         <p class="pr-2">See All</p>
                         <svg width="18px" height="18px" class="pt-1.5" viewBox="-4.5 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>arrow_right [#336]</title> <desc>Created with Sketch.</desc> <defs> </defs> <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Dribbble-Light-Preview" transform="translate(-305.000000, -6679.000000)" fill="#d97706"> <g id="icons" transform="translate(56.000000, 160.000000)"> <path d="M249.365851,6538.70769 L249.365851,6538.70769 C249.770764,6539.09744 250.426289,6539.09744 250.830166,6538.70769 L259.393407,6530.44413 C260.202198,6529.66364 260.202198,6528.39747 259.393407,6527.61699 L250.768031,6519.29246 C250.367261,6518.90671 249.720021,6518.90172 249.314072,6519.28247 L249.314072,6519.28247 C248.899839,6519.67121 248.894661,6520.31179 249.302681,6520.70653 L257.196934,6528.32352 C257.601847,6528.71426 257.601847,6529.34685 257.196934,6529.73759 L249.365851,6537.29462 C248.960938,6537.68437 248.960938,6538.31795 249.365851,6538.70769" id="arrow_right-[#336]"> </path> </g> </g> </g> </g></svg>
                     </Link>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-5 gap-x-1 font-light ">
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-x-1 mt-1 font-light ">
 
                     <div class="bg-slate-50 px-1 hover:bg-white hover:shadow-md hover:rounded">
-                        <img :src="`https://ke.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/30/300581/1.jpg?0437`" alt="product">
-                        <p class="h-6 mt-1 overflow-hidden">Laghunya T</p>
-                        <p class="mt-1 font-semibold">$ 258.50</p>
-                        <p class="text-xs text-gray-600 line-through">$ 676.50</p>
+                        <img :src="`https://ke.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/56/709275/1.jpg?4535`" alt="product">
+                        <p class="h-6 mt-1 overflow-hidden">Men Official</p>
+                        <p class="mt-1 font-semibold">$ 1,758.25</p>
+                        <p class="text-xs text-gray-600 line-through">$ 1,676.25</p>
                     </div>
 
                     <div class="bg-slate-50 px-1 hover:bg-white hover:shadow-md hover:rounded">
-                        <img :src="`https://ke.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/39/572158/1.jpg?3872`" alt="product">
-                        <p class="h-6 mt-1 overflow-hidden">Lion Man</p>
-                        <p class="mt-1 font-semibold">$ 478.05</p>
-                        <p class="text-xs text-gray-600 line-through">$ 576.05</p>
+                        <img :src="`https://ke.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/23/638454/1.jpg?6012`" alt="product">
+                        <p class="h-6 mt-1 overflow-hidden">E =mc<span class="align-super text-xs">2</span></p>
+                        <p class="mt-1 font-semibold">299,792,458 m/s</p>
+                        <p class="text-xs text-gray-600 line-through">3×108 m/s</p>
                     </div>
 
                     <div class="bg-slate-50 px-1 hover:bg-white hover:shadow-md hover:rounded">
-                        <img :src="`https://ke.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/88/286613/1.jpg?0668`" alt="product">
-                        <p class="h-6 mt-1 overflow-hidden">Usiku Sacco</p>
-                        <p class="mt-1 font-semibold">$ 58.99</p>
-                        <p class="text-xs text-gray-600 line-through">$ 76.99</p>
+                        <img :src="`https://ke.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/68/490956/1.jpg?4111`" alt="product">
+                        <p class="h-6 mt-1 overflow-hidden">High Heels</p>
+                        <p class="mt-1 font-semibold">$ 100.00</p>
+                        <p class="text-xs text-gray-600 line-through">$ 110.99</p>
                     </div>
 
                     <div class="bg-slate-50 px-1 hover:bg-white hover:shadow-md hover:rounded">
-                        <img :src="`https://ke.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/44/0880001/1.jpg?7129`" alt="product">
-                        <p class="h-6 mt-1 overflow-hidden">Samsung Blah Blah Pro Max XD HD YT MD</p>
-                        <p class="mt-1 font-semibold">$ 4,758.00</p>
-                        <p class="text-xs text-gray-600 line-through">$ 5,676.00</p>
+                        <img :src="`https://ke.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/07/390244/1.jpg?9969`" alt="product">
+                        <p class="h-6 mt-1 overflow-hidden">Winter Kinamba Heavy Wear</p>
+                        <p class="mt-1 font-semibold">$ 5.99</p>
+                        <p class="text-xs text-gray-600 line-through">$ 6.50</p>
                     </div>
 
                     <div class="bg-slate-50 px-1 hover:bg-white hover:shadow-md hover:rounded">
-                        <img :src="`https://ke.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/05/440354/1.jpg?5572`" alt="product">
-                        <p class="h-6 mt-1 overflow-hidden">Kiondo Special</p>
-                        <p class="mt-1 font-semibold">$ 40.25</p>
-                        <p class="text-xs text-gray-600 line-through">$ 56.25</p>
+                        <img :src="`https://ke.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/84/751906/1.jpg?5258`" alt="product">
+                        <p class="h-6 mt-1 overflow-hidden">Ladies Shoes</p>
+                        <p class="mt-1 font-semibold">$ 104,758.99</p>
+                        <p class="text-xs text-gray-600 line-through">$ 155,676.00</p>
                     </div>
 
                 </div>
@@ -687,27 +691,27 @@ function toggleMenu() {
             <div class="bg-white p-3 rounded shadow-sm">
                 <div class="mx-auto my-4 flex flex-col gap-y-2 text-sm">
                     <h3 class="font-semibold uppercase text-base">Our Company</h3>
-                    <a href="#menu-col" class="pl-1.5">About</a>
-                    <a href="#menu-col" class="pl-1.5">Investor</a>
-                    <a href="#menu-col" class="pl-1.5">People</a>
-                    <a href="#menu-col" class="pl-1.5">Careers</a>
+                    <a href="/coming-soon" class="pl-1.5">About</a>
+                    <a href="/coming-soon" class="pl-1.5">Investor</a>
+                    <a href="/coming-soon" class="pl-1.5">People</a>
+                    <a href="/coming-soon" class="pl-1.5">Careers</a>
                 </div>
             </div>
 
             <div class="col-span-1 bg-white p-3 rounded shadow-sm">
                 <div class="mx-auto my-4 flex flex-col gap-y-2 text-sm">
                     <h3 class="font-semibold uppercase text-base">Community Relations</h3>
-                    <a href="#menu-col" class="pl-1.5">Our Foundation</a>
-                    <a href="#menu-col" class="pl-1.5">Initiatives</a>
-                    <a href="#menu-col" class="pl-1.5">Climate Responsibility</a>
-                    <a href="#menu-col" class="pl-1.5">Sustainability Reports</a>
+                    <a href="/coming-soon" class="pl-1.5">Our Foundation</a>
+                    <a href="/coming-soon" class="pl-1.5">Initiatives</a>
+                    <a href="/coming-soon" class="pl-1.5">Climate Responsibility</a>
+                    <a href="/coming-soon" class="pl-1.5">Sustainability Reports</a>
                 </div>
             </div>
 
             <div class="col-span-1 bg-white p-3 rounded shadow-sm">
                 <div class="mx-auto my-4 flex flex-col gap-y-2 text-sm">
                     <h3 class="font-semibold uppercase text-base">Contact Me</h3>
-                    <a href="#menu-col" class="pl-1.5">
+                    <a href="https://mwangikanothe.com/#contact" class="pl-1.5">
                         <span class="pr-2 font-semibold">Email: </span> francis@mwangikanothe.com
                     </a>
 
