@@ -29,18 +29,10 @@
 import { register } from 'swiper/element/bundle';
 
 register();
-import {Swiper} from "swiper";
 
 import SliderProductCard from "./SliderProductCard.vue";
 const spaceBetween = 50;
-const onProgress = (e) => {
-    const [swiper, progress] = e.detail;
-    console.log(progress)
-};
 
-const onSlideChange = (e) => {
-    console.log('slide changed')
-}
 const productList = [
     {
         phone: "Samsung S23 Pro",

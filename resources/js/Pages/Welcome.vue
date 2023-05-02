@@ -16,11 +16,11 @@ let {flash} = useFlash();
 
 const cartItemsNumber = ref(0);
 
-const authenticatedUser = ref(false);
-
 const showMenu = ref(false);
 
-const showCart = ref(false)
+const showCart = ref(false);
+
+const searchKey = ref('');
 
 defineProps({
     canLogin: Boolean,
@@ -32,7 +32,6 @@ defineProps({
 onBeforeMount(() => {
     cart.getCart();
     cartItemsNumber.value = cart.cartItemsValue;
-    usePage().props.auth.user.id ? authenticatedUser.value = true : authenticatedUser.value = false;
 });
 
 watchEffect(() => {
@@ -44,8 +43,14 @@ function updateCart() {
     window.location.reload();
 }
 
+function loginUser() {
+    window.location.href="/login";
+}
+
 function search() {
-    console.log('searching...')
+    flash('Oops!!', 'Search returned no results.', 'info');
+    searchKey.value = '';
+
 }
 function toggleMenu() {
     showMenu.value = !showMenu.value;
@@ -75,7 +80,7 @@ function toggleMenu() {
                             </svg>
                             </button>
 
-                            <input @input="search" class="bg-gray-100 px-2 py-1 m-1.5 border-none outline-none" placeholder="Search...">
+                            <input v-model="searchKey" @keyup.enter="search" class="bg-gray-100 px-2 py-1 m-1.5 border-none outline-none" placeholder="Search...">
                         </label>
                     </div>
 
@@ -350,7 +355,11 @@ function toggleMenu() {
                                 <p class="text-orange-200 text-xs line-through align-super">was $168.99</p>
                                 <p class="text-green-900 text-sm font-semibold">Now <span class="underline text-lg">$99.99</span></p>
                             </div>
-                            <PrimaryButton class="mt-3" @click.prevent="authenticatedUser===true ? cart.addToCart(8) : route('login')">Add to Cart</PrimaryButton>
+                            <PrimaryButton class="mt-3"
+                                           @click.prevent="$page.props.auth.user ? cart.addToCart(8) : loginUser()">
+                                Add to Cart
+                            </PrimaryButton>
+
                         </div>
                     </div>
                 </div>
@@ -617,7 +626,7 @@ function toggleMenu() {
                                 <p class="text-orange-200 text-xs line-through align-super">was $168.99</p>
                                 <p class="text-green-900 text-sm font-semibold">Now <span class="underline text-lg">$99.99</span></p>
                             </div>
-                            <PrimaryButton class="mt-3" @click.prevent="authenticatedUser===true ? cart.addToCart(7) : route('login')">Add to Cart</PrimaryButton>
+                            <PrimaryButton class="mt-3" @click.prevent="$page.props.auth.user ? cart.addToCart(7) : loginUser()">Add to Cart</PrimaryButton>
                         </div>
                     </div>
                 </div>
@@ -748,7 +757,7 @@ function toggleMenu() {
                                 <p class="text-orange-200 text-xs line-through align-super">was $168.99</p>
                                 <p class="text-green-900 text-sm font-semibold">Now <span class="underline text-lg">$99.99</span></p>
                             </div>
-                            <PrimaryButton class="mt-3" @click.prevent="authenticatedUser===true ? cart.addToCart(6) : route('login')">Add to Cart</PrimaryButton>
+                            <PrimaryButton class="mt-3" @click.prevent="$page.props.auth.user ? cart.addToCart(6) : loginUser()">Add to Cart</PrimaryButton>
                         </div>
                     </div>
                 </div>

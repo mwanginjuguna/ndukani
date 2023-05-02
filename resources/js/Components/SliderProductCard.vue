@@ -1,14 +1,13 @@
 <script setup>
-import PrimaryButton from '../Components/PrimaryButton.vue';
-import {Link} from "@inertiajs/vue3";
-import {computed, defineProps, ref, watchEffect} from "vue";
+
+import { defineProps, ref, watchEffect} from "vue";
 
 const props = defineProps( {
     imageUrl: String,
-    percentOff: String,
+    percentOff: Number,
     title: String,
     features: String,
-    price: String,
+    price: Number,
     details: String
 
 })

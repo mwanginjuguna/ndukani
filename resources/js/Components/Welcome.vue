@@ -62,7 +62,7 @@ defineProps({
         <div class="bg-gray-300 bg-opacity-25 grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 p-6 lg:p-8">
 
             <!--Flash Sale-->
-            <div class="md:col-span-2 px-4 p-2 pb-3 bg-white rounded">
+            <div class="md:col-span-2 px-4 p-2 bg-white rounded">
                 <div class="mt-5 py-3 px-4 flex justify-between bg-red-600">
                     <h3 class="font-semibold text-lg text-amber-300">Flash Sale</h3>
                     <Link :href="route('products')" class="text-amber-300 font-semibold flex flex-row place-content-center">
@@ -163,14 +163,14 @@ defineProps({
             </div>
 
             <div class="md:col-span-2">
-                <div class="md:flex md:flex-row gap-x-px py-10 px-6 bg-slate-100 rounded shadow-md">
+                <div class="md:flex md:flex-row gap-x-px py-4 px-6 bg-slate-100 rounded shadow-md">
 
                     <div class="">
                         <img alt="phone-image" class="max-w-sm min-h-[20rem] bg-slate-100 rounded-lg max-h-[36rem] object-cover" :src="`https://maplestore.in/wp-content/uploads/2022/09/iphone-14-pro-finish-select-202209-6-7inch-deeppurple_AV1_GEO_EMEA.jpeg`">
                     </div>
 
                     <div class="md:my-auto">
-                        <h3 class="font-bold text-xl font-serif text-indigo-900 underline underline-offset-4">Nangos 103R</h3>
+                        <h3 class="font-bold text-xl font-serif text-indigo-900 underline underline-offset-4">iPhone Pro Max 103R</h3>
                         <div class="mt-2">
                             <p class="text-sm text-justify leading-tight"><span class="font-semibold">Features: </span>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
                                 <Link :href="route('product-show', 4)" class="text-indigo-700 hover:text-indigo-800 text-xs font-semibold flex items-center ">

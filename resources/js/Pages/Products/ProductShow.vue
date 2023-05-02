@@ -26,7 +26,6 @@
                 </div>
                 <!--content-->
                 <div class="mt-4 col-span-1 md:col-span-3 flex flex-col gap-y-3">
-
                     <!--product-->
                     <div class="pb-6 grid grid-cols-1 md:grid-cols-2 gap-4 bg-white rounded shadow-sm">
 
@@ -157,11 +156,11 @@
 
                                 <!-- button -->
                                 <div id="cart-button"
-                                     class="my-5 px-8 py-3 grid grid-cols-2 flex justify-between shadow-lg drop-shadow-lg rounded-sm bg-amber-500 hover:bg-amber-600 hover:underline hover:underline-offset-4 decoration-amber-500 uppercase hover:cursor-pointer transition-all ease-in-out 200ms"
+                                     class="my-5 px-2 lg:px-8 py-3 flex flex-row gap-2 shadow-lg drop-shadow-lg rounded-sm bg-amber-500 hover:bg-amber-600 hover:underline hover:underline-offset-4 decoration-amber-500 uppercase hover:cursor-pointer transition-all ease-in-out 200ms"
                                      @click="addToCart(product.id)"
                                 >
                                     <svg fill="#ffffff" width="24px" height="24px" viewBox="0 0 24 24" data-name="Layer 1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><title></title><path d="M12.2,9h1.6V6.8H16V5.2H13.8V3H12.2V5.2H10V6.8h2.2ZM20,5v5.5L7.45,12.72,5,3H1.25a1,1,0,0,0,0,2H3.47L6.7,18H20V16H8.26l-.33-1.33L22,12.18V5ZM7,19a1.5,1.5,0,1,0,1.5,1.5A1.5,1.5,0,0,0,7,19Zm12,0a1.5,1.5,0,1,0,1.5,1.5A1.5,1.5,0,0,0,19,19Z"></path></g></svg>
-                                    <p class="font-bold text-base text-white">Add to cart</p>
+                                    <p class="font-bold text-sm lg:text-base text-white">Add to cart</p>
                                 </div>
 
                                 <hr class="px-6 text-slate-300">
@@ -191,7 +190,6 @@
                         </div>
                         <a href="#" class="mt-28 p-3 text-sm text-sky-700 hover:text-sky-600 hover:underline">Report Wrong Product Details!</a>
                     </div>
-
                     <!--product description-->
                     <section class="pb-6 px-4 bg-white rounded flex flex-col">
                         <h2 class="my-2 font-semibold text-xl text-slate-900">Product Description</h2>
@@ -214,7 +212,6 @@
                         </div>
 
                     </section>
-
                     <!--product specifications-->
                     <section id="specifications" class="pb-6 bg-white rounded flex flex-col">
                         <h2 class="my-2 mx-4 font-medium text-xl text-slate-700">Specifications</h2>
@@ -249,29 +246,104 @@
                         </div>
 
                     </section>
-
                     <!--products also viewed-->
-                    <section class="pb-6 px-4 bg-white rounded flex flex-col">
-                        <h2 class="my-2 font-semibold text-xl text-slate-900">Customer who viewed this also viewed</h2>
-
-                        <div class="mt-3">
-                            <Slider>
-
-                            </Slider>
+                    <div class="mt-5 p-2 pb-3 bg-white rounded">
+                        <div class="flex justify-between py-3 px-4 bg-lime-700">
+                            <h3 class="font-semibold text-lg text-slate-100">Customer who viewed this also viewed</h3>
+                            <Link :href="route('products')" class="text-amber-300 font-semibold flex flex-row place-content-center">
+                                <p class="pr-2">See All</p>
+                                <svg width="18px" height="18px" class="pt-1.5" viewBox="-4.5 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>arrow_right [#336]</title> <desc>Created with Sketch.</desc> <defs> </defs> <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Dribbble-Light-Preview" transform="translate(-305.000000, -6679.000000)" fill="#d97706"> <g id="icons" transform="translate(56.000000, 160.000000)"> <path d="M249.365851,6538.70769 L249.365851,6538.70769 C249.770764,6539.09744 250.426289,6539.09744 250.830166,6538.70769 L259.393407,6530.44413 C260.202198,6529.66364 260.202198,6528.39747 259.393407,6527.61699 L250.768031,6519.29246 C250.367261,6518.90671 249.720021,6518.90172 249.314072,6519.28247 L249.314072,6519.28247 C248.899839,6519.67121 248.894661,6520.31179 249.302681,6520.70653 L257.196934,6528.32352 C257.601847,6528.71426 257.601847,6529.34685 257.196934,6529.73759 L249.365851,6537.29462 C248.960938,6537.68437 248.960938,6538.31795 249.365851,6538.70769" id="arrow_right-[#336]"> </path> </g> </g> </g> </g></svg>
+                            </Link>
                         </div>
-                    </section>
 
+                        <div class="grid grid-cols-2 md:grid-cols-5 gap-x-1 gap-y-3 mt-1 font-light ">
+
+                            <div class="bg-slate-50 px-1 hover:bg-white hover:shadow-md hover:rounded">
+                                <img :src="`https://ke.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/68/272633/1.jpg?7170`" alt="product">
+                                <p class="h-6 mt-1 overflow-hidden">Mali Safi</p>
+                                <p class="mt-1 font-semibold">$ 8.00</p>
+                                <p class="text-xs text-gray-600 line-through">$ 8.01</p>
+                            </div>
+
+                            <div class="bg-slate-50 px-1 hover:bg-white hover:shadow-md hover:rounded">
+                                <img :src="`https://ke.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/84/788253/1.jpg?3496`" alt="product">
+                                <p class="h-6 mt-1 overflow-hidden">Big Five Africa</p>
+                                <p class="mt-1 font-semibold">$ 204,758.00</p>
+                                <p class="text-xs text-gray-600 line-through">$ 205,676.99</p>
+                            </div>
+
+                            <div class="bg-slate-50 px-1 hover:bg-white hover:shadow-md hover:rounded">
+                                <img :src="`https://ke.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/06/443053/1.jpg?7625`" alt="product">
+                                <p class="h-6 mt-1 overflow-hidden">Mara Mbili</p>
+                                <p class="mt-1 font-semibold">$ 758.99</p>
+                                <p class="text-xs text-gray-600 line-through">$ 976.50</p>
+                            </div>
+
+                            <div class="bg-slate-50 px-1 hover:bg-white hover:shadow-md hover:rounded">
+                                <img :src="`https://ke.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/76/140585/1.jpg?2555`" alt="product">
+                                <p class="h-6 mt-1 overflow-hidden">Ndovu ni kuu</p>
+                                <p class="mt-1 font-semibold">$ 84,758.55</p>
+                                <p class="text-xs text-gray-600 line-through">$ 105,676.26</p>
+                            </div>
+
+                            <div class="bg-slate-50 px-1 hover:bg-white hover:shadow-md hover:rounded">
+                                <img :src="`https://ke.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/59/739946/1.jpg?0622`" alt="product">
+                                <p class="h-6 mt-1 overflow-hidden">Farasi</p>
+                                <p class="mt-1 font-semibold">$ 14,758.00</p>
+                                <p class="text-xs text-gray-600 line-through">$ 25,676.00</p>
+                            </div>
+
+                        </div>
+                    </div>
                     <!--products you may like-->
-                    <section class="pb-6 px-4 bg-white rounded flex flex-col">
-                        <h2 class="my-2 font-semibold text-xl text-slate-900">You May Also Like These</h2>
-
-                        <div class="mt-3">
-                            <Slider>
-
-                            </Slider>
+                    <div class="md:col-span-2 px-4 p-2 bg-white rounded">
+                        <div class="mt-5 py-3 px-4 flex justify-between bg-red-600">
+                            <h3 class="font-semibold text-lg text-amber-300">You May Also Like These</h3>
+                            <Link :href="route('products')" class="text-amber-300 font-semibold flex flex-row place-content-center">
+                                <p class="pr-2">See All</p>
+                                <svg width="18px" height="18px" class="pt-1.5" viewBox="-4.5 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>arrow_right [#336]</title> <desc>Created with Sketch.</desc> <defs> </defs> <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Dribbble-Light-Preview" transform="translate(-305.000000, -6679.000000)" fill="#d97706"> <g id="icons" transform="translate(56.000000, 160.000000)"> <path d="M249.365851,6538.70769 L249.365851,6538.70769 C249.770764,6539.09744 250.426289,6539.09744 250.830166,6538.70769 L259.393407,6530.44413 C260.202198,6529.66364 260.202198,6528.39747 259.393407,6527.61699 L250.768031,6519.29246 C250.367261,6518.90671 249.720021,6518.90172 249.314072,6519.28247 L249.314072,6519.28247 C248.899839,6519.67121 248.894661,6520.31179 249.302681,6520.70653 L257.196934,6528.32352 C257.601847,6528.71426 257.601847,6529.34685 257.196934,6529.73759 L249.365851,6537.29462 C248.960938,6537.68437 248.960938,6538.31795 249.365851,6538.70769" id="arrow_right-[#336]"> </path> </g> </g> </g> </g></svg>
+                            </Link>
                         </div>
-                    </section>
 
+                        <div class="grid grid-cols-2 md:grid-cols-5 gap-x-1 gap-y-3 mt-1 font-light ">
+
+                            <div class="bg-slate-50 px-1 hover:bg-white hover:shadow-md hover:rounded">
+                                <img :src="`https://ke.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/56/709275/1.jpg?4535`" alt="product">
+                                <p class="h-6 mt-1 overflow-hidden">Men Official</p>
+                                <p class="mt-1 font-semibold">$ 1,758.25</p>
+                                <p class="text-xs text-gray-600 line-through">$ 1,676.25</p>
+                            </div>
+
+                            <div class="bg-slate-50 px-1 hover:bg-white hover:shadow-md hover:rounded">
+                                <img :src="`https://ke.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/23/638454/1.jpg?6012`" alt="product">
+                                <p class="h-6 mt-1 overflow-hidden">E =mc<span class="align-super text-xs">2</span></p>
+                                <p class="mt-1 font-semibold">299,792,458 m/s</p>
+                                <p class="text-xs text-gray-600 line-through">3×108 m/s</p>
+                            </div>
+
+                            <div class="bg-slate-50 px-1 hover:bg-white hover:shadow-md hover:rounded">
+                                <img :src="`https://ke.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/68/490956/1.jpg?4111`" alt="product">
+                                <p class="h-6 mt-1 overflow-hidden">High Heels</p>
+                                <p class="mt-1 font-semibold">$ 100.00</p>
+                                <p class="text-xs text-gray-600 line-through">$ 110.99</p>
+                            </div>
+
+                            <div class="bg-slate-50 px-1 hover:bg-white hover:shadow-md hover:rounded">
+                                <img :src="`https://ke.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/07/390244/1.jpg?9969`" alt="product">
+                                <p class="h-6 mt-1 overflow-hidden">Winter Kinamba Heavy Wear</p>
+                                <p class="mt-1 font-semibold">$ 5.99</p>
+                                <p class="text-xs text-gray-600 line-through">$ 6.50</p>
+                            </div>
+
+                            <div class="bg-slate-50 px-1 hover:bg-white hover:shadow-md hover:rounded">
+                                <img :src="`https://ke.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/84/751906/1.jpg?5258`" alt="product">
+                                <p class="h-6 mt-1 overflow-hidden">Ladies Shoes</p>
+                                <p class="mt-1 font-semibold">$ 104,758.99</p>
+                                <p class="text-xs text-gray-600 line-through">$ 155,676.00</p>
+                            </div>
+
+                        </div>
+                    </div>
                     <!--Customer feedback-->
                     <section id="feedback" class="pb-6 min-w-max max-w-4xl bg-white rounded flex flex-col">
 
@@ -425,29 +497,55 @@
 
                         </div>
                     </section>
-
-                    <!--products also viewed-->
-                    <section class="pb-6 px-4 bg-white rounded flex flex-col">
-                        <h2 class="my-2 font-semibold text-xl text-slate-900">More items from this seller</h2>
-
-                        <div class="mt-3">
-                            <Slider>
-
-                            </Slider>
+                    <!--mulika mwizi edition-->
+                    <div class="mt-5 p-2 pb-3 bg-white rounded">
+                        <div class="flex justify-between py-3 px-4 bg-amber-200">
+                            <h3 class="font-semibold text-lg text-slate-900">More items from this seller</h3>
+                            <Link :href="route('products')" class="text-amber-700 font-semibold flex flex-row place-content-center">
+                                <p class="pr-2">See All</p>
+                                <svg width="18px" height="18px" class="pt-1.5" viewBox="-4.5 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>arrow_right [#336]</title> <desc>Created with Sketch.</desc> <defs> </defs> <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Dribbble-Light-Preview" transform="translate(-305.000000, -6679.000000)" fill="#d97706"> <g id="icons" transform="translate(56.000000, 160.000000)"> <path d="M249.365851,6538.70769 L249.365851,6538.70769 C249.770764,6539.09744 250.426289,6539.09744 250.830166,6538.70769 L259.393407,6530.44413 C260.202198,6529.66364 260.202198,6528.39747 259.393407,6527.61699 L250.768031,6519.29246 C250.367261,6518.90671 249.720021,6518.90172 249.314072,6519.28247 L249.314072,6519.28247 C248.899839,6519.67121 248.894661,6520.31179 249.302681,6520.70653 L257.196934,6528.32352 C257.601847,6528.71426 257.601847,6529.34685 257.196934,6529.73759 L249.365851,6537.29462 C248.960938,6537.68437 248.960938,6538.31795 249.365851,6538.70769" id="arrow_right-[#336]"> </path> </g> </g> </g> </g></svg>
+                            </Link>
                         </div>
-                    </section>
 
-                    <!--products you may like-->
-                    <section class="pb-6 px-4 bg-white rounded flex flex-col">
-                        <h2 class="my-2 font-semibold text-xl text-slate-900">Recently viewed products</h2>
+                        <div class="grid grid-cols-2 md:grid-cols-5 gap-x-1 gap-y-3 mt-1 font-light ">
 
-                        <div class="mt-3">
-                            <Slider>
+                            <div class="bg-slate-50 px-1 hover:bg-white hover:shadow-md hover:rounded">
+                                <img :src="`https://ke.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/88/669029/1.jpg?9478`" alt="product">
+                                <p class="h-6 mt-1 overflow-hidden">iPhone 14 Pro Max</p>
+                                <p class="mt-1 font-semibold">$ 124,758</p>
+                                <p class="text-xs text-gray-600 line-through">$ 135,676</p>
+                            </div>
 
-                            </Slider>
+                            <div class="bg-slate-50 px-1 hover:bg-white hover:shadow-md hover:rounded">
+                                <img :src="`https://ke.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/34/207378/1.jpg?8371`" alt="product">
+                                <p class="h-6 mt-1 overflow-hidden">Nokia 105 - #TBT Old Skull</p>
+                                <p class="mt-1 font-semibold">$ 9.99</p>
+                                <p class="text-xs text-gray-600 line-through">$ 11.50</p>
+                            </div>
+
+                            <div class="bg-slate-50 px-1 hover:bg-white hover:shadow-md hover:rounded">
+                                <img :src="`https://ke.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/81/330286/1.jpg?5345`" alt="product">
+                                <p class="h-6 mt-1 overflow-hidden">Nokia 3310</p>
+                                <p class="mt-1 font-semibold">$ 4.80</p>
+                                <p class="text-xs text-gray-600 line-through">$ 5.76</p>
+                            </div>
+
+                            <div class="bg-slate-50 px-1 hover:bg-white hover:shadow-md hover:rounded">
+                                <img :src="`https://ke.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/35/8047221/1.jpg?5225`" alt="product">
+                                <p class="h-6 mt-1 overflow-hidden">Bontel 911 -  Flip Phone</p>
+                                <p class="mt-1 font-semibold">$ 18.00</p>
+                                <p class="text-xs text-gray-600 line-through">$ 26.99</p>
+                            </div>
+
+                            <div class="bg-slate-50 px-1 hover:bg-white hover:shadow-md hover:rounded">
+                                <img :src="`https://ke.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/68/979255/1.jpg?6349`" alt="product">
+                                <p class="h-6 mt-1 overflow-hidden">Bontel T1000 - Wireless Desktop Phone</p>
+                                <p class="mt-1 font-semibold">$ 28.99</p>
+                                <p class="text-xs text-gray-600 line-through">$ 35.50</p>
+                            </div>
+
                         </div>
-                    </section>
-
+                    </div>
                 </div>
 
                 <!--right sidebar-->
@@ -634,7 +732,7 @@
                     <div class="mt-4 pb-6 grid grid-cols-1 md:grid-cols-2 gap-1 bg-white rounded shadow-sm">
 
                         <!--product images-->
-                        <div class="py-1">
+                        <div class="py-1 grid place-content-center">
                             <!--all images-->
                             <!--consider a slider-->
                             <!--for image in images-->
@@ -645,13 +743,13 @@
                         <!--product details-->
                         <div class="px-1 py-4 text-sm text-slate-800 flex flex-col gap-y-1.5">
 
-                            <h2 class="h-4 overflow-hidden font-light text-xs text-slate-700 leading-tight">
+                            <h2 class="lg:h-4 overflow-hidden font-light text-xs text-blue-600 leading-tight">
                                 {{ product.name }}
                             </h2>
 
                             <div>
                                 <div class="py-2">
-                                    <p class="text-base text-black font-sans font-bold">
+                                    <p class="text-base text-black text-xs font-sans font-medium">
                                         {{ product.currency }} {{ product.price }}
                                     </p>
                                     <div class="mt-1.5 flex flex-wrap gap-x-2">
@@ -667,11 +765,12 @@
 
                         <!-- button -->
                         <div id="cart-button"
-                             class="col-span-2 mx-2 px-4 py-2 flex gap-x-4 shadow-lg drop-shadow-lg rounded-sm bg-amber-500 hover:bg-amber-600 hover:cursor-pointer uppercase"
+                             class="col-span-2 mx-2 px-2 lg:px-4 py-2 flex gap-x-1 lg:gap-x-4 shadow-lg drop-shadow-lg rounded-sm bg-amber-500 hover:bg-amber-600 hover:cursor-pointer"
                              @click="addToCart(product.id)"
                         >
-                            <svg fill="#ffffff" width="24px" height="24px" viewBox="0 0 24 24" data-name="Layer 1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><title></title><path d="M12.2,9h1.6V6.8H16V5.2H13.8V3H12.2V5.2H10V6.8h2.2ZM20,5v5.5L7.45,12.72,5,3H1.25a1,1,0,0,0,0,2H3.47L6.7,18H20V16H8.26l-.33-1.33L22,12.18V5ZM7,19a1.5,1.5,0,1,0,1.5,1.5A1.5,1.5,0,0,0,7,19Zm12,0a1.5,1.5,0,1,0,1.5,1.5A1.5,1.5,0,0,0,19,19Z"></path></g></svg>
-                            <p class="font-bold text-base text-white pl-3">Add to cart</p>
+                            <svg fill="#ffffff" width="24px" height="24px" viewBox="0 0 24 24" data-name="Layer 1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff">
+                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><title></title><path d="M12.2,9h1.6V6.8H16V5.2H13.8V3H12.2V5.2H10V6.8h2.2ZM20,5v5.5L7.45,12.72,5,3H1.25a1,1,0,0,0,0,2H3.47L6.7,18H20V16H8.26l-.33-1.33L22,12.18V5ZM7,19a1.5,1.5,0,1,0,1.5,1.5A1.5,1.5,0,0,0,7,19Zm12,0a1.5,1.5,0,1,0,1.5,1.5A1.5,1.5,0,0,0,19,19Z"></path></g></svg>
+                            <p class="font-bold text-sm lg:text-base text-white pl-px lg:pl-3">Add To Cart</p>
                         </div>
 
                     </div>

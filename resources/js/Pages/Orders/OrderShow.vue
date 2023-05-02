@@ -52,7 +52,9 @@
                     <StripeOneTime :order="order" />
                 </div>
                 <div class="mt-5 mx-auto place-content-center">
-                    <Link :as="`button`" :class="`px-4 py-2 bg-green-500 text-white rounded-lg`">Pay with Mpesa</Link>
+                    <Link :as="`button`" :class="`px-4 py-2 bg-green-500 text-white rounded-lg`"
+                          @click.prevent="flash('Alert!', 'Not allowed in your region!', 'info')"
+                    >Pay with Mpesa</Link>
                 </div>
             </div>
 
@@ -72,6 +74,9 @@ import {defineProps} from "vue";
 import {Link} from "@inertiajs/vue3";
 import PayPalButtons from "../../Components/PayPalButtons.vue";
 import StripeOneTime from "../../Components/StripeOneTime.vue";
+import {useFlash} from "../../Composables/useFlash";
+
+const {flash} = useFlash();
 
 defineProps({
     order: Object,

@@ -50,12 +50,21 @@ class PaymentController extends Controller
         if (isset($paypalOrder['id']) && $paypalOrder['id'] != null) {
             foreach ($paypalOrder['links'] as $link) {
                 if ($link['rel'] === 'approve') {
-                    Payment::updateOrCreate([
-                        'user_id' => $request->input('user_id'),
-                        'order_id' => $order->id,
-                        'paypal_transaction_id' => $paypalOrder['id'],
-                        'transaction_status' => $paypalOrder['status']
-                    ]);
+                    $payment = Payment::where('order_id', $order->id)->first();
+
+                    if ($payment) {
+                        $payment->paypal_transaction_id = $paypalOrder['id'];
+                        $payment->transaction_status = $paypalOrder['status'];
+                        $payment->save();
+                    } else {
+                        Payment::updateOrCreate([
+                            'user_id' => $request->input('user_id'),
+                            'order_id' => $order->id,
+                            'paypal_transaction_id' => $paypalOrder['id'],
+                            'transaction_status' => $paypalOrder['status']
+                        ]);
+                    }
+
                     return response()->json($paypalOrder);
                 }
             }
@@ -143,7 +152,7 @@ class PaymentController extends Controller
      */
     public function cancelPayPal(Request $request, Order $order): Response
     {
-        $payment = Payment::where('order_id', $order->id);
+        $payment = Payment::where('order_id', $order->id)->first();
         $payment->transaction_status = 'CANCELLED';
         $payment->save();
         return Inertia::render('Orders/PaymentStatus', [
@@ -287,15 +296,17 @@ class PaymentController extends Controller
     }
 
     /**
-     * Initialize Stripe payment
-     * @param
-     * @return
+     * Initialize Stripe payment-failed!
+     * @param Request $request
+     * @param Order $order
+     * @return Response
      */
-    public function stripeFail(Request $request, Order $order)
+    public function stripeFail(Request $request, Order $order): Response
     {
         return Inertia::render('Orders/PaymentStatus', [
             "status" => "failed",
-            "message" => "Payment was not successful."
+            "message" => "Payment was not successful.",
+            "order" => $order
         ]);
     }
 }
