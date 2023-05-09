@@ -72,6 +72,14 @@ class CartController extends Controller
             ->get();
         //dd($cartItems);
 
+        // ensure cart is clean: i.e all cart items have quantity = or > 1
+        foreach ($cartItems as $key => $item) {
+            if ($item->quantity < 1) {
+                Cart::where('id', $item->id)->delete();
+                $cartItems->forget($key);
+            }
+        }
+
         return response()->json(['cart' => $cartItems]);
     }
 
@@ -113,7 +121,7 @@ class CartController extends Controller
             ->where('user_id', $userId)
             ->first();
 
-        if ($cart->quantity === 1) {
+        if ($cart->quantity === 1 || $cart->quantity < 1) {
             $cart->delete();
         } else {
             $cart->quantity -= 1;

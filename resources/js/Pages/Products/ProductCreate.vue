@@ -8,8 +8,8 @@
 
         <div class="py-8">
             <div class="max-w-5xl mx-auto sm:px-4 lg:px-12 ">
-                <form @submit.prevent="submitForm" class="bg-white rounded-lg shadow-md p-6 lg:py-12 lg:px-10">
-                    <h2 class="text-xl text-center font-bold mb-4">Create Product {{ this.$page.props.jetstreamToken }}</h2>
+                <form @submit.prevent="submitFormAPI" class="bg-white rounded-lg shadow-md p-6 lg:py-12 lg:px-10">
+                    <h2 class="text-xl text-center font-bold mb-4">Create Product</h2>
 
                     <div class="mb-4">
                         <label for="name" class="block font-bold mb-2">Name:</label>
@@ -115,18 +115,6 @@ import {useFlash} from "../../Composables/useFlash.js";
 
 let { flash } = useFlash();
 
-onBeforeMount(() => {
-    fetch('/sanctum/csrf-cookie').then(response => {
-        fetch('/api/user').then(response => {
-            response.json().then(data => {
-                console.log(data)
-                const token = data.api_token;
-                // Store the authentication token in the Vue application
-                this.$store.commit('SET_AUTH_TOKEN', token);
-            });
-        });
-    });
-})
 
 const formData = useForm({
     name: '',
@@ -213,8 +201,8 @@ const submitFormAPI = async () => {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-            'Authorization': `Bearer ${usePage().props.auth.token}`,
+            'Accept': 'application/json',
+            'X-CSRF-TOKEN': usePage().props.csrfToken,
         },
         body: JSON.stringify({
             name: formData.name,
@@ -228,17 +216,21 @@ const submitFormAPI = async () => {
             description: formData.description,
             quantity: formData.quantity,
             in_stock: formData.in_stock,
-            user: usePage().props.user
+            user: usePage().props.auth.user.id
         })
     })
 
     if (response.ok) {
         // Do something on success, e.g. show a success message
         await flash('Success', "Product added successfully.", "success");
+        formData.reset();
 
-    } else {
+    } else if (response.status === 403 ) {
         // Handle the error case, e.g. show an error message
-        await flash("Failed", "Something went wrong while saving the product. Try Again!", "warning");
+        await flash("Authentication Error", "The server could not authenticate your request!", "danger");
+    }else {
+        // Handle the error case, e.g. show an error message
+        await flash("Failed", "Something went wrong while saving the product. Try Again!", "danger");
     }
 }
 

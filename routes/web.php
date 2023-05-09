@@ -32,6 +32,8 @@ Route::get('/', function () {
     ]);
 })->name('home');
 
+Route::get('/product/new', [ProductController::class, 'create'])->name('product-create');
+
 Route::get('/coming-soon', function () {
     return Inertia::render('ComingSoon');
 })->name('coming-soon');
@@ -72,16 +74,7 @@ Route::middleware([
 
     Route::get('/order/{order}', [OrderController::class, 'show'])->name('order.show');
 
-    Route::get('/product/new', function () {
-        return Inertia::render('Products/ProductCreate', [
-            "categories" => Category::all(),
-            "tags" => Tag::all(),
-            "brands" => Brand::all(),
-        ]);
-    })->name('product-create');
-
     // Route::resource('products', ProductController::class);
-
 
     Route::get('/products', function () {
         return Inertia::render('Products/ProductIndex');
