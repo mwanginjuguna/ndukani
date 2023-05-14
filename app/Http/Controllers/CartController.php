@@ -192,8 +192,12 @@ class CartController extends Controller
                 'quantity' => $item->quantity
             ]);
         }
-        $cart = Cart::where('user_id', $userId)->first();
-        $cart->delete();
+
+        // delete cart items from db
+        foreach ($cartItems as $cartItem) {
+            $cart = Cart::where('id', $cartItem->id)->first();
+            $cart->delete();
+        }
 
         // retrieve the ordernumber incase this function was called to update an existing order at line 181
         $orderNumber = $order->order_number;

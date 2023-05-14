@@ -30,9 +30,6 @@ export let useCartStore = defineStore('cart',{
                 } else {
                     flash('Error', `Something went wrong! Server responded with ${response.status} Status.`, 'warning')
                 }
-
-
-
             } catch (error) {
                 flash('Error', 'Something went wrong. Product not added to Cart.', 'warning');
             }
@@ -74,6 +71,32 @@ export let useCartStore = defineStore('cart',{
             } catch (error) {
                 flash('Error', 'Failed to retrieve cart items', 'warning');
             }
+        },
+        addToLocalCart(productId, quantity = 1) {
+            // Retrieve the cart data from localStorage and parse it as an array (cartItems).
+            let localCart = localStorage.getItem('cart');
+            let cartItems = localCart ? JSON.parse(localCart) : [];
+            // Check if the productId already exists in the cart by finding its index using findIndex.
+            const existingCartItemIndex = cartItems.findIndex(item => item.product_id === productId);
+            // add new cart item if the cart is empty or undefined
+            if (existingCartItemIndex !== -1) {
+                // Update quantity if product already in cart
+                cartItems[existingCartItemIndex].quantity += quantity;
+            } else {
+                // Add new item
+                cartItems.push({
+                    product_id: productId,
+                    quantity: quantity
+                });
+            }
+            // set local cart
+            localStorage.setItem('cart', JSON.stringify(cartItems));
+            flash('Added Successfull.', `You have added one item into cart.`, 'success')
+        },
+        getLocalCart() {
+            this.cartItems = localStorage.getItem('cart');
+            console.log(`Local cart retrieved & updated: `, this.cartItems)
+            // return localCart ? JSON.parse(localCart) : [];
         }
     },
     getters: {

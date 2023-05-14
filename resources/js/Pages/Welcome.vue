@@ -9,7 +9,6 @@ import HeroLandscapeSlider from "./Products/Partials/HeroLandscapeSlider.vue";
 import {useCartStore} from "../stores/CartStore";
 import {useFlash} from "../Composables/useFlash";
 
-
 let cart = useCartStore();
 
 let {flash} = useFlash();
@@ -30,8 +29,8 @@ defineProps({
 });
 
 onBeforeMount(() => {
-    cart.getCart();
-    cartItemsNumber.value = cart.cartItemsValue;
+    usePage().props.auth.user ? cart.getCart() : cart.getLocalCart();
+    cartItemsNumber.value = cart.cartItems ? cart.cartItemsValue : 0;
 });
 
 watchEffect(() => {
@@ -130,17 +129,16 @@ function toggleMenu() {
                             </template>
                         </MenuDropdown>
                     </div>
-
                 </div>
 
                 <div class="flex gap-4">
                     <!--cart-->
-                    <button @click="showCart = true" class="ml-3 relative flex">
+                    <button @click="$page.props.auth.user ? showCart = true : loginUser()" class="ml-3 relative flex">
                         <svg fill="#f59e0b" width="24px" height="24px" viewBox="0 0 24 24" id="cart-add" data-name="Flat Line" xmlns="http://www.w3.org/2000/svg" class="icon flat-line">
                             <g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><line id="primary-upstroke" x1="10.95" y1="20.5" x2="11.05" y2="20.5" style="fill: none; stroke: #f59e0b; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2.5;"></line><line id="primary-upstroke-2" data-name="primary-upstroke" x1="16.95" y1="20.5" x2="17.05" y2="20.5" style="fill: none; stroke: #000000; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2.5;"></line><path id="primary" d="M14,5v6m3-3H11" style="fill: none; stroke: #f59e0b; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2;"></path><path id="primary-2" data-name="primary" d="M3,3H5.2a1,1,0,0,1,1,.78L8.82,15.22a1,1,0,0,0,1,.78h8.42a1,1,0,0,0,1-.76L21,8" style="fill: none; stroke: #f59e0b; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2;"></path></g></svg>
                         <span class="w-fit -ml-1.5 -mt-1 inline-flex h-fit px-1 text-xs align-super bg-amber-500 text-white rounded-full"  v-if="cartItemsNumber > 0">
-                                            {{ cartItemsNumber }}
-                                        </span>
+                            {{ cartItemsNumber }}
+                        </span>
                         <span class="text-base font-semibold text-slate-600 hover:text-amber-500">Cart</span>
                     </button>
                     <!--Cart Modal-->
@@ -193,9 +191,7 @@ function toggleMenu() {
                         </template>
                     </div>
                 </div>
-
             </div>
-
         </div>
 
         <!--content-->
@@ -356,7 +352,7 @@ function toggleMenu() {
                                 <p class="text-green-900 text-sm font-semibold">Now <span class="underline text-lg">$99.99</span></p>
                             </div>
                             <PrimaryButton class="mt-3"
-                                           @click.prevent="$page.props.auth.user ? cart.addToCart(8) : loginUser()">
+                                           @click.prevent="$page.props.auth.user ? cart.addToCart(8) : cart.addToLocalCart(8)">
                                 Add to Cart
                             </PrimaryButton>
 
@@ -474,10 +470,10 @@ function toggleMenu() {
                             <img alt="phone-image" class="max-w-xs rounded-lg max-h-[36rem] object-cover" :src="`https://www.mobilephonemuseum.com/assets/static/e57d5c2a34aef9308ac96a89187daa3b/9d75f/fd09a85d-5dfd-436d-be83-4667ecd73e05.png`">
                         </div>
                         <div class="md:my-auto">
-                            <Link :href="route('product')" class="font-bold text-black text-xl font-serif underline underline-offset-4">Somsong Max Pro</Link>
+                            <Link class="font-bold text-black text-xl font-serif underline underline-offset-4">Somsong Max Pro</Link>
                             <div class="mt-2">
                                 <p class="text-sm text-justify leading-tight"><span class="font-semibold">Features: </span>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-                                    <Link :href="route('products')" class="text-blue-900 text-xs font-semibold flex items-center ">
+                                    <Link class="text-blue-900 text-xs font-semibold flex items-center ">
                                         More Details
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="w-5 h-5 fill-indigo-500">
                                             <path fill-rule="evenodd" d="M5 10a.75.75 0 01.75-.75h6.638L10.23 7.29a.75.75 0 111.04-1.08l3.5 3.25a.75.75 0 010 1.08l-3.5 3.25a.75.75 0 11-1.04-1.08l2.158-1.96H5.75A.75.75 0 015 10z" clip-rule="evenodd" />
@@ -626,7 +622,10 @@ function toggleMenu() {
                                 <p class="text-orange-200 text-xs line-through align-super">was $168.99</p>
                                 <p class="text-green-900 text-sm font-semibold">Now <span class="underline text-lg">$99.99</span></p>
                             </div>
-                            <PrimaryButton class="mt-3" @click.prevent="$page.props.auth.user ? cart.addToCart(7) : loginUser()">Add to Cart</PrimaryButton>
+                            <PrimaryButton class="mt-3"
+                                           @click.prevent="$page.props.auth.user ? cart.addToCart(7) : cart.addToLocalCart(7)"
+                            >Add to Cart
+                            </PrimaryButton>
                         </div>
                     </div>
                 </div>
@@ -757,7 +756,10 @@ function toggleMenu() {
                                 <p class="text-orange-200 text-xs line-through align-super">was $168.99</p>
                                 <p class="text-green-900 text-sm font-semibold">Now <span class="underline text-lg">$99.99</span></p>
                             </div>
-                            <PrimaryButton class="mt-3" @click.prevent="$page.props.auth.user ? cart.addToCart(6) : loginUser()">Add to Cart</PrimaryButton>
+                            <PrimaryButton class="mt-3"
+                                           @click.prevent="$page.props.auth.user ? cart.addToCart(6) : cart.addToLocalCart(6)"
+                            >Add to Cart
+                            </PrimaryButton>
                         </div>
                     </div>
                 </div>

@@ -1,4 +1,5 @@
 <template>
+    <Head title="Payment Status" />
     <div class="max-w-xl mx-auto grid place-content-center mt-10 bg-white shadow-md rounded">
             <div class="py-6 md:p-12 px-5 flex flex-col gap-y-3">
                 <h1 class="text-blue-600 font-extrabold text-2xl text-center">
@@ -61,9 +62,8 @@
         </div>
 </template>
 <script setup>
-import AppLayout from "../../Layouts/AppLayout.vue";
 import {defineProps} from "vue";
-import {Link} from "@inertiajs/vue3";
+import {Link, Head} from "@inertiajs/vue3";
 
 const props = defineProps({
     status : String,
