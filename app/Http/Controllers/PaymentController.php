@@ -117,6 +117,7 @@ class PaymentController extends Controller
             $order->is_paid = true;
             $order->payment_gateway = 'paypal';
             $order->payment_id = $payPalOrderId;
+            $order->total = $paidAmount;
             $order->status = 'processing';
             $order->save();
 
@@ -284,7 +285,8 @@ class PaymentController extends Controller
         $order->payment_id = $stripeSession['id'];
         $order->is_paid = true;
         $order->status = 'shipping';
-        $order->notes = $stripeSession['currency'].' '.($stripeSession['amount_total']/100).' paid by'.$stripeSession['customer_details']['email'];
+        $order->total = $stripeSession['amount_total']/100;
+        $order->notes = $stripeSession['currency'].' '.($stripeSession['amount_total']/100).' paid by '.$stripeSession['customer_details']['email'];
         $order->save();
 
 

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\Order;
+use App\Models\OrderItem;
 use App\Models\Product;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -132,5 +134,76 @@ class CartController extends Controller
 
         // Return a JSON response indicating success with new cart items
         return response()->json(['success' => true, 'newCartItems' => $newCartItems]);
+    }
+
+    /**
+     * Process checkout request
+     * @param Request $request
+     * @return JsonResponse
+     * @throws \Exception
+     */
+    public function checkoutPay(Request $request): JsonResponse
+    {
+        $userId = $request->input('user_id');
+
+        // get cart items belonging to this user
+        $response = $this->getCart($request);
+        $content = $response->getContent();
+
+        $cartItems = json_decode($content)->cart;
+
+        // get total from cartItems
+        $total = 0;
+        foreach ($cartItems as $item) {
+            $itemTotal = $item->product->price * $item->quantity;
+            $total += $itemTotal;
+        }
+
+        // create new order
+        $order = Order::query()
+            ->where('user_id', $userId)
+            ->where('subtotal', $total)
+            ->first();
+
+        if (!$order) {
+            // generate random order_number
+            $length = 10; // The length of the random string
+            $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+            $orderNumber = 'DUKA_#';
+            for ($i = 0; $i < $length; $i++) {
+                $orderNumber .= $characters[random_int(0, strlen($characters) - 1)];
+            }
+            $order = Order::create([
+                'user_id' => $userId,
+                'order_number' => $orderNumber,
+                'subtotal' => $total,
+            ]);
+        } else {
+            $order->subtotal = $total;
+            $order->save();
+        }
+
+        //create order items
+        foreach ($cartItems as $item) {
+            $order->items->create([
+                'product_id' => $item->product->id,
+                'order_id' => $order->id,
+                'price' => $item->product->price * $item->quantity,
+                'quantity' => $item->quantity
+            ]);
+        }
+        $cart = Cart::where('user_id', $userId)->first();
+        $cart->delete();
+
+        // retrieve the ordernumber incase this function was called to update an existing order at line 181
+        $orderNumber = $order->order_number;
+
+        // return json with order and success message. The user will be redirected in frontend.
+        return response()->json([
+            "message" => "Success. Order ${orderNumber} has been created successfully. We will redirect you to payments Page.",
+            "order" => $order
+        ]);
+        // redirect to payment page
+        // return redirect()->route('order.show', $order->id);
     }
 }

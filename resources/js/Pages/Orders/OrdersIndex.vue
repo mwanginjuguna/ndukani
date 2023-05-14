@@ -38,8 +38,11 @@
                     <div class="">
                         <p class="font-semibold text-amber-800">
                             Payment Details:
-                            <span class="font-normal text-slate-700 uppercase">
-                                via {{ order.payment_gateway }}
+                            <span v-if="order.is_paid" class="text-green-700 uppercase">
+                                Paid via {{ order.payment_gateway }}
+                            </span>
+                            <span v-if="!order.is_paid" class="text-red-700 uppercase">
+                                Not Paid
                             </span>
                         </p>
                         <p class="pl-4 pt-1 text-sm">

@@ -66,6 +66,8 @@ Route::middleware([
         return Inertia::render('Checkout');
     })->name('checkout');
 
+    Route::post('/checkout/pay', [CartController::class, 'checkoutPay'])->name('checkout.pay');
+
     Route::get('/orders', [OrderController::class, 'index'])->name('orders');
 
     Route::get('/orders/pay-status', function () {

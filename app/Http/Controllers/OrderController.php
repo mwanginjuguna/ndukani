@@ -51,7 +51,7 @@ class OrderController extends Controller
 
         // Fetch paginated results
         $perPage = 10;
-        $orders = $orders->paginate($perPage);
+        $orders = $orders->latest()->paginate($perPage);
 
         return Inertia::render('Orders/OrdersIndex', [
             'orders' => $orders
@@ -69,16 +69,8 @@ class OrderController extends Controller
         // validate request data
         $validatedData = $request->validate([
             'user_id' => 'required|integer',
+            'order_number' => 'required|string',
             'subtotal' => 'required|numeric',
-            'discount' => 'required|numeric',
-            'tax' => 'required|numeric',
-            'shipping' => 'required|numeric',
-            'total' => 'required|numeric',
-            'payment_gateway' => 'required|string',
-            'payment_id' => 'required|string',
-            'notes' => 'nullable|string',
-            'status' => 'required|string',
-            'items' => 'required|array'
         ]);
 
         // create new order

@@ -1,6 +1,5 @@
 <template>
-    <AppLayout>
-        <div class="max-w-xl mx-auto mt-10 bg-white shadow-md rounded">
+    <div class="max-w-xl mx-auto grid place-content-center mt-10 bg-white shadow-md rounded">
             <div class="py-6 md:p-12 px-5 flex flex-col gap-y-3">
                 <h1 class="text-blue-600 font-extrabold text-2xl text-center">
                     Order Payment Report
@@ -60,7 +59,6 @@
 
             </div>
         </div>
-    </AppLayout>
 </template>
 <script setup>
 import AppLayout from "../../Layouts/AppLayout.vue";

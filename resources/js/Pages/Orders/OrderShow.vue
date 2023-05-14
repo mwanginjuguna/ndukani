@@ -2,7 +2,7 @@
     <AppLayout>
         <div class="mx-auto max-w-2xl py-12 ">
             <div class="md:mt-5 mt-2 px-3">
-                <h3 class="text-center font-extrabold text-3xl">Order {{ order.order_number }} View Details</h3>
+                <h3 class="text-center font-extrabold text-3xl">Order Summary: ({{ order.order_number }})</h3>
             </div>
 
             <div class="grid grid-cols-2 px-5 py-4 mt-3">
@@ -17,7 +17,12 @@
 
                 <div class="text-sm text-slate-700">
                     <h4 class="text-base font-bold text-slate-800 pl-6 pb-1.5">Order Processing</h4>
-                    <p>Order Status: <span class="font-semibold">{{order.status}}</span></p>
+                    <p>
+                        Order Status:
+                        <span class="font-semibold">{{order.status}}</span>
+                        <span v-if="order.is_paid" class="pl-2 text-green-500 font-medium">Paid</span>
+                        <span v-if="!order.is_paid" class="pl-2 text-red-500 text-lg font-semibold">Not Paid</span>
+                    </p>
                     <p>Payment: <span class="font-semibold">{{order.payment_gateway}}</span></p>
                     <p>Payment ID: <span class="font-semibold">{{order.payment_id}}</span></p>
                 </div>
