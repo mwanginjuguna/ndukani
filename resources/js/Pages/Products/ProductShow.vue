@@ -826,9 +826,6 @@ function onSelectImage(image) {
 }
 
 const specTypes = ref([]);
-onMounted(()=> {
-    console.log(specTypes.value);
-});
 
 const mainImageUrl = ref('');
 

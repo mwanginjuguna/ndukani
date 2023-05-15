@@ -28,7 +28,7 @@ defineProps({
                 <div>
 
                     <!--product Ericsson-->
-                    <ProductCard  @add-to-cart="cart.addToCart(6)" image-url="https://ke.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/02/666582/1.jpg?8617" percent-off="20" title="Black Traditional Culture Shirt" price="80.34">
+                    <ProductCard productId="6" @add-to-cart="cart.addToCart(6)" image-url="https://ke.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/02/666582/1.jpg?8617" percent-off="20" title="Black Traditional Culture Shirt" price="80.34">
 
                     </ProductCard>
 
@@ -48,7 +48,7 @@ defineProps({
                 <div>
 
                     <!--product Ericsson-->
-                    <ProductCard @add-to-cart="cart.addToCart(8)" image-url="https://ke.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/76/676084/1.jpg?6262" percent-off="35" title="Wlisth - Brand Men's Quartz Casual" price="42.99">
+                    <ProductCard productId="8" @add-to-cart="cart.addToCart(8)" image-url="https://ke.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/76/676084/1.jpg?6262" percent-off="35" title="Wlisth - Brand Men's Quartz Casual" price="42.99">
 
                     </ProductCard>
 

@@ -28,7 +28,7 @@ class PaymentController extends Controller
     {
         //dd($request);
 
-        $amount = $order->getTotalAmount();
+        $amount = $order->total !== null ? $order->total : $order->subtotal;
 
         $provider = new PayPal();
         $provider->setApiCredentials(config('paypal'));
@@ -172,7 +172,7 @@ class PaymentController extends Controller
      */
     public function payWithStripe(Request $request, Order $order): JsonResponse
     {
-        $amount = 6.50;
+        $amount = $order->total !== null ? $order->total : $order->subtotal;
         $currency = 'usd';
         $orderNumber = $order->order_number;
 

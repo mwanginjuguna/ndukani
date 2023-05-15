@@ -9,8 +9,8 @@ const props = defineProps( {
     title: String,
     features: String,
     price: String,
-    details: String
-
+    details: String,
+    productId: String,
 })
 
 let initialPrice = ref(null)
@@ -40,13 +40,13 @@ const emit = defineEmits(['addToCart'])
 
         <div class="grid place-content-center">
             <div class="px-4 md:px-0 md:pr-4 mt-2.5">
-                <h3 class="font-semibold text-lg font-serif text-slate-700 underline underline-offset-4">{{ title ? title : '' }}</h3>
+                <Link :href="route('product-show', productId ?? 8)" class="font-semibold text-sm lg:text-lg font-serif text-slate-700 underline underline-offset-4">{{ title ? title : '' }}</Link>
                 <div class="mt-2">
                     <slot name="description" />
 
 
                     <div v-if="features" class="text-base leading-tight"><span class="font-semibold">Features: </span>{{ features ? features : '' }}
-                        <Link class="text-indigo-700 hover:text-indigo-800 text-xs font-semibold flex items-center inline-flex">
+                        <Link :href="route('product-show', productId ?? 8)" class="text-indigo-700 hover:text-indigo-800 text-xs font-semibold flex items-center inline-flex">
                             More Details
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="w-5 h-5 fill-indigo-500">
                                 <path fill-rule="evenodd" d="M5 10a.75.75 0 01.75-.75h6.638L10.23 7.29a.75.75 0 111.04-1.08l3.5 3.25a.75.75 0 010 1.08l-3.5 3.25a.75.75 0 11-1.04-1.08l2.158-1.96H5.75A.75.75 0 015 10z" clip-rule="evenodd" />

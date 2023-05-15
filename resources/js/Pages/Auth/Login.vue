@@ -44,6 +44,7 @@ const submit = () => {
         <form @submit.prevent="submit">
             <div>
                 <InputLabel for="email" value="Email" />
+                <p class="text-xs text-gray-600">Demo email: johndoe@e-commerce.com</p>
                 <TextInput
                     id="email"
                     v-model="form.email"
@@ -58,6 +59,7 @@ const submit = () => {
 
             <div class="mt-4">
                 <InputLabel for="password" value="Password" />
+                <p class="text-xs text-gray-600">Demo password: johndoe1</p>
                 <TextInput
                     id="password"
                     v-model="form.password"

@@ -72,7 +72,7 @@
                     </div>
                     <button @click.prevent="checkout"
                             class="px-2 bg-amber-500 text-white text-lg rounded-lg shadow-lg">
-                        Next
+                        Place Order
                     </button>
                 </div>
             </div>
