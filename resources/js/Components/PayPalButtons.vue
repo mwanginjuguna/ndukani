@@ -20,7 +20,7 @@ const props = defineProps({
 const {flash} = useFlash();
 
 function paid() {
-    console.log('Running paid() function to redirect to recent orders')
+    console.log('Running paid() function to redirect to recent orders');
     const a = Object.assign(
         document.createElement('a'),
         {
@@ -46,6 +46,7 @@ onMounted( async () => {
             // Call your server to set up the transaction
             createOrder: function (data, actions) {
                 console.log('data before fetch pay', JSON.stringify(data));
+                console.log('actions before fetch pay', JSON.stringify(actions));
 
                 return fetch(route('payWithPayPal', props.order.id), {
                     method: 'post',
@@ -86,7 +87,7 @@ onMounted( async () => {
                     //   (2) Other non-recoverable errors -> Show a failure message
                     //   (3) Successful transaction -> Show confirmation or thank you
 
-                    var errorDetail = Array.isArray(orderData.details) && orderData.details[0];
+                    var errorDetail = Array.isArray(orderData.data.details) && orderData.data.details[0];
 
                     if (errorDetail && errorDetail.issue === 'INSTRUMENT_DECLINED') {
                         return actions.restart();
@@ -96,21 +97,26 @@ onMounted( async () => {
                         var msg = 'Sorry, your transaction could not be processed.';
                         if (errorDetail.description) msg += '\n\n' + errorDetail.description;
 
-                        if (orderData.debug_id) msg += ' (' + orderData.debug_id + ')';
+                        if (orderData.data.debug_id) msg += ' (' + orderData.data.debug_id + ')';
 
-                        return flash('Error!', msg, 'danger'); // Show a failure message
+                        return flash('Error!', `${msg}`, 'warning'); // Show a failure message
                     }
 
                     // Successful capture! For demo purposes:
-                    console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
-                    var transaction = orderData.purchase_units[0].payments.captures[0];
-                    flash('Success. Order paid!','Transaction ' + transaction.status + ': Transaction ID' + transaction.id, 'danger');
+                    console.log('Capture result', orderData.data, JSON.stringify(orderData, null, 2));
+                    var transaction = orderData.data.purchase_units[0].payments.captures[0];
+                    flash(
+                        'Success. Order paid!',
+                        'Transaction ' + transaction.status + ': Transaction ID' + transaction.id,
+                        'danger');
 
                     // Replace the above to show a success message within this page, e.g.
                     const element = document.getElementById('paypal-button-container');
                     element.innerHTML = '';
                     element.innerHTML = '<h3>Thank you for your payment!</h3>';
-                    setInterval(paid(),3000);
+                    setInterval(() => {
+                        document.location.href = `/orders`
+                    },6000);
                 });
             },
 
@@ -122,14 +128,14 @@ onMounted( async () => {
                         'X-CSRF-TOKEN': csrfToken,
                     }
                 }).then( (res) => res.json()).then( (orderData) => {
-                    flash(`Error! ${orderData.status}`, `${orderData.message}`, 'danger');
+                    flash(`Error! ${orderData.status}`, `${orderData.message}`, 'error');
                     console.log(JSON.stringify(orderData));
                 });
             }
 
         }).render('#paypal-button-container');
     } catch (error) {
-        flash('Error', 'An Error Occurred. Could not Connect!', 'danger');
+        flash('Error', 'An Error Occurred. Could not Connect!', 'warning');
         console.log(error)
     }
 })

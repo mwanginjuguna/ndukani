@@ -439,7 +439,8 @@ let {flash} = useFlash();
                                     <div class="md:my-auto">
                                         <Link :href="route('product-show', 7)" class="font-bold text-black text-xl font-serif underline underline-offset-4">Mambo Zamani African Print Men Shirt</Link>
                                         <div class="mt-2">
-                                            <p class="text-sm text-justify leading-tight"><span class="font-semibold">Features: </span>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
+                                            <p class="text-sm text-justify leading-tight">
+                                                <span class="font-semibold">Features: </span>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
                                                 <Link :href="route('product-show', 7)" class="text-blue-900 text-xs font-semibold flex items-center ">
                                                     More Details
                                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="w-5 h-5 fill-indigo-500">

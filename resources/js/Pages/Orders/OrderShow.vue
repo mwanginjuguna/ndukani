@@ -48,7 +48,7 @@
             </div>
 
             <!--payment buttons-->
-            <div class="mt-12 grid grid-cols-3 gap-x-4">
+            <div v-if="!order.is_paid" class="mt-12 grid grid-cols-3 gap-x-4">
                 <div>
                     <!--Pay with paypal-->
                     <PayPalButtons :order="order" :currency="`USD`" />

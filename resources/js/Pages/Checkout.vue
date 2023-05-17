@@ -87,6 +87,7 @@ import {defineEmits, onBeforeMount, watch} from "vue";
 import {useFlash} from "../Composables/useFlash";
 import {useCartStore} from "../stores/CartStore";
 import {Link, usePage} from "@inertiajs/vue3";
+import axios from "axios";
 
 let cart = useCartStore();
 
@@ -123,10 +124,13 @@ async function checkout() {
 
         if (response.status === 200) {
             flash('Success', `${response.data.message}`, 'success');
-
-            setTimeout(
-                document.location.href = route('orders.show', response.data.order.id)
-            , 2000);
+            const orderId = response.data.order.id
+            setTimeout( () => {
+                // axios.get(route(`order.show`, response.data.order.id));
+                document.location.href = `/order/${orderId}`
+            }, 5000);
+        } else {
+            flash('Error!', `Something went wrong. Server responded with Error (${response.status})`, 'warning')
         }
     } catch (error) {
         flash('Error!', 'Something went wrong. Could not establish a connection with the server.', 'warning')

@@ -94,8 +94,9 @@ class PaymentController extends Controller
         $provider->setAccessToken($token);
 
         $response = $provider->capturePaymentOrder($payPalOrderId);
+        // dd($response['status']);
 
-        if (isset($response->status) && $response->status === 'COMPLETED')
+        if (isset($response['status']) && $response["status"] === 'COMPLETED')
         {
             $payerId = $request->input('payerId');
             $paidAmount = $response['purchase_units'][0]['payments']['captures'][0]['amount']['value'];
@@ -118,16 +119,21 @@ class PaymentController extends Controller
             $order->payment_gateway = 'paypal';
             $order->payment_id = $payPalOrderId;
             $order->total = $paidAmount;
-            $order->status = 'processing';
+            $order->status = 'shipping';
+            $order->notes = '$ '.($paidAmount).' paid by '.$payerName;
             $order->save();
 
+            // dd($order);
             // send emails to user and admin
 
+            return response()->json([
+                "message" => "successful Paypal Payments.",
+                "order" => $order,
+                "data" => $response
+            ]);
             // return response
-            return response()->json($response);
-        }
-        elseif (isset($response['debug_ID']))
-        {
+            // return response()->json($response);
+        } elseif (isset($response['debug_ID'])) {
             $paymentError = [
                 "name" => $response['name'],
                 "debug_ID" => $response['debug_ID'],
@@ -138,9 +144,7 @@ class PaymentController extends Controller
 
             // respond with payment error
             return response()->json($paymentError);
-        }
-        else
-        {
+        } else {
             return response()->json($response);
         }
     }

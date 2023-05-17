@@ -160,28 +160,20 @@ class CartController extends Controller
         }
 
         // create new order
-        $order = Order::query()
-            ->where('user_id', $userId)
-            ->where('subtotal', $total)
-            ->first();
+        // $order = Order::query()->where('user_id', $userId)->where('subtotal', $total)->first();
 
-        if (!$order) {
-            // generate random order_number
-            $length = 10; // The length of the random string
-            $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-            $orderNumber = 'DUKA_#';
-            for ($i = 0; $i < $length; $i++) {
-                $orderNumber .= $characters[random_int(0, strlen($characters) - 1)];
-            }
-            $order = Order::create([
-                'user_id' => $userId,
-                'order_number' => $orderNumber,
-                'subtotal' => $total,
-            ]);
-        } else {
-            $order->subtotal = $total;
-            $order->save();
+        // generate random order_number
+        $length = 10; // The length of the random string
+        $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        $orderNumber = 'DUKA_#';
+        for ($i = 0; $i < $length; $i++) {
+            $orderNumber .= $characters[random_int(0, strlen($characters) - 1)];
         }
+        $order = Order::create([
+            'user_id' => $userId,
+            'order_number' => $orderNumber,
+            'subtotal' => $total,
+        ]);
 
         //create order items
         foreach ($cartItems as $item) {
@@ -198,9 +190,6 @@ class CartController extends Controller
             $cart = Cart::where('id', $cartItem->id)->first();
             $cart->delete();
         }
-
-        // retrieve the ordernumber incase this function was called to update an existing order at line 181
-        $orderNumber = $order->order_number;
 
         // return json with order and success message. The user will be redirected in frontend.
         return response()->json([
